@@ -1,7 +1,8 @@
 #include "tree.h"
 
-void initNode(Node *node) {
+Node *initNode() {
     size_t iter;
+    Node *node = (Node *) malloc(sizeof(Node));
     /* ASSERT(node != NULL) */
     for(iter = 0; iter < nsides; iter++) {
         node->board[iter] = (uint64_t) 0;
@@ -11,6 +12,7 @@ void initNode(Node *node) {
     node->nchildren = 8;
     node->child = NULL;
 
+    return node;
     // TODO: Consider node->heuristic = 0f;
 }
 
@@ -33,6 +35,10 @@ Node *createChild(Node *parent, const size_t nchild) {
 
 void createChildren(Node *parent) {
     size_t iter;
+    parent->child = (Node **) malloc(sizeof(Node *));
+    for(iter = 0; iter < parent->nchildren; iter++) {
+        parent->child[iter] = (Node *) malloc(sizeof(Node));
+    }
     for(iter = 0; iter < parent->nchildren; iter++) {
         parent->child[iter] = createChild(parent, iter);
     }
