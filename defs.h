@@ -1,5 +1,6 @@
 #ifndef DEFS_GUARD
 #define DEFS_GUARD
+#include <stdint.h>
 
 #define N 8
 #define next(turn) (turn == X ? O : X)
