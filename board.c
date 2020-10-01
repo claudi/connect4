@@ -15,7 +15,7 @@ void copyNode(Node *dest, const Node *orig) {
 void copyBoard(Board *dest, const Board *orig) {
     size_t iter;
     for(iter = 0; iter < nsides; iter++) {
-        dest->board[iter] = orig->board[iter];
+        dest[iter] = orig[iter];
     }
 }
 
