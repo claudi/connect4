@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 #define N 8
-#define next(turn) (turn == X ? O : X)
+#define next(turn) ((turn == X) ? O : X)
 // #define next(turn) (b*(turn-b)/(a-b) + a*(turn-a)/(b-a))
 
 typedef enum {FALSE, TRUE} Bool;
