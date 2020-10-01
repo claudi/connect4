@@ -1,4 +1,5 @@
 #include "defs.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 uint64_t shift(const size_t row, const size_t col);

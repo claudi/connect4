@@ -1,6 +1,4 @@
 #include "tree.h"
-#include "board.h"
-#include <stdio.h>
 
 void initNode(Node *node) {
     size_t iter;
