@@ -1,4 +1,5 @@
 #include "board.h"
+#include <stdio.h>
 
 uint64_t shift(const size_t row, const size_t col) {
     size_t shift = ((N-(row+1))*N)+col;
@@ -41,5 +42,32 @@ int makeMove(Node *node, const size_t col) {
     node->board[node->turn] |= shift(row, col);
     node->turn = next(node->turn);
     return 0;
+}
+
+void printBoard(const Board *board) {
+    size_t row, col;
+    for(row = 0; row < N; row++) {
+        for(col = 0; col < N; col++) {
+            if(board[X] & shift(row, col)) {
+                printf(" X");
+            } else if (board[O] & shift(row, col)) {
+                printf(" O");
+            } else {
+                printf("  ");
+            }
+        }
+        printf("\n");
+    }
+    for(col = 0; col < N; col++) {
+        printf(" %lu", col);
+    }
+    printf("\n");
+}
+
+void printNode(const Node *node) {
+    printf(" turn:\t%c\n", (node->turn == X) ? 'X' : 'O');
+    printf(" nchildren:\t%d", node->nchildren);
+
+    printBoard(node->board);
 }
 

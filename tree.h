@@ -6,9 +6,8 @@
  * be initialized with real board and values
  */
 void initNode(Node *node);
-void printNode(Node *node);
-void initTree(Node *root, const size_t depth);
-void initChild(Node *parent, const size_t column);
-void initChildren(Node *parent);
+void createTree(Node *root, const size_t depth);
+Node *createChild(Node *parent, const size_t child);
+void createChildren(Node *parent);
 
 // TODO: return values
