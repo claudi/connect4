@@ -7,8 +7,8 @@
  */
 void initNode(Node *node);
 void printNode(Node *node);
-void initTree(Node *root, size_t depth);
-void initChild(Node *parent, size_t column);
+void initTree(Node *root, const size_t depth);
+void initChild(Node *parent, const size_t column);
 void initChildren(Node *parent);
 
 // TODO: return values
