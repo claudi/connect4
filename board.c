@@ -1,9 +1,7 @@
 #include "board.h"
 
 uint64_t shift(const size_t row, const size_t col) {
-    size_t shift = ((N-(row+1))*N)+col;
-    uint64_t result = ((uint64_t) 1) << shift;
-    return result;
+    return ((uint64_t) 1) << ((N * row) + col);
 }
 
 void copyNode(Node *dest, const Node *orig) {
@@ -21,7 +19,7 @@ void copyBoard(Board *dest, const Board *orig) {
 
 int makeMove(Node *node, const size_t col) {
     size_t iter;
-    int row = -1;
+    ssize_t row = -1;
     /* ASSERT(col < N) */
     /* ASSERT(col >= 0) */
     for(iter = 0; iter < N; iter++) {
@@ -44,8 +42,8 @@ int makeMove(Node *node, const size_t col) {
 }
 
 void printBoard(const Board *board) {
-    size_t row, col;
-    for(row = 0; row < N; row++) {
+    ssize_t row, col;
+    for(row = N - 1; row >= 0; row--) {
         for(col = 0; col < N; col++) {
             if(board[X] & shift(row, col)) {
                 printf(" X");
@@ -60,12 +58,13 @@ void printBoard(const Board *board) {
     for(col = 0; col < N; col++) {
         printf(" %lu", col);
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 void printNode(const Node *node) {
-    printf(" turn:\t%c\n", (node->turn == X) ? 'X' : 'O');
+    printf(" turn:\t\t%c\n", (node->turn == X) ? 'X' : 'O');
     printf(" nchildren:\t%d", node->nchildren);
+    printf("\n");
 
     printBoard(node->board);
 }
