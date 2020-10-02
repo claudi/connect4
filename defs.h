@@ -7,7 +7,7 @@
 // #define next(turn) (b*(turn-b)/(a-b) + a*(turn-a)/(b-a))
 
 typedef enum {FALSE, TRUE} Bool;
-typedef enum {X, O, BOTH, nsides} Side;
+typedef enum {X, O, BOTH, nsides} Side; // TODO: Get rid of BOTH
 // typedef char Board [N][N];
 typedef uint64_t Board;
 

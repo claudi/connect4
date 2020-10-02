@@ -1,7 +1,7 @@
 #include "board.h"
 
 uint64_t shift(const size_t row, const size_t col) {
-    return ((uint64_t) 1) << ((N * row) + col);
+    return ((uint64_t) 1) << ((N * row) + col); // TODO: change into macro
 }
 
 void copyNode(Node *dest, const Node *orig) {
