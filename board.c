@@ -43,6 +43,7 @@ int makeMove(Node *node, const size_t col) {
 
 void printBoard(const Board *board) {
     ssize_t row, col;
+    printf("\n");
     for(row = N - 1; row >= 0; row--) {
         for(col = 0; col < N; col++) {
             if(board[X] & shift(row, col)) {
@@ -58,14 +59,13 @@ void printBoard(const Board *board) {
     for(col = 0; col < N; col++) {
         printf(" %lu", col);
     }
-    printf("\n\n");
+    printf("\n");
 }
 
 void printNode(const Node *node) {
-    printf(" turn:\t\t%c\n", (node->turn == X) ? 'X' : 'O');
-    printf(" nchildren:\t%d", node->nchildren);
-    printf("\n");
-
     printBoard(node->board);
+
+    printf("turn:\t\t%c\n", (node->turn == X) ? 'X' : 'O');
+    printf("nchildren:\t%d\n", node->nchildren);
 }
 
