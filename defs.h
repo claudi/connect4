@@ -4,7 +4,7 @@
 
 #define N 8
 #define next(turn) ((turn == X) ? O : X)
-// #define next(turn) (b*(turn-b)/(a-b) + a*(turn-a)/(b-a))
+// #define next(turn) (O*(turn-O)/(X-O) + X*(turn-X)/(O-X))
 
 typedef enum {FALSE, TRUE} Bool;
 typedef enum {X, O, BOTH, nsides} Side; // TODO: Get rid of BOTH
