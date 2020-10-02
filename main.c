@@ -4,9 +4,14 @@
 #include <stdio.h>
 
 int main(int argc, char **argv) {
+    size_t depth = 6;
     Node *game = initNode();;
+    if(argc == 2) {
+        depth = atoi(argv[1]);
+    }
+
     // printNode(game);
-    createTree(game, atoi(argv[1]));
+    createTree(game, depth);
     return 0;
 }
 
