@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
         depth = atoi(argv[1]);
     }
 
-    // printNode(game);
+    printNode(game);
     createTree(game, depth);
     return 0;
 }
