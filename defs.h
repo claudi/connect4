@@ -1,6 +1,7 @@
 #ifndef DEFS_GUARD
 #define DEFS_GUARD
-#include <stdint.h>
+#include <stdint.h> // for uint64_t
+#include <float.h>  // for FLT_MAX and FLT_MIN
 
 #define N 8
 #define next(turn) ((turn == X) ? O : X)
