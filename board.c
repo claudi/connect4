@@ -11,18 +11,16 @@ void copyNode(Node *dest, const Node *orig) {
 }
 
 void copyBoard(Board *dest, const Board *orig) {
-    size_t iter;
-    for(iter = 0; iter < nsides; iter++) {
+    for(size_t iter = 0; iter < nsides; iter++) {
         dest[iter] = orig[iter];
     }
 }
 
 int makeMove(Node *node, const size_t col) {
-    size_t iter;
-    ssize_t row = -1;
     /* ASSERT(col < N) */
     /* ASSERT(col >= 0) */
-    for(iter = 0; iter < N; iter++) {
+    ssize_t row = -1;
+    for(size_t iter = 0; iter < N; iter++) {
         if(!(node->board[BOTH] & shift(iter, col))) {
             row = iter;
             break;
