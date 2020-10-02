@@ -12,4 +12,5 @@ void createTree(Node *root, const ssize_t depth);
 Node *createChild(Node *parent, const size_t child);
 void createChildren(Node *parent);
 
+// TODO: free tree
 // TODO: return values
