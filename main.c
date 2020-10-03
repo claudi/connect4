@@ -1,7 +1,15 @@
 #include "defs.h"
 #include "board.h"
 #include "tree.h"
+#include "minimax.h"
 #include <stdio.h>
+
+void printTree(const Node *root) {
+    printNode(root);
+    for(size_t iter = 0; iter < root->nchildren; iter++) {
+        printTree(root->child[iter]);
+    }
+}
 
 int main(int argc, char **argv) {
     size_t depth = 4;
@@ -10,8 +18,13 @@ int main(int argc, char **argv) {
     }
 
     Node *game = initNode();;
-    printNode(game);
-    createTree(game, depth);
+    // createTree(game, depth);
+
+    // printTree(game);
+
+    srand(time(NULL));
+    printf("move: %ld\n", chooseMove(game, depth));
+
     return 0;
 }
 
