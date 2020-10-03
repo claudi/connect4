@@ -27,9 +27,9 @@ int makeMove(Node *node, const size_t col) {
         }
     }
 
-    if(row == -1) {
-        return 1; // Error: column was full
-    } else if(row == N - 1) {
+    /* ASSERT(row != -1) */
+    // Check for won board, and if so set nchildren to 0 and return 0
+    if(row == N - 1) {
         node->nchildren = node->nchildren - 1;
     }
 
