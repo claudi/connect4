@@ -1,5 +1,7 @@
 #include "defs.h"
 #include "tree.h"
+#include <time.h>
+#include <stdlib.h>
 
 int side(const Side side);
 float heuristic(const Node *node);
