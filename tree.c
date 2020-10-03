@@ -15,31 +15,27 @@ Node *initNode(void) {
     // TODO: Consider node->heuristic = 0f;
 }
 
-Node *createChild(Node *parent, const size_t nchild) {
-    /* ASSERT(nchild < N) */
-    /* ASSERT(nchild >= 0) */
-    size_t col = 0;
-    for(size_t iter = 0; col != nchild; iter++) {
-        if(!(parent->board[BOTH] & shift(N - 1, iter))) {
-            col++;
-        }
-    }
+Node *createChild(Node *parent, const size_t col) {
+    /* ASSERT(col < N) */
+    /* ASSERT(col >= 0) */
 
     Node *child = (Node *) malloc(sizeof(Node));
     copyNode(child, parent);
     makeMove(child, col);   // TODO: Check return value
 
-    printNode(child);
     return child;
 }
 
 void createChildren(Node *parent) {
-    parent->child = (Node **) malloc(sizeof(Node *));
-    for(size_t iter = 0; iter < parent->nchildren; iter++) {
-        parent->child[iter] = (Node *) malloc(sizeof(Node));
-    }
-    for(size_t iter = 0; iter < parent->nchildren; iter++) {
-        parent->child[iter] = createChild(parent, iter);
+    parent->child = (Node **) malloc(parent->nchildren * sizeof(Node *));
+
+    for(size_t iter = 0, col = 0; iter < parent->nchildren; iter++) {
+        while(parent->board[BOTH] & shift(N - 1, col)) {
+            col++;
+            /* ASSERT(col < N) */
+        }
+        parent->child[iter] = createChild(parent, col);
+        col++;
     }
 }
 
