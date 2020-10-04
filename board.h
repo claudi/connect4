@@ -9,4 +9,3 @@ int makeMove(Node *node, const size_t column);
 void printBoard(const Board *board);
 void printNode(const Node *node);
 
-// TODO: return values
