@@ -10,6 +10,7 @@
 typedef enum {FALSE, TRUE} Bool;
 typedef enum {X, O, BOTH, nsides} Side; // TODO: Get rid of BOTH
 typedef uint64_t Board;
+typedef uint64_t Mask;
 
 typedef struct Node Node;
 struct Node {

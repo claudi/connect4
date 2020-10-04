@@ -4,7 +4,7 @@ Node *initNode(void) {
     /* ASSERT(node != NULL) */
     Node *node = (Node *) malloc(sizeof(Node));
     for(size_t iter = 0; iter < nsides; iter++) {
-        node->board[iter] = (uint64_t) 0;
+        node->board[iter] = (Board) 0;
     }
     node->turn = X;
 
