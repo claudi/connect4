@@ -5,11 +5,6 @@ int side(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
-float heuristic(const Node *node) {
-    // TODO: Actual heuristic lol
-    return (float) rand();
-}
-
 size_t chooseMove(Node *root, const ssize_t depth) {
     /* ASSERT(root != NULL) */
     /* ASSERT(depth > 0) */
