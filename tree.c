@@ -52,3 +52,10 @@ void createTree(Node *root, const ssize_t depth) {
     }
 }
 
+void printTree(const Node *root) {
+    printNode(root);
+    for(size_t iter = 0; iter < root->nchildren; iter++) {
+        printTree(root->child[iter]);
+    }
+}
+

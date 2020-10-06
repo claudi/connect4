@@ -4,13 +4,6 @@
 #include "minimax.h"
 #include <stdio.h>
 
-void printTree(const Node *root) {
-    printNode(root);
-    for(size_t iter = 0; iter < root->nchildren; iter++) {
-        printTree(root->child[iter]);
-    }
-}
-
 int main(int argc, char **argv) {
     size_t depth = 4;
     if(argc == 2) {
