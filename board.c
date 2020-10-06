@@ -21,7 +21,7 @@ int makeMove(Node *node, const size_t col) {
     /* ASSERT(col >= 0) */
     ssize_t row = -1;
     for(size_t iter = 0; iter < N; iter++) {
-        if(!(node->board[BOTH] & shift(iter, col))) {
+        if(!(( node->board[X] | node->board[O] ) & shift(iter, col))) {
             row = iter;
             break;
         }
@@ -33,7 +33,6 @@ int makeMove(Node *node, const size_t col) {
         node->nchildren = node->nchildren - 1;
     }
 
-    node->board[BOTH] |= shift(row, col);
     node->board[node->turn] |= shift(row, col);
     node->turn = next(node->turn);
     return 0;
