@@ -30,7 +30,7 @@ void createChildren(Node *parent) {
     parent->child = (Node **) malloc(parent->nchildren * sizeof(Node *));
 
     for(size_t iter = 0, col = 0; iter < parent->nchildren; iter++) {
-        while(parent->board[BOTH] & shift(N - 1, col)) {
+        while(( parent->board[X] | parent->board[O] ) & shift(N - 1, col)) {
             col++;
             /* ASSERT(col < N) */
         }
