@@ -13,7 +13,7 @@ size_t chooseMove(Node *root, const ssize_t depth) {
     float best = -FLT_MAX;
     ssize_t move = -1;
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        float heuristic = minimax(root->child[iter], depth);
+        float heuristic = minimax(root->child[iter], depth - 1);
         free(root->child[iter]);
         if(heuristic > best) {
             best = heuristic;
