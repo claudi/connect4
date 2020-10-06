@@ -15,8 +15,8 @@ Node *initNode(void) {
 }
 
 Node *createChild(Node *parent, const size_t col) {
-    ASSERT(nchild < N);
-    ASSERT(nchild >= 0);
+    ASSERT(col < N);
+    ASSERT(col >= 0);
 
     Node *child = (Node *) malloc(sizeof(Node));
     copyNode(child, parent);
@@ -31,7 +31,7 @@ void createChildren(Node *parent) {
     for(size_t iter = 0, col = 0; iter < parent->nchildren; iter++) {
         while(( parent->board[X] | parent->board[O] ) & shift(N - 1, col)) {
             col++;
-            /* ASSERT(col < N) */
+            ASSERT(col < N);
         }
         parent->child[iter] = createChild(parent, col);
         col++;

@@ -1,13 +1,13 @@
 #include "minimax.h"
 
 int side(const Side side) {
-    /* ASSERT((side == X) || (side == O)) */
     return (side == X) ? 1 : -1;
 }
 
 size_t chooseMove(Node *root, const ssize_t depth) {
-    /* ASSERT(root != NULL) */
-    /* ASSERT(depth > 0) */
+    ASSERT(root != NULL);
+    ASSERT(depth > 0);
+
     createChildren(root);
 
     float best = -FLT_MAX;
@@ -22,7 +22,7 @@ size_t chooseMove(Node *root, const ssize_t depth) {
     }
     free(root->child);
 
-    /* ASSERT(move != -1) */
+    ASSERT(move != -1);
     return move;
 }
 
