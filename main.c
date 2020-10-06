@@ -2,6 +2,7 @@
 #include "board.h"
 #include "tree.h"
 #include "minimax.h"
+#include "masks.h"
 #include <stdio.h>
 
 int main(int argc, char **argv) {
@@ -10,14 +11,13 @@ int main(int argc, char **argv) {
         depth = atoi(argv[1]);
     }
 
+    initMasks();
     Node *game = initNode();;
-    // createTree(game, depth);
-
-    // printTree(game);
 
     srand(time(NULL));
     printf("move: %ld\n", chooseMove(game, depth));
 
+    free(game);
     return 0;
 }
 
