@@ -1,7 +1,6 @@
 #include "tree.h"
 
 Node *initNode(void) {
-    /* ASSERT(node != NULL) */
     Node *node = (Node *) malloc(sizeof(Node));
     for(size_t iter = 0; iter < nsides; iter++) {
         node->board[iter] = (Board) 0;
@@ -16,8 +15,8 @@ Node *initNode(void) {
 }
 
 Node *createChild(Node *parent, const size_t col) {
-    /* ASSERT(col < N) */
-    /* ASSERT(col >= 0) */
+    ASSERT(nchild < N);
+    ASSERT(nchild >= 0);
 
     Node *child = (Node *) malloc(sizeof(Node));
     copyNode(child, parent);
@@ -40,7 +39,8 @@ void createChildren(Node *parent) {
 }
 
 void createTree(Node *root, const ssize_t depth) {
-    /* ASSERT(depth >= 0) */
+    ASSERT(depth >= 0);
+
     if(depth == 0) {
         root->nchildren = 0;
         root->child = NULL;
