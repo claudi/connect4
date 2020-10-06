@@ -1,105 +1,104 @@
 #include "masks.h"
 
-Mask ***mask;   // mask[V][connect3][M1101]
+Mask ***mask;   // mask[connect3][V][M1101]
 
 void initMasks(void) {
-    mask = (Mask ***) malloc(ndirmasks * sizeof(Mask **));
+    mask = (Mask ***) malloc(nconnects * sizeof(Mask **));
+    for(size_t connect = 0; connect < nconnects; connect++) {
+        mask[connect] = (Mask **) malloc(ndirmasks * sizeof(Mask *));
+    }
+
     for(size_t dir = 0; dir < ndirmasks; dir++) {
-        mask[dir] = (Mask **) malloc(nconnects * sizeof(Mask *));
-
-        mask[dir][connect1] = (Mask *) malloc(nmasks1 * sizeof(Mask));
+        mask[connect1][dir] = (Mask *) malloc(nmasks1 * sizeof(Mask));
         for(size_t masks = 0; masks < nmasks1; masks++) {
-            mask[dir][connect1][masks] = (Mask) 0;
+            mask[connect1][dir][masks] = (Mask) 0;
         }
-
-        mask[dir][connect2] = (Mask *) malloc(nmasks2 * sizeof(Mask));
+        mask[connect2][dir] = (Mask *) malloc(nmasks2 * sizeof(Mask));
         for(size_t masks = 0; masks < nmasks2; masks++) {
-            mask[dir][connect2][masks] = (Mask) 0;
+            mask[connect2][dir][masks] = (Mask) 0;
         }
-
-        mask[dir][connect3] = (Mask *) malloc(nmasks3 * sizeof(Mask));
+        mask[connect3][dir] = (Mask *) malloc(nmasks3 * sizeof(Mask));
         for(size_t masks = 0; masks < nmasks3; masks++) {
-            mask[dir][connect3][masks] = (Mask) 0;
+            mask[connect3][dir][masks] = (Mask) 0;
         }
-
-        mask[dir][connect4] = (Mask *) malloc(nmasks4 * sizeof(Mask));
+        mask[connect4][dir] = (Mask *) malloc(nmasks4 * sizeof(Mask));
         for(size_t masks = 0; masks < nmasks4; masks++) {
-            mask[dir][connect4][masks] = (Mask) 0;
+            mask[connect4][dir][masks] = (Mask) 0;
         }
     }
 
-    mask[H][connect1][M1000] = shift(0,0);
-    mask[H][connect1][M0100] = shift(0,1);
-    mask[H][connect1][M0010] = shift(0,2);
-    mask[H][connect1][M0001] = shift(0,3);
-
-    mask[V][connect1][M1000] = shift(0,0);
-    mask[V][connect1][M0100] = shift(1,0);
-    mask[V][connect1][M0010] = shift(2,0);
-    mask[V][connect1][M0001] = shift(3,0);
-
-    mask[R][connect1][M1000] = shift(0,0);
-    mask[R][connect1][M0100] = shift(1,1);
-    mask[R][connect1][M0010] = shift(2,2);
-    mask[R][connect1][M0001] = shift(3,3);
-
-    mask[L][connect1][M1000] = shift(0,3);
-    mask[L][connect1][M0100] = shift(1,2);
-    mask[L][connect1][M0010] = shift(2,1);
-    mask[L][connect1][M0001] = shift(3,0);
-
-    mask[H][connect2][M1100] = shift(0,0) | shift(0,1);
-    mask[H][connect2][M1010] = shift(0,0) | shift(0,2);
-    mask[H][connect2][M0110] = shift(0,1) | shift(0,2);
-    mask[H][connect2][M1001] = shift(0,0) | shift(0,3);
-    mask[H][connect2][M0101] = shift(0,1) | shift(0,3);
-    mask[H][connect2][M0011] = shift(0,2) | shift(0,3);
-
-    mask[V][connect2][M1100] = shift(0,0) | shift(1,0);
-    mask[V][connect2][M1010] = shift(0,0) | shift(2,0);
-    mask[V][connect2][M0110] = shift(1,0) | shift(2,0);
-    mask[V][connect2][M1001] = shift(0,0) | shift(3,0);
-    mask[V][connect2][M0101] = shift(1,0) | shift(3,0);
-    mask[V][connect2][M0011] = shift(2,0) | shift(3,0);
-
-    mask[R][connect2][M1100] = shift(0,0) | shift(1,1);
-    mask[R][connect2][M1010] = shift(0,0) | shift(2,2);
-    mask[R][connect2][M0110] = shift(1,1) | shift(2,2);
-    mask[R][connect2][M1001] = shift(0,0) | shift(3,3);
-    mask[R][connect2][M0101] = shift(1,1) | shift(3,3);
-    mask[R][connect2][M0011] = shift(2,2) | shift(3,3);
-
-    mask[L][connect2][M1100] = shift(0,3) | shift(1,2);
-    mask[L][connect2][M1010] = shift(0,3) | shift(2,1);
-    mask[L][connect2][M0110] = shift(1,2) | shift(2,1);
-    mask[L][connect2][M1001] = shift(0,3) | shift(3,0);
-    mask[L][connect2][M0101] = shift(1,2) | shift(3,0);
-    mask[L][connect2][M0011] = shift(2,1) | shift(3,0);
-
-    mask[H][connect3][M1110] = shift(0,0) | shift(0,1) | shift(0,2);
-    mask[H][connect3][M1101] = shift(0,0) | shift(0,1) | shift(0,3);
-    mask[H][connect3][M1011] = shift(0,0) | shift(0,2) | shift(0,3);
-    mask[H][connect3][M0111] = shift(0,1) | shift(0,2) | shift(0,3);
-
-    mask[V][connect3][M1110] = shift(0,0) | shift(1,0) | shift(2,0);
-    mask[V][connect3][M1101] = shift(0,0) | shift(1,0) | shift(3,0);
-    mask[V][connect3][M1011] = shift(0,0) | shift(2,0) | shift(3,0);
-    mask[V][connect3][M0111] = shift(1,0) | shift(2,0) | shift(3,0);
-
-    mask[R][connect3][M1110] = shift(0,0) | shift(1,1) | shift(2,2);
-    mask[R][connect3][M1101] = shift(0,0) | shift(1,1) | shift(3,3);
-    mask[R][connect3][M1011] = shift(0,0) | shift(2,2) | shift(3,3);
-    mask[R][connect3][M0111] = shift(1,1) | shift(2,2) | shift(3,3);
-
-    mask[L][connect3][M1110] = shift(0,3) | shift(1,2) | shift(2,1);
-    mask[L][connect3][M1101] = shift(0,3) | shift(1,2) | shift(3,0);
-    mask[L][connect3][M1011] = shift(0,3) | shift(2,1) | shift(3,0);
-    mask[L][connect3][M0111] = shift(1,2) | shift(2,1) | shift(3,0);
-
-    mask[H][connect4][M1111] = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
-    mask[V][connect4][M1111] = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
-    mask[R][connect4][M1111] = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
-    mask[L][connect4][M1111] = shift(0,3) | shift(1,2) | shift(2,1) | shift(3,0);
+    mask[connect1][H][M1000] = shift(0,0);
+    mask[connect1][H][M0100] = shift(0,1);
+    mask[connect1][H][M0010] = shift(0,2);
+    mask[connect1][H][M0001] = shift(0,3);
+                     
+    mask[connect1][V][M1000] = shift(0,0);
+    mask[connect1][V][M0100] = shift(1,0);
+    mask[connect1][V][M0010] = shift(2,0);
+    mask[connect1][V][M0001] = shift(3,0);
+                     
+    mask[connect1][R][M1000] = shift(0,0);
+    mask[connect1][R][M0100] = shift(1,1);
+    mask[connect1][R][M0010] = shift(2,2);
+    mask[connect1][R][M0001] = shift(3,3);
+                     
+    mask[connect1][L][M1000] = shift(0,3);
+    mask[connect1][L][M0100] = shift(1,2);
+    mask[connect1][L][M0010] = shift(2,1);
+    mask[connect1][L][M0001] = shift(3,0);
+                     
+    mask[connect2][H][M1100] = shift(0,0) | shift(0,1);
+    mask[connect2][H][M1010] = shift(0,0) | shift(0,2);
+    mask[connect2][H][M0110] = shift(0,1) | shift(0,2);
+    mask[connect2][H][M1001] = shift(0,0) | shift(0,3);
+    mask[connect2][H][M0101] = shift(0,1) | shift(0,3);
+    mask[connect2][H][M0011] = shift(0,2) | shift(0,3);
+                     
+    mask[connect2][V][M1100] = shift(0,0) | shift(1,0);
+    mask[connect2][V][M1010] = shift(0,0) | shift(2,0);
+    mask[connect2][V][M0110] = shift(1,0) | shift(2,0);
+    mask[connect2][V][M1001] = shift(0,0) | shift(3,0);
+    mask[connect2][V][M0101] = shift(1,0) | shift(3,0);
+    mask[connect2][V][M0011] = shift(2,0) | shift(3,0);
+                     
+    mask[connect2][R][M1100] = shift(0,0) | shift(1,1);
+    mask[connect2][R][M1010] = shift(0,0) | shift(2,2);
+    mask[connect2][R][M0110] = shift(1,1) | shift(2,2);
+    mask[connect2][R][M1001] = shift(0,0) | shift(3,3);
+    mask[connect2][R][M0101] = shift(1,1) | shift(3,3);
+    mask[connect2][R][M0011] = shift(2,2) | shift(3,3);
+                     
+    mask[connect2][L][M1100] = shift(0,3) | shift(1,2);
+    mask[connect2][L][M1010] = shift(0,3) | shift(2,1);
+    mask[connect2][L][M0110] = shift(1,2) | shift(2,1);
+    mask[connect2][L][M1001] = shift(0,3) | shift(3,0);
+    mask[connect2][L][M0101] = shift(1,2) | shift(3,0);
+    mask[connect2][L][M0011] = shift(2,1) | shift(3,0);
+                     
+    mask[connect3][H][M1110] = shift(0,0) | shift(0,1) | shift(0,2);
+    mask[connect3][H][M1101] = shift(0,0) | shift(0,1) | shift(0,3);
+    mask[connect3][H][M1011] = shift(0,0) | shift(0,2) | shift(0,3);
+    mask[connect3][H][M0111] = shift(0,1) | shift(0,2) | shift(0,3);
+                     
+    mask[connect3][V][M1110] = shift(0,0) | shift(1,0) | shift(2,0);
+    mask[connect3][V][M1101] = shift(0,0) | shift(1,0) | shift(3,0);
+    mask[connect3][V][M1011] = shift(0,0) | shift(2,0) | shift(3,0);
+    mask[connect3][V][M0111] = shift(1,0) | shift(2,0) | shift(3,0);
+                     
+    mask[connect3][R][M1110] = shift(0,0) | shift(1,1) | shift(2,2);
+    mask[connect3][R][M1101] = shift(0,0) | shift(1,1) | shift(3,3);
+    mask[connect3][R][M1011] = shift(0,0) | shift(2,2) | shift(3,3);
+    mask[connect3][R][M0111] = shift(1,1) | shift(2,2) | shift(3,3);
+                     
+    mask[connect3][L][M1110] = shift(0,3) | shift(1,2) | shift(2,1);
+    mask[connect3][L][M1101] = shift(0,3) | shift(1,2) | shift(3,0);
+    mask[connect3][L][M1011] = shift(0,3) | shift(2,1) | shift(3,0);
+    mask[connect3][L][M0111] = shift(1,2) | shift(2,1) | shift(3,0);
+                     
+    mask[connect4][H][M1111] = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
+    mask[connect4][V][M1111] = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
+    mask[connect4][R][M1111] = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
+    mask[connect4][L][M1111] = shift(0,3) | shift(1,2) | shift(2,1) | shift(3,0);
 }
 
 void printMask(const Mask mask) {
