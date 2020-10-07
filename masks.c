@@ -1,29 +1,24 @@
 #include "masks.h"
 
 Mask ***mask;   // mask[connect3][V][M1101]
+Connects *nmasks;
 
 void initMasks(void) {
+    nmasks = (Connects *) malloc(nconnects * sizeof(Connects));
+    // nmasks = {nmasks1, nmasks2, nmasks3, nmasks4};
+    nmasks[connect1] = nmasks1;
+    nmasks[connect2] = nmasks2;
+    nmasks[connect3] = nmasks3;
+    nmasks[connect4] = nmasks4;
+
     mask = (Mask ***) malloc(nconnects * sizeof(Mask **));
     for(size_t connect = 0; connect < nconnects; connect++) {
         mask[connect] = (Mask **) malloc(ndirmasks * sizeof(Mask *));
-    }
-
-    for(size_t dir = 0; dir < ndirmasks; dir++) {
-        mask[connect1][dir] = (Mask *) malloc(nmasks1 * sizeof(Mask));
-        for(size_t masks = 0; masks < nmasks1; masks++) {
-            mask[connect1][dir][masks] = (Mask) 0;
-        }
-        mask[connect2][dir] = (Mask *) malloc(nmasks2 * sizeof(Mask));
-        for(size_t masks = 0; masks < nmasks2; masks++) {
-            mask[connect2][dir][masks] = (Mask) 0;
-        }
-        mask[connect3][dir] = (Mask *) malloc(nmasks3 * sizeof(Mask));
-        for(size_t masks = 0; masks < nmasks3; masks++) {
-            mask[connect3][dir][masks] = (Mask) 0;
-        }
-        mask[connect4][dir] = (Mask *) malloc(nmasks4 * sizeof(Mask));
-        for(size_t masks = 0; masks < nmasks4; masks++) {
-            mask[connect4][dir][masks] = (Mask) 0;
+        for(size_t dir = 0; dir < ndirmasks; dir++) {
+            mask[connect][dir] = (Mask *) malloc(nmasks[connect] * sizeof(Mask));
+            for(size_t masks = 0; masks < nmasks[connect]; masks++) {
+                mask[connect1][dir][masks] = (Mask) 0;
+            }
         }
     }
 
