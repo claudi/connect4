@@ -97,7 +97,7 @@ void initMasks(void) {
 }
 
 void printMask(const Mask mask) {
-    for(size_t iter_i = 0; iter_i < N; iter_i++) {
+    for(ssize_t iter_i = (N - 1); iter_i >= 0; iter_i--) {
         for(size_t iter_j = 0; iter_j < N; iter_j++) {
             printf("%c", (mask & shift(iter_i, iter_j)) ? '1' : '0');
         }
