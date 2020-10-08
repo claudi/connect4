@@ -1,99 +1,516 @@
 #include "masks.h"
 
-Mask ***mask;   // mask[connect3][V][M1101]
-Connects *nmasks;
+SMask **masks;
 
 void initMasks(void) {
-    nmasks = (Connects *) malloc(nconnects * sizeof(Connects));
-    // nmasks = {nmasks1, nmasks2, nmasks3, nmasks4};
-    nmasks[connect1] = nmasks1;
-    nmasks[connect2] = nmasks2;
-    nmasks[connect3] = nmasks3;
-    nmasks[connect4] = nmasks4;
+    masks = (Mask **) malloc(nmatches * sizeof(Mask *));
 
-    mask = (Mask ***) malloc(nconnects * sizeof(Mask **));
-    for(size_t connect = 0; connect < nconnects; connect++) {
-        mask[connect] = (Mask **) malloc(ndirmasks * sizeof(Mask *));
-        for(size_t dir = 0; dir < ndirmasks; dir++) {
-            mask[connect][dir] = (Mask *) malloc(nmasks[connect] * sizeof(Mask));
-            for(size_t masks = 0; masks < nmasks[connect]; masks++) {
-                mask[connect1][dir][masks] = (Mask) 0;
-            }
+    masks[match1] = (Mask *) malloc(() * sizeof(Mask));
+    size_t pos = 0;
+    // H1000
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(0,0);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,1) | shift(0,2) | shift(0,3);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H0100
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(0,1);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,0) | shift(0,2) | shift(0,3);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H0010
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(0,2);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,0) | shift(0,1) | shift(0,3);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H0001
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(0,3);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,0) | shift(0,1) | shift(0,2);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
         }
     }
 
-    mask[connect1][H][M1000] = shift(0,0);
-    mask[connect1][H][M0100] = shift(0,1);
-    mask[connect1][H][M0010] = shift(0,2);
-    mask[connect1][H][M0001] = shift(0,3);
+    // R1000
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(0,0);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(1,1) | shift(2,2) | shift(3,3);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R0100
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(1,1);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,0) | shift(2,2) | shift(3,3);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R0010
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(2,2);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,0) | shift(1,1) | shift(3,3);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R0001
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(3,3);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,0) | shift(1,1) | shift(2,2);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect1][V][M1000] = shift(0,0);
-    mask[connect1][V][M0100] = shift(1,0);
-    mask[connect1][V][M0010] = shift(2,0);
-    mask[connect1][V][M0001] = shift(3,0);
+    // L1000
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(0,3);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(1,2) | shift(2,1) | shift(3,0);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L0100
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(1,2);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,3) | shift(2,1) | shift(3,0);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L0010
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(2,1);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,3) | shift(1,2) | shift(3,0);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L0001
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match1][pos].main = shift(3,0);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(0,3) | shift(1,2) | shift(2,1);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect1][R][M1000] = shift(0,0);
-    mask[connect1][R][M0100] = shift(1,1);
-    mask[connect1][R][M0010] = shift(2,2);
-    mask[connect1][R][M0001] = shift(3,3);
+    // V1000
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < N; col++) {
+            masks[match1][pos].main = shift(0,0);
+            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti = shift(1,0) | shift(2,0) | shift(3,0);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect1][L][M1000] = shift(0,3);
-    mask[connect1][L][M0100] = shift(1,2);
-    mask[connect1][L][M0010] = shift(2,1);
-    mask[connect1][L][M0001] = shift(3,0);
+    size_t pos = 0;
+    // H1100
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,0) | shift(0,1);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,2) | shift(0,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H1010
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,0) | shift(0,2);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,1) | shift(0,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H0110
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,1) | shift(0,2);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,0) | shift(0,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H1001
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,0) | shift(0,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,1) | shift(0,2);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H0101
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,1) | shift(0,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,0) | shift(0,2);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H0011
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,2) | shift(0,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,0) | shift(0,1);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect2][H][M1100] = shift(0,0) | shift(0,1);
-    mask[connect2][H][M1010] = shift(0,0) | shift(0,2);
-    mask[connect2][H][M0110] = shift(0,1) | shift(0,2);
-    mask[connect2][H][M1001] = shift(0,0) | shift(0,3);
-    mask[connect2][H][M0101] = shift(0,1) | shift(0,3);
-    mask[connect2][H][M0011] = shift(0,2) | shift(0,3);
+    // R1100
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,0) | shift(1,1);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(2,2) | shift(3,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R1010
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,0) | shift(2,2);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(1,1) | shift(3,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R0110
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(1,1) | shift(2,2);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,0) | shift(3,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R1001
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(0,0) | shift(3,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(1,1) | shift(2,2);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R0101
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(1,1) | shift(3,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,0) | shift(2,2);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R0011
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(2,2) | shift(3,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(0,0) | shift(1,1);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect2][V][M1100] = shift(0,0) | shift(1,0);
-    mask[connect2][V][M1010] = shift(0,0) | shift(2,0);
-    mask[connect2][V][M0110] = shift(1,0) | shift(2,0);
-    mask[connect2][V][M1001] = shift(0,0) | shift(3,0);
-    mask[connect2][V][M0101] = shift(1,0) | shift(3,0);
-    mask[connect2][V][M0011] = shift(2,0) | shift(3,0);
+    // L1100
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(3,0) | shift(2,1);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(1,2) | shift(0,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L1010
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(3,0) | shift(1,2);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(2,1) | shift(0,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L0110
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(2,1) | shift(1,2);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(3,0) | shift(0,3);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L1001
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(3,0) | shift(0,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(2,1) | shift(1,2);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L0101
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(2,1) | shift(0,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(3,0) | shift(1,2);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L0011
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match2][pos].main = shift(1,2) | shift(0,3);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(3,0) | shift(2,1);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect2][R][M1100] = shift(0,0) | shift(1,1);
-    mask[connect2][R][M1010] = shift(0,0) | shift(2,2);
-    mask[connect2][R][M0110] = shift(1,1) | shift(2,2);
-    mask[connect2][R][M1001] = shift(0,0) | shift(3,3);
-    mask[connect2][R][M0101] = shift(1,1) | shift(3,3);
-    mask[connect2][R][M0011] = shift(2,2) | shift(3,3);
+    // V1100
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < N; col++) {
+            masks[match2][pos].main = shift(0,0) | shift(1,0);
+            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].anti = shift(2,0) | shift(3,0);
+            masks[match2][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect2][L][M1100] = shift(0,3) | shift(1,2);
-    mask[connect2][L][M1010] = shift(0,3) | shift(2,1);
-    mask[connect2][L][M0110] = shift(1,2) | shift(2,1);
-    mask[connect2][L][M1001] = shift(0,3) | shift(3,0);
-    mask[connect2][L][M0101] = shift(1,2) | shift(3,0);
-    mask[connect2][L][M0011] = shift(2,1) | shift(3,0);
+    size_t pos = 0;
+    // H1110
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(0,0) | shift(0,1) | shift(0,2);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(0,3);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H1101
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(0,0) | shift(0,1) | shift(0,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(0,2);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H1011
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(0,0) | shift(0,2) | shift(0,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(0,1);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // H0111
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(0,1) | shift(0,2) | shift(0,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(0,0);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect3][H][M1110] = shift(0,0) | shift(0,1) | shift(0,2);
-    mask[connect3][H][M1101] = shift(0,0) | shift(0,1) | shift(0,3);
-    mask[connect3][H][M1011] = shift(0,0) | shift(0,2) | shift(0,3);
-    mask[connect3][H][M0111] = shift(0,1) | shift(0,2) | shift(0,3);
+    // R1110
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(0,0) | shift(1,1) | shift(2,2);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(3,3);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R1101
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(0,0) | shift(1,1) | shift(3,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(2,2);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R1011
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(0,0) | shift(2,2) | shift(3,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(1,1);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // R0111
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(1,1) | shift(2,2) | shift(3,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(0,0);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect3][V][M1110] = shift(0,0) | shift(1,0) | shift(2,0);
-    mask[connect3][V][M1101] = shift(0,0) | shift(1,0) | shift(3,0);
-    mask[connect3][V][M1011] = shift(0,0) | shift(2,0) | shift(3,0);
-    mask[connect3][V][M0111] = shift(1,0) | shift(2,0) | shift(3,0);
+    // L1110
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(3,0) | shift(2,1) | shift(1,2);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(0,3);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L1101
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(3,0) | shift(2,1) | shift(0,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(1,2);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L1011
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(3,0) | shift(1,2) | shift(0,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(2,1);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
+    // L0111
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match3][pos].main = shift(2,1) | shift(1,2) | shift(0,3);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(3,0);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect3][R][M1110] = shift(0,0) | shift(1,1) | shift(2,2);
-    mask[connect3][R][M1101] = shift(0,0) | shift(1,1) | shift(3,3);
-    mask[connect3][R][M1011] = shift(0,0) | shift(2,2) | shift(3,3);
-    mask[connect3][R][M0111] = shift(1,1) | shift(2,2) | shift(3,3);
+    // V1110
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < N; col++) {
+            masks[match3][pos].main = shift(0,0) | shift(1,0) | shift(2,0);
+            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].anti = shift(3,0);
+            masks[match3][pos].anti <<= pos2Shift(row, col);
+            pos++;
+        }
+    }
 
-    mask[connect3][L][M1110] = shift(0,3) | shift(1,2) | shift(2,1);
-    mask[connect3][L][M1101] = shift(0,3) | shift(1,2) | shift(3,0);
-    mask[connect3][L][M1011] = shift(0,3) | shift(2,1) | shift(3,0);
-    mask[connect3][L][M0111] = shift(1,2) | shift(2,1) | shift(3,0);
+    size_t pos = 0;
+    // H111
+    for(size_t row = 0; row < N; row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match4][pos].main = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
+            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].anti = (Mask) 0;
+            pos++;
+        }
+    }
 
-    mask[connect4][H][M1111] = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
-    mask[connect4][V][M1111] = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
-    mask[connect4][R][M1111] = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
-    mask[connect4][L][M1111] = shift(0,3) | shift(1,2) | shift(2,1) | shift(3,0);
+    // R111
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match4][pos].main = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
+            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].anti = (Mask) 0;
+            pos++;
+
+        }
+    }
+    // L111
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < (N - 3); col++) {
+            masks[match4][pos].main = shift(3,0) | shift(2,1) | shift(1,2) | shift(0,3);
+            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].anti = (Mask) 0;
+            pos++;
+        }
+    }
+
+    // V1111
+    for(size_t row = 0; row < (N - 3); row++) {
+        for(size_t col = 0; col < N; col++) {
+            masks[match4][pos].main = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
+            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].anti = (Mask) 0;
+            pos++;
+        }
+    }
 }
 
 void printMask(const Mask mask) {

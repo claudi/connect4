@@ -3,12 +3,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum {connect1, connect2, connect3, connect4, nconnects} Connects;
-typedef enum {H, V, R, L, ndirmasks} DirMasks;
-typedef enum {M1000, M0100, M0010, M0001, nmasks1} Masks1;
-typedef enum {M1100, M1010, M0110, M1001, M0101, M0011, nmasks2} Masks2;
-typedef enum {M1110, M1101, M1011, M0111, nmasks3} Masks3;
-typedef enum {M1111, nmasks4} Masks4;
+typedef struct {
+    Mask main;
+    Mask anti;
+} SMask;
+
+typedef enum {match1, match2, match3, match4, nmatches} Matches;
+typedef enum {H1000, H0100, H0010, H0001,
+              R1000, R0100, R0010, R0001,
+              L1000, L0100, L0010, L0001,
+              V1000, nmasks1} Masks1;
+typedef enum {H1100, H1010, H0110, H1001, H0101, H0011,
+              R1100, R1010, R0110, R1001, R0101, R0011,
+              L1100, L1010, L0110, L1001, L0101, L0011,
+              V1100, nmasks2} Masks2;
+typedef enum {H1110, H1101, H1011, H0111,
+              R1110, R1101, R1011, R0111,
+              L1110, L1101, L1011, L0111,
+              V1110, nmasks3} Masks3;
+typedef enum {H1111, R1111, L1111, V1111, nmasks4} Masks4;
 
 void printMask(const Mask mask);
 void initMasks(void);
