@@ -527,7 +527,6 @@ void initMasks(void) {
         for(size_t col = 0; col < N; col++) {
             masks[match4][pos].main = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
             masks[match4][pos].main <<= pos2Shift(row, col);
-            printMask(masks[match4][pos].main);
             masks[match4][pos].anti = (Mask) 0;
             pos++;
         }
