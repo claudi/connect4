@@ -33,7 +33,7 @@ float minimax(Node *root, const ssize_t depth) {
 
     createChildren(root);
     float best = -FLT_MAX;
-    for(size_t iter; iter < root->nchildren; iter++) {
+    for(size_t iter = 0; iter < root->nchildren; iter++) {
         float heuristic = -minimax(root->child[iter], depth - 1);
         free(root->child[iter]);
         if(heuristic > best) {
