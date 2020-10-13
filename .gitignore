@@ -11,3 +11,4 @@
 docs/
 .tags
 play.debug
+*.o
