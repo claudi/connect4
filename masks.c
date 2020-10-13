@@ -1,11 +1,22 @@
 #include "masks.h"
 
 SMask **masks;
+size_t *masksCnt;
 
 void initMasks(void) {
-    masks = (Mask **) malloc(nmatches * sizeof(Mask *));
+    masks = (SMask **) malloc(nmatches * sizeof(SMask *));
+    masksCnt = (size_t *) malloc(nmatches * sizeof(size_t));
 
-    masks[match1] = (Mask *) malloc(() * sizeof(Mask));
+    size_t Hcnt, Rcnt, Lcnt, Vcnt, combinations;
+    Hcnt = N*(N - 3);
+    Rcnt = (N - 3)*(N - 3);
+    Lcnt = (N - 3)*(N - 3);
+    Vcnt = (N - 3)*N;
+
+    combinations = (nmasks1 - 1)/3;
+    masksCnt[match1] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+
+    masks[match1] = (SMask *) malloc(masksCnt[match1] * sizeof(SMask));
     size_t pos = 0;
     // H1000
     for(size_t row = 0; row < N; row++) {
@@ -141,7 +152,10 @@ void initMasks(void) {
         }
     }
 
-    size_t pos = 0;
+    combinations = (nmasks2 - 1)/3;
+    masksCnt[match2] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+    masks[match2] = (SMask *) malloc(masksCnt[match2] * sizeof(SMask));
+    pos = 0;
     // H1100
     for(size_t row = 0; row < N; row++) {
         for(size_t col = 0; col < (N - 3); col++) {
@@ -336,7 +350,10 @@ void initMasks(void) {
         }
     }
 
-    size_t pos = 0;
+    combinations = (nmasks3 - 1)/3;
+    masksCnt[match3] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+    masks[match3] = (SMask *) malloc(masksCnt[match3] * sizeof(SMask));
+    pos = 0;
     // H1110
     for(size_t row = 0; row < N; row++) {
         for(size_t col = 0; col < (N - 3); col++) {
@@ -471,7 +488,10 @@ void initMasks(void) {
         }
     }
 
-    size_t pos = 0;
+    combinations = (nmasks4 - 1)/3;
+    masksCnt[match4] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+    masks[match4] = (SMask *) malloc(masksCnt[match4] * sizeof(SMask));
+    pos = 0;
     // H111
     for(size_t row = 0; row < N; row++) {
         for(size_t col = 0; col < (N - 3); col++) {
@@ -507,6 +527,7 @@ void initMasks(void) {
         for(size_t col = 0; col < N; col++) {
             masks[match4][pos].main = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
             masks[match4][pos].main <<= pos2Shift(row, col);
+            printMask(masks[match4][pos].main);
             masks[match4][pos].anti = (Mask) 0;
             pos++;
         }
@@ -521,5 +542,13 @@ void printMask(const Mask mask) {
         printf("\n");
     }
     printf("\n");
+}
+
+void printMasks() {
+    for(Matches iter = 0; iter < nmatches; iter++) {
+        for(size_t length = 0; length < masksCnt[iter]; length++) {
+            printMask(masks[iter][length].main);
+        }
+    }
 }
 
