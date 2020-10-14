@@ -8,9 +8,9 @@
  * be initialized with real board and values
  */
 Node *initNode(void);
-void createTree(Node *root, const ssize_t depth);
+// void createTree(Node *root, const ssize_t depth);
 Node *createChild(Node *parent, const size_t child);
 void createChildren(Node *parent);
-void printTree(const Node *root);
+// void printTree(const Node *root);
 
 // TODO: free tree

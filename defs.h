@@ -7,6 +7,7 @@
 #define next(turn) ((turn == X) ? O : X)
 // #define next(turn) (O*(turn-O)/(X-O) + X*(turn-X)/(O-X))
 
+enum {TURN, BOTH, nboards};
 typedef enum {FALSE, TRUE} Bool;
 typedef enum {X, O, nsides} Side;
 typedef uint64_t Board;
@@ -14,8 +15,8 @@ typedef uint64_t Mask;
 
 typedef struct Node Node;
 struct Node {
-    Board board[nsides];
-    Side turn;                  // Next to move
+    Board board[nboards];
+    Side turn;                  // Last move
     short int nchildren;
     Node **child;
     float heuristic;

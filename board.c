@@ -1,7 +1,7 @@
 #include "board.h"
 
 Mask shift(const size_t row, const size_t col) {
-    return (((Mask) 1) << pos2Shift(row, col));    // TODO: change into macro
+    return (((Mask) 1) << pos2Shift(row, col));    // TODO: change into macro or array
 }
 
 size_t pos2Shift(const size_t row, const size_t col) {
@@ -15,7 +15,7 @@ void copyNode(Node *dest, const Node *orig) {
 }
 
 void copyBoard(Board *dest, const Board *orig) {
-    for(size_t iter = 0; iter < nsides; iter++) {
+    for(size_t iter = 0; iter < nboards; iter++) {
         dest[iter] = orig[iter];
     }
 }
@@ -26,7 +26,7 @@ int makeMove(Node *node, const size_t col) {
 
     ssize_t row = -1;
     for(size_t iter = 0; iter < N; iter++) {
-        if(!(( node->board[X] | node->board[O] ) & shift(iter, col))) {
+        if(!(node->board[BOTH] & shift(iter, col))) {
             row = iter;
             break;
         }
@@ -38,20 +38,29 @@ int makeMove(Node *node, const size_t col) {
         node->nchildren = node->nchildren - 1;
     }
 
-    node->board[node->turn] |= shift(row, col);
+    node->board[TURN] ^= node->board[BOTH];
+    node->board[TURN] |= shift(row, col);
+    node->board[BOTH] |= shift(row, col);
+
     node->turn = next(node->turn);
     return 0;
 }
 
-void printBoard(const Board *board) {
+char showTurn(const Side turn) {
+    return (turn == X) ? 'X' : 'O';
+}
+
+void printBoard(const Node *node) {
     ssize_t row, col;
+    char lastMove = showTurn(node->turn);
+    char nextMove = showTurn(next(node->turn));
     printf("\n");
     for(row = N - 1; row >= 0; row--) {
         for(col = 0; col < N; col++) {
-            if(board[X] & shift(row, col)) {
-                printf(" X");
-            } else if (board[O] & shift(row, col)) {
-                printf(" O");
+            if(node->board[TURN] & shift(row, col)) {
+                printf(" %c", lastMove);
+            } else if (node->board[BOTH] & shift(row, col)) {
+                printf(" %c", nextMove);
             } else {
                 printf("  ");
             }
@@ -65,9 +74,9 @@ void printBoard(const Board *board) {
 }
 
 void printNode(const Node *node) {
-    printBoard(node->board);
+    printBoard(node);
 
-    printf("turn:\t\t%c\n", (node->turn == X) ? 'X' : 'O');
+    printf("last move:\t%c\n", showTurn(node->turn));
     printf("nchildren:\t%d\n", node->nchildren);
 }
 
