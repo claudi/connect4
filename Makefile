@@ -1,10 +1,14 @@
 SOURCES = $(wildcard *.c)
+DEPENDS	= $(wildcard *.h)
 OBJECTS = $(SOURCES:.c=.o)
 
 CFLAGS = -Wall -pedantic -Werror -O3
 
 play: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c $(DEPENDS)
+	$(CC) $(CFLAGS) -c $<
 
 .PHONY: clean
 clean:
