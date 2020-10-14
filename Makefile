@@ -18,5 +18,5 @@ clean:
 debug: play.debug
 
 play.debug: CFLAGS += -D DEBUG -g
-play.debug: $(SOURCES)
+play.debug: $(SOURCES) $(DEPENDS)
 	$(CC) $(CFLAGS) -o $@ $(SOURCES)
