@@ -23,6 +23,9 @@ typedef enum {H1110, H1101, H1011, H0111,
               V1110, nmasks3} Masks3;
 typedef enum {H1111, R1111, L1111, V1111, nmasks4} Masks4;
 
+extern SMask **masks;
+extern size_t *masksCnt;
+
 void initMasks(void);
 void printMask(const Mask mask);
 void printMasks();
