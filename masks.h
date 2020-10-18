@@ -1,3 +1,5 @@
+#ifndef MASKS_GUARD
+#define MASKS_GUARD
 #include "defs.h"
 #include "board.h"
 #include <stdio.h>
@@ -29,4 +31,6 @@ extern size_t *masksCnt;
 void initMasks(void);
 void printMask(const Mask mask);
 void printMasks();
+
+#endif // MASKS_GUARD
 

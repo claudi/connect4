@@ -1,3 +1,5 @@
+#ifndef BOARD_GUARD
+#define BOARD_GUARD
 #include "defs.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,4 +11,6 @@ void copyBoard(Board *destination, const Board *origin);
 int makeMove(Node *node, const size_t column);
 void printBoard(const Node *node);
 void printNode(const Node *node);
+
+#endif // BOARD_GUARD
 

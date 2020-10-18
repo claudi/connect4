@@ -36,7 +36,7 @@ struct Node {
         fprintf(stderr, "\n");                          \
         exit(1);                                        \
     }
-#endif
+#endif // DEBUG
 
-#endif
+#endif // DEFS_GUARD
 

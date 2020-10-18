@@ -1,3 +1,5 @@
+#ifndef TREE_GUARD
+#define TREE_GUARD
 #include "defs.h"
 #include "board.h"
 #include <stdio.h>
@@ -14,3 +16,5 @@ void createChildren(Node *parent);
 // void printTree(const Node *root);
 
 // TODO: free tree
+#endif // TREE_GUARD
+
