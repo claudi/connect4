@@ -24,15 +24,11 @@ int makeMove(Node *node, const size_t col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
 
-    ssize_t row = -1;
+    size_t row = 0;
     for(size_t iter = 0; iter < N; iter++) {
-        if(!(node->board[BOTH] & shift(iter, col))) {
-            row = iter;
-            break;
-        }
+        row = row + ((node->board[BOTH] & shift(iter, col)) == shift(iter, col));
     }
 
-    ASSERT(row != -1);
     // Check for won board, and if so set nchildren to 0 and return 0
     if(row == N - 1) {
         node->nchildren = node->nchildren - 1;
