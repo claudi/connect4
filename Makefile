@@ -1,6 +1,6 @@
 SRCDIR = src/
 OBJDIR = obj/
-EXECUTS = play play.debug
+EXECUTS = play play.debug play.profile
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
@@ -26,4 +26,11 @@ debug: play.debug
 
 play.debug: CFLAGS += -D DEBUG -g
 play.debug: $(SOURCES) $(DEPENDS)
+	$(CC) $(CFLAGS) -o $@ $(SOURCES)
+
+.PHONY: profile
+profile: play.profile
+
+play.profile: CFLAGS += -g
+play.profile: $(SOURCS) $(DEPENDS)
 	$(CC) $(CFLAGS) -o $@ $(SOURCES)
