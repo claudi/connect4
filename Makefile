@@ -1,9 +1,10 @@
+SRCDIR = src/
+OBJDIR = obj/
+EXECUTS = play play.debug
+
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
 OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
-
-SRCDIR = src/
-OBJDIR = obj/
 
 CFLAGS = -Wall -pedantic -Werror -O3
 
@@ -15,7 +16,10 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) play play.debug
+	rm -f $(OBJECTS) $(EXECUTS)
+
+.PHONY: all
+all: $(EXECUTS)
 
 .PHONY: debug
 debug: play.debug
