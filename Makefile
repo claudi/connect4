@@ -2,6 +2,7 @@ SRCDIR = src/
 OBJDIR = obj/
 EXECUTS = play play.debug play.profile
 
+CC = gcc
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
 OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
