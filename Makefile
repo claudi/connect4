@@ -25,13 +25,13 @@ all: $(EXECUTS)
 .PHONY: debug
 debug: play.debug
 
-play.debug: CFLAGS += -D DEBUG -g
+play.debug: CFLAGS += -D DEBUG -ggdb
 play.debug: $(SOURCES) $(DEPENDS)
 	$(CC) $(CFLAGS) -o $@ $(SOURCES)
 
 .PHONY: profile
 profile: play.profile
 
-play.profile: CFLAGS += -g
+play.profile: CFLAGS += -pg
 play.profile: $(SOURCS) $(DEPENDS)
 	$(CC) $(CFLAGS) -o $@ $(SOURCES)

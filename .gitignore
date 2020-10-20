@@ -8,7 +8,9 @@
 # Unignore makefile
 !Makefile
 
-doc/
 .tags
+gmon.out
+
+doc/
 play.*
 *.o
