@@ -1,22 +1,37 @@
-SOURCES = $(wildcard *.c)
-DEPENDS	= $(wildcard *.h)
-OBJECTS = $(SOURCES:.c=.o)
+SRCDIR = src/
+OBJDIR = obj/
+EXECUTS = play play.debug play.profile
 
-CFLAGS = -Wall -pedantic -Werror -O3
+SOURCES = $(wildcard $(SRCDIR)*.c)
+DEPENDS	= $(wildcard $(SRCDIR)*.h)
+OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
+
+CC = gcc
+CFLAGS = -Wall -pedantic -Werror -Ofast
 
 play: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-%.o: %.c $(DEPENDS)
-	$(CC) $(CFLAGS) -c $<
+$(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) play play.debug
+	rm -f $(OBJECTS) $(EXECUTS)
+
+.PHONY: all
+all: $(EXECUTS)
 
 .PHONY: debug
 debug: play.debug
 
-play.debug: CFLAGS += -D DEBUG -g
+play.debug: CFLAGS += -D DEBUG -ggdb
 play.debug: $(SOURCES) $(DEPENDS)
+	$(CC) $(CFLAGS) -o $@ $(SOURCES)
+
+.PHONY: profile
+profile: play.profile
+
+play.profile: CFLAGS += -pg
+play.profile: $(SOURCS) $(DEPENDS)
 	$(CC) $(CFLAGS) -o $@ $(SOURCES)
