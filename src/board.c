@@ -30,15 +30,18 @@ int makeMove(Node *node, const size_t col) {
     }
 
     // Check for won board, and if so set nchildren to 0 and return 0
-    if(row == N - 1) {
-        node->nchildren = node->nchildren - 1;
-    }
-
     node->board[TURN] ^= node->board[BOTH];
     node->board[TURN] |= shift(row, col);
     node->board[BOTH] |= shift(row, col);
 
     node->turn = next(node->turn);
+
+    if(wonBoard(node->board)) {
+        node->nchildren = 0;
+    } else if(row == N - 1) {
+        node->nchildren = node->nchildren - 1;
+    }
+
     return 0;
 }
 

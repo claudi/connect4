@@ -32,5 +32,9 @@ void initMasks(void);
 void printMask(const Mask mask);
 void printMasks();
 
+Bool matchMask(const Board *board, const SMask mask);
+size_t matches(const Board *board, const size_t length);
+size_t wonBoard(const Board *board);
+
 #endif // MASKS_GUARD
 

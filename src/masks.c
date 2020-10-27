@@ -551,3 +551,23 @@ void printMasks() {
     }
 }
 
+Bool matchMask(const Board *board, const SMask mask) {
+    return ((board[TURN] & mask.main) == (mask.main))
+        && ((board[BOTH] & mask.anti) == ((Mask) 0));
+}
+
+size_t matches(const Board *board, const size_t length) {
+    ASSERT(length >= 0);
+    ASSERT(length < nmatches);
+
+    size_t count = 0;
+    for(size_t mask = 0; mask < masksCnt[length]; mask++) {
+        count += matchMask(board, masks[length][mask]);
+    }
+    return count;
+}
+
+size_t wonBoard(const Board *board) {
+    return matches(board, match4);
+}
+

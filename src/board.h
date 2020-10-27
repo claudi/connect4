@@ -1,6 +1,7 @@
 #ifndef BOARD_GUARD
 #define BOARD_GUARD
 #include "defs.h"
+#include "heuristic.h"
 #include <stdio.h>
 #include <stdlib.h>
 
