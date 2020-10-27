@@ -7,7 +7,7 @@
 
 int side(const Side side);
 size_t chooseMove(Node *root, const ssize_t depth);
-float minimax(Node *root, const ssize_t depth);
+int minimax(Node *root, const ssize_t depth);
 
 #endif // MINIMAX_GUARD
 

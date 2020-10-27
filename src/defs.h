@@ -1,7 +1,7 @@
 #ifndef DEFS_GUARD
 #define DEFS_GUARD
 #include <stdint.h> // for uint64_t
-#include <float.h>  // for FLT_MAX and FLT_MIN
+#include <limits.h> // for INT_MIN and INT_MAX
 
 #define N 8
 #define next(turn) ((turn == X) ? O : X)
@@ -19,7 +19,7 @@ struct Node {
     Side turn;                  // Last move
     short int nchildren;
     Node **child;
-    float heuristic;
+    int heuristic;
 };
 
 #ifndef DEBUG

@@ -10,10 +10,10 @@ size_t chooseMove(Node *root, const ssize_t depth) {
 
     createChildren(root);
 
-    float best = -FLT_MAX;
+    int best = INT_MIN;
     ssize_t move = -1;
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        float heuristic = minimax(root->child[iter], depth - 1);
+        int heuristic = minimax(root->child[iter], depth - 1);
         free(root->child[iter]);
         if(heuristic > best) {
             best = heuristic;
@@ -26,15 +26,15 @@ size_t chooseMove(Node *root, const ssize_t depth) {
     return move;
 }
 
-float minimax(Node *root, const ssize_t depth) {
+int minimax(Node *root, const ssize_t depth) {
     if((depth == 0) || (root->nchildren == 0)) {
         return (side(root->turn) * heuristic(root));
     }
 
     createChildren(root);
-    float best = -FLT_MAX;
+    int best = INT_MIN;
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        float heuristic = -minimax(root->child[iter], depth - 1);
+        int heuristic = -minimax(root->child[iter], depth - 1);
         free(root->child[iter]);
         if(heuristic > best) {
             best = heuristic;
