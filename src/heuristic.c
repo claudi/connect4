@@ -2,7 +2,7 @@
 #define HEURISTIC_GUARD
 #include "heuristic.h"
 
-int heuristic(const Node *node) {
+int heuristic(const Node *node, const Side side) {
     int val4 = matches(node->board, match4);
     if(val4 > 0) {
         return INT_MAX;

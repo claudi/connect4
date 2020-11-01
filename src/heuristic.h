@@ -2,5 +2,5 @@
 #include "masks.h"
 #include <stdlib.h>
 
-int heuristic(const Node *node);
+int heuristic(const Node *node, const Side side);
 

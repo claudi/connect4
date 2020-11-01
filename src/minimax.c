@@ -1,13 +1,13 @@
 #include "minimax.h"
 
-int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth);
-int alphaBetaMin(Node *root, int alpha, int beta, const ssize_t depth);
+int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth, const Side side);
+int alphaBetaMin(Node *root, int alpha, int beta, const ssize_t depth, const Side side);
 
 int side(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
-size_t chooseMove(Node *root, const ssize_t depth) {
+size_t chooseMove(Node *root, const ssize_t depth, const Side side) {
     ASSERT(root != NULL);
     ASSERT(depth > 0);
 
@@ -18,7 +18,7 @@ size_t chooseMove(Node *root, const ssize_t depth) {
     int beta = INT_MAX;
     ssize_t move = -1;
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        int score = alphaBetaMax(root->child[iter], alpha, beta, depth - 1);
+        int score = alphaBetaMax(root->child[iter], alpha, beta, depth - 1, side);
         free(root->child[iter]);
         if(score > best) {
             best = score;
@@ -43,15 +43,15 @@ size_t chooseMove(Node *root, const ssize_t depth) {
     return col;
 }
 
-int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth) {
+int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth, const Side side) {
     // if(depth * (root->nchildren) == 0)
     if((depth == 0) || (root->nchildren == 0)) {
-        return heuristic(root);
+        return heuristic(root, side);
     }
 
     createChildren(root);
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        int score = alphaBetaMin(root->child[iter], alpha, beta, depth - 1);
+        int score = alphaBetaMin(root->child[iter], alpha, beta, depth - 1, side);
         free(root->child[iter]);
         if(score >= beta) {
             return beta;
@@ -65,15 +65,15 @@ int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth) {
     return alpha;
 }
 
-int alphaBetaMin(Node *root, int alpha, int beta, const ssize_t depth) {
+int alphaBetaMin(Node *root, int alpha, int beta, const ssize_t depth, const Side side) {
     // if(depth * (root->nchildren) == 0)
     if((depth == 0) || (root->nchildren == 0)) {
-        return -heuristic(root);
+        return -heuristic(root, side);
     }
 
     createChildren(root);
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        int score = alphaBetaMax(root->child[iter], alpha, beta, depth - 1);
+        int score = alphaBetaMax(root->child[iter], alpha, beta, depth - 1, side);
         free(root->child[iter]);
         if(score <= alpha) {
             return alpha;

@@ -6,7 +6,7 @@
 #include <time.h>
 
 int side(const Side side);
-size_t chooseMove(Node *root, const ssize_t depth);
+size_t chooseMove(Node *root, const ssize_t depth, const Side side);
 int minimax(Node *root, const ssize_t depth);
 
 #endif // MINIMAX_GUARD
