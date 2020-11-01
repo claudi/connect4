@@ -106,7 +106,7 @@ void initMasks(void) {
             masks[match1][pos].main = shift(0,3);
             masks[match1][pos].main <<= pos2Shift(row, col);
             masks[match1][pos].anti = shift(1,2) | shift(2,1) | shift(3,0);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= pos2Shift(row, col);
             pos++;
         }
     }
