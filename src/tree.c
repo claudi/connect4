@@ -34,6 +34,7 @@ void createChildren(Node *parent) {
             col++;
             ASSERT(col < N);
         }
+        ASSERT(col < N);
         parent->child[iter] = createChild(parent, col);
         col++;
     }
