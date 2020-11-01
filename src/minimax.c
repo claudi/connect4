@@ -28,7 +28,19 @@ size_t chooseMove(Node *root, const ssize_t depth) {
     free(root->child);
 
     ASSERT(move != -1);
-    return move;
+    ASSERT(move < root->nchildren);
+
+    ssize_t col = -1;
+    for(size_t iter = 0; iter <= move; iter++) {
+        col++;
+        ASSERT(col < N);
+        while(root->board[BOTH] & shift(N - 1, col)) {
+            col++;
+            ASSERT(col < N);
+        }
+    }
+
+    return col;
 }
 
 int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth) {
