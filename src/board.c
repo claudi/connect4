@@ -23,6 +23,7 @@ void copyBoard(Board *dest, const Board *orig) {
 int makeMove(Node *node, const size_t col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
+    ASSERT(!(node->board[BOTH] & shift(N - 1, col)));
 
     size_t row = 0;
     for(size_t iter = 0; iter < N; iter++) {
