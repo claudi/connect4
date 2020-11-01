@@ -11,7 +11,6 @@ Node *initNode(void) {
     node->child = NULL;
 
     return node;
-    // TODO: Consider node->heuristic = 0f;
 }
 
 Node *createChild(Node *parent, const size_t col) {

@@ -19,7 +19,6 @@ struct Node {
     Side turn;                  // Last move
     short int nchildren;
     Node **child;
-    int heuristic;
 };
 
 #ifndef DEBUG
