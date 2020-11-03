@@ -14,8 +14,12 @@ int main(int argc, char **argv) {
     initMasks();
     Node *game = initNode();;
 
-    srand(time(NULL));
-    printf("move: %ld\n", chooseMove(game, depth));
+    Side side = X;
+    while(game->nchildren) {
+        makeMove(game, chooseMove(game, depth, side));
+        side = next(side);
+    }
+    printNode(game);
 
     free(game);
     return 0;
