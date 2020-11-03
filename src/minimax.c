@@ -1,7 +1,6 @@
 #include "minimax.h"
 
-int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth, const Side side);
-int alphaBetaMin(Node *root, int alpha, int beta, const ssize_t depth, const Side side);
+int alphaBeta(Node *root, int alpha, int beta, const ssize_t depth, const Side side, const Bool maximizing);
 
 int side(const Side side) {
     return (side == X) ? 1 : -1;
@@ -13,21 +12,22 @@ size_t chooseMove(Node *root, const ssize_t depth, const Side side) {
 
     createChildren(root);
 
-    int best = INT_MIN;
+    int value = INT_MIN;
     int alpha = INT_MIN;
     int beta = INT_MAX;
-    ssize_t move = -1;
+
+    int heuristic;
+    size_t move = 0;
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        int score = alphaBetaMax(root->child[iter], alpha, beta, depth - 1, side);
+        heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
         free(root->child[iter]);
-        if(score > best) {
-            best = score;
+        if(heuristic > value) {
+            value = heuristic;
             move = iter;
         }
     }
     free(root->child);
 
-    ASSERT(move != -1);
     ASSERT(move < root->nchildren);
 
     ssize_t col = -1;
@@ -43,47 +43,53 @@ size_t chooseMove(Node *root, const ssize_t depth, const Side side) {
     return col;
 }
 
-int alphaBetaMax(Node *root, int alpha, int beta, const ssize_t depth, const Side side) {
-    // if(depth * (root->nchildren) == 0)
-    if((depth == 0) || (root->nchildren == 0)) {
-        return heuristic(root, side);
+int alphaBeta(Node *root, int alpha, int beta, const ssize_t depth, const Side side, const Bool maximizing) {
+    if(depth == 0 || root->nchildren == 0) {
+        int h = heuristic(root, side);
+        return h;
     }
 
+    int value;
     createChildren(root);
-    for(size_t iter = 0; iter < root->nchildren; iter++) {
-        int score = alphaBetaMin(root->child[iter], alpha, beta, depth - 1, side);
-        free(root->child[iter]);
-        if(score >= beta) {
-            return beta;
+    if(maximizing) {
+        value = INT_MIN;
+        for(size_t iter = 0; iter < root->nchildren; iter++) {
+            int heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+
+            if(heuristic > value) {
+                value = heuristic;
+            }
+            if(value > alpha) {
+                alpha = value;
+            }
+            if(alpha >= beta) {
+                for(size_t free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
+                    free(root->child[free_the_children]);
+                }
+                break;
+            }
+            free(root->child[iter]);
         }
-        if(score > alpha) {
-            alpha = score;
+    } else {
+        value = INT_MAX;
+        for(size_t iter = 0; iter < root->nchildren; iter++) {
+            int heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+
+            if(heuristic < value) {
+                value = heuristic;
+            }
+            if(value < beta) {
+                beta = value;
+            }
+            if(beta <= alpha) {
+                for(size_t free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
+                    free(root->child[free_the_children]);
+                }
+                break;
+            }
+            free(root->child[iter]);
         }
     }
-    free(root->child);
-
-    return alpha;
-}
-
-int alphaBetaMin(Node *root, int alpha, int beta, const ssize_t depth, const Side side) {
-    // if(depth * (root->nchildren) == 0)
-    if((depth == 0) || (root->nchildren == 0)) {
-        return -heuristic(root, side);
-    }
-
-    createChildren(root);
-    for(size_t iter = 0; iter < root->nchildren; iter++) {
-        int score = alphaBetaMax(root->child[iter], alpha, beta, depth - 1, side);
-        free(root->child[iter]);
-        if(score <= alpha) {
-            return alpha;
-        }
-        if(score < beta) {
-            beta = score;
-        }
-    }
-    free(root->child);
-
-    return beta;
+    return value;
 }
 
