@@ -24,14 +24,38 @@ int simpleHeuristic(const Node *node, const Side side) {
 }
 
 int heuristic(const Node *node, const Side side) {
-    int val4 = matches(node->board, match4);
-    if(val4 > 0) {
+    Board board[nboards];
+    copyBoard(board, node->board);
+
+    if(node->turn != side) {
+        board[TURN] ^= board[BOTH];
+    }
+
+    int heuristic = 0;
+    int /*nmatch1,*/ nmatch2, nmatch3, nmatch4;
+    nmatch4 = matches(board, match4);
+    if(nmatch4 > 0) {
+        return INT_MIN;
+    }
+    nmatch3 = matches(board, match3);
+    nmatch2 = matches(board, match2);
+    // nmatch1 = matches(board, match1);
+
+    heuristic -= 2*(nmatch2 + 10*nmatch3);
+
+    board[TURN] ^= board[BOTH];
+
+    nmatch4 = matches(board, match4);
+    if(nmatch4 > 0) {
         return INT_MAX;
     }
-    int val3 = matches(node->board, match3);
-    int val2 = matches(node->board, match2);
-    int val1 = matches(node->board, match1);
-    return (val1 + 10*val2 + 100*val3 + 1000*val4);
+    nmatch3 = matches(board, match3);
+    nmatch2 = matches(board, match2);
+    // nmatch1 = matches(board, match1);
+
+    heuristic += (nmatch2 + 10*nmatch3);
+
+    return heuristic;
 }
 
 #endif // HEURISTIC_GUARD
