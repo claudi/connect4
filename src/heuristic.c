@@ -2,6 +2,27 @@
 #define HEURISTIC_GUARD
 #include "heuristic.h"
 
+int simpleHeuristic(const Node *node, const Side side) {
+    Board board[nboards];
+    copyBoard(board, node->board);
+
+    if(node->turn != side) {
+        board[TURN] ^= board[BOTH];
+    }
+
+    if(matches(board, match4) > 0) {
+        return INT_MIN;
+    }
+
+    board[TURN] ^= board[BOTH];
+
+    if(matches(board, match4) > 0) {
+        return INT_MAX;
+    }
+
+    return 0;
+}
+
 int heuristic(const Node *node, const Side side) {
     int val4 = matches(node->board, match4);
     if(val4 > 0) {
