@@ -2,6 +2,14 @@
 #define HEURISTIC_GUARD
 #include "heuristic.h"
 
+int simpleHeuristic(const Node *node, const Side side);
+int weightedHeuristic(const Node *node, const Side side);
+int manualHeuristic(const Node *node, const Side side);
+
+int heuristic(const Node *node, const Side side) {
+    return simpleHeuristic(node, side);
+}
+
 int simpleHeuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
@@ -23,7 +31,7 @@ int simpleHeuristic(const Node *node, const Side side) {
     return 0;
 }
 
-int heuristic(const Node *node, const Side side) {
+int weightedHeuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 
