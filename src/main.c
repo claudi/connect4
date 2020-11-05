@@ -7,11 +7,10 @@
 
 int main(int argc, char **argv) {
     size_t depth = 6;
-    if(argc == 2) {
-        depth = atoi(argv[1]);
-    }
 
     initMasks();
+    initCoefs(argv[1]);
+
     Node *game = initNode();;
 
     Side side = X;

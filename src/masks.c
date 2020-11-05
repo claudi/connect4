@@ -2,6 +2,8 @@
 
 SMask **masks;
 size_t *masksCnt;
+int *coefs;
+size_t ncoefs = 0;
 
 void initMasks(void) {
     masks = (SMask **) malloc(nmatches * sizeof(SMask *));
@@ -533,6 +535,23 @@ void initMasks(void) {
     }
 }
 
+void initCoefs(const char *FILEName) {
+    for(Matches iter = 0; iter < nmatches - 1; iter++) {
+        ncoefs += masksCnt[iter];
+    }
+    coefs = (int *) malloc(ncoefs * sizeof (int));
+
+    FILE *fcoefs = fopen(FILEName, "r");
+    if(fcoefs == NULL) {
+        fprintf(stderr, "Cannot read %s\n", FILEName);
+        exit(-1);
+    }
+
+    for(size_t iter = 0; iter < ncoefs; iter++) {
+        fscanf(fcoefs, "%d", coefs + iter);
+    }
+}
+
 void printMask(const Mask mask) {
     for(ssize_t iter_i = (N - 1); iter_i >= 0; iter_i--) {
         for(size_t iter_j = 0; iter_j < N; iter_j++) {
@@ -554,6 +573,18 @@ void printMasks() {
 Bool matchMask(const Board *board, const SMask mask) {
     return ((board[TURN] & mask.main) == (mask.main))
         && ((board[BOTH] & mask.anti) == ((Mask) 0));
+}
+
+int weightedMatches(const Board *board) {
+    int total = 0;
+    size_t coef = 0;
+    for(Mask iter = 0; iter < nmatches; iter++) {
+        for(size_t mask = 0; mask < masksCnt[iter]; mask++) {
+            total += coefs[coef] * matchMask(board, masks[iter][mask]);
+            coef++;
+        }
+    }
+    return total;
 }
 
 size_t matches(const Board *board, const size_t length) {
