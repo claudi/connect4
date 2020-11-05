@@ -7,7 +7,7 @@ int weightedHeuristic(const Node *node, const Side side);
 int manualHeuristic(const Node *node, const Side side);
 
 int heuristic(const Node *node, const Side side) {
-    return simpleHeuristic(node, side);
+    return manualHeuristic(node, side);
 }
 
 int simpleHeuristic(const Node *node, const Side side) {
@@ -35,7 +35,7 @@ int weightedHeuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 
-    if(node->turn != side) {
+    if(node->turn == side) {
         board[TURN] ^= board[BOTH];
     }
 
@@ -60,7 +60,7 @@ int manualHeuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 
-    if(node->turn != side) {
+    if(node->turn == side) {
         board[TURN] ^= board[BOTH];
     }
 
