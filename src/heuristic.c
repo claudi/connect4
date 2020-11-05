@@ -6,7 +6,7 @@ int simpleHeuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 
-    if(node->turn != side) {
+    if(node->turn == side) {
         board[TURN] ^= board[BOTH];
     }
 
@@ -27,7 +27,7 @@ int heuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 
-    if(node->turn != side) {
+    if(node->turn == side) {
         board[TURN] ^= board[BOTH];
     }
 

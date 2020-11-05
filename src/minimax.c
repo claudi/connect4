@@ -19,7 +19,7 @@ size_t chooseMove(Node *root, const ssize_t depth, const Side side) {
     int heuristic;
     size_t move = 0;
     for(size_t iter = 0; iter < root->nchildren; iter++) {
-        heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+        heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
         free(root->child[iter]);
         if(heuristic > value) {
             value = heuristic;
