@@ -19,7 +19,12 @@ int main(int argc, char **argv) {
         makeMove(game, chooseMove(game, depth, side));
         side = next(side);
     }
-    printNode(game);
+
+    if(wonBoard(game->board)) {
+        printf("%d\n", game->turn);
+    } else {
+        printf("-1\n");
+    }
 
     free(game);
     return 0;
