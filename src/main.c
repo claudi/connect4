@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     size_t depth = 6;
 
     initMasks();
-    initCoefs(argv[1]);
+    initCoefs(argv[1], argv[2]);
 
     Node *game = initNode();;
 

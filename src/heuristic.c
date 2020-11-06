@@ -7,7 +7,7 @@ int weightedHeuristic(const Node *node, const Side side);
 int manualHeuristic(const Node *node, const Side side);
 
 int heuristic(const Node *node, const Side side) {
-    return manualHeuristic(node, side);
+    return weightedHeuristic(node, side);
 }
 
 int simpleHeuristic(const Node *node, const Side side) {
@@ -44,14 +44,14 @@ int weightedHeuristic(const Node *node, const Side side) {
     if(matches(board, match4)) {
         return INT_MIN;
     }
-    heuristic -= weightedMatches(board);
+    heuristic -= weightedMatches(board, next(side));
 
     board[TURN] ^= board[BOTH];
 
     if(matches(board, match4)) {
         return INT_MAX;
     }
-    heuristic += weightedMatches(board);
+    heuristic += weightedMatches(board, side);
 
     return heuristic;
 }

@@ -29,12 +29,12 @@ extern SMask **masks;
 extern size_t *masksCnt;
 
 void initMasks(void);
-void initCoefs(const char *FILEName);
+void initCoefs(const char *FILENameX, const char *FILENameO);
 void printMask(const Mask mask);
 void printMasks();
 
 Bool matchMask(const Board *board, const SMask mask);
-int weightedMatches(const Board *board);
+int weightedMatches(const Board *board, const Side side);
 size_t matches(const Board *board, const size_t length);
 size_t wonBoard(const Board *board);
 
