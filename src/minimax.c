@@ -1,12 +1,12 @@
 #include "minimax.h"
 
-int alphaBeta(Node *root, int alpha, int beta, const ssize_t depth, const Side side, const Bool maximizing);
+int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing);
 
 int side(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
-size_t chooseMove(Node *root, const ssize_t depth, const Side side) {
+short chooseMove(Node *root, const short depth, const Side side) {
     ASSERT(root != NULL);
     ASSERT(depth > 0);
 
@@ -43,7 +43,7 @@ size_t chooseMove(Node *root, const ssize_t depth, const Side side) {
     return col;
 }
 
-int alphaBeta(Node *root, int alpha, int beta, const ssize_t depth, const Side side, const Bool maximizing) {
+int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing) {
     if(depth == 0 || root->nchildren == 0) {
         int h = heuristic(root, side);
         return h;
