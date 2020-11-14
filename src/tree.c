@@ -2,7 +2,7 @@
 
 Node *initNode(void) {
     Node *node = (Node *) malloc(sizeof(Node));
-    for(size_t iter = 0; iter < nboards; iter++) {
+    for(short iter = 0; iter < nboards; iter++) {
         node->board[iter] = (Board) 0;
     }
     node->turn = O;
@@ -13,7 +13,7 @@ Node *initNode(void) {
     return node;
 }
 
-Node *createChild(Node *parent, const size_t col) {
+Node *createChild(Node *parent, const short col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
 
@@ -27,8 +27,8 @@ Node *createChild(Node *parent, const size_t col) {
 void createChildren(Node *parent) {
     parent->child = (Node **) malloc(parent->nchildren * sizeof(Node *));
 
-    size_t col = 0;
-    for(size_t iter = 0; iter < parent->nchildren; iter++) {
+    short col = 0;
+    for(short iter = 0; iter < parent->nchildren; iter++) {
         while(parent->board[BOTH] & shift(N - 1, col)) {
             col++;
             ASSERT(col < N);
@@ -37,9 +37,10 @@ void createChildren(Node *parent) {
         parent->child[iter] = createChild(parent, col);
         col++;
     }
+    ASSERT(col >= 0);
 }
 
-void createTree(Node *root, const ssize_t depth) {
+void createTree(Node *root, const short depth) {
     ASSERT(depth >= 0);
 
     if(depth == 0) {
@@ -47,7 +48,7 @@ void createTree(Node *root, const ssize_t depth) {
         root->child = NULL;
     } else {
         createChildren(root);
-        for(size_t iter = 0; iter < root->nchildren; iter++) {
+        for(short iter = 0; iter < root->nchildren; iter++) {
             createTree(root->child[iter], depth - 1);
         }
     }
@@ -55,7 +56,7 @@ void createTree(Node *root, const ssize_t depth) {
 
 void printTree(const Node *root) {
     printNode(root);
-    for(size_t iter = 0; iter < root->nchildren; iter++) {
+    for(short iter = 0; iter < root->nchildren; iter++) {
         printTree(root->child[iter]);
     }
 }
