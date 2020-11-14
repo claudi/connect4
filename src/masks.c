@@ -492,7 +492,7 @@ void initMasks(void) {
     masksCnt[match4] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     masks[match4] = (SMask *) malloc(masksCnt[match4] * sizeof(SMask));
     pos = 0;
-    // H111
+    // H1111
     for(size_t row = 0; row < N; row++) {
         for(size_t col = 0; col < (N - 3); col++) {
             masks[match4][pos].main = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
@@ -502,7 +502,7 @@ void initMasks(void) {
         }
     }
 
-    // R111
+    // R1111
     for(size_t row = 0; row < (N - 3); row++) {
         for(size_t col = 0; col < (N - 3); col++) {
             masks[match4][pos].main = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
@@ -512,7 +512,7 @@ void initMasks(void) {
 
         }
     }
-    // L111
+    // L1111
     for(size_t row = 0; row < (N - 3); row++) {
         for(size_t col = 0; col < (N - 3); col++) {
             masks[match4][pos].main = shift(3,0) | shift(2,1) | shift(1,2) | shift(0,3);
