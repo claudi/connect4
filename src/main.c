@@ -19,7 +19,6 @@ int main(int argc, char **argv) {
         makeMove(game, chooseMove(game, depth, side));
         side = next(side);
     }
-    printNode(game);
 
     free(game);
     return 0;
