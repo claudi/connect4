@@ -26,15 +26,15 @@ typedef enum {H1110, H1101, H1011, H0111,
 typedef enum {H1111, R1111, L1111, V1111, nmasks4} Masks4;
 
 extern SMask **masks;
-extern size_t *masksCnt;
+extern unsigned *masksCnt;
 
 void initMasks(void);
 void printMask(const Mask mask);
 void printMasks();
 
 Bool matchMask(const Board *board, const SMask mask);
-size_t matches(const Board *board, const size_t length);
-size_t wonBoard(const Board *board);
+unsigned matches(const Board *board, const unsigned length);
+unsigned wonBoard(const Board *board);
 
 #endif // MASKS_GUARD
 
