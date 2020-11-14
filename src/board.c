@@ -1,10 +1,10 @@
 #include "board.h"
 
-Mask shift(const size_t row, const size_t col) {
+Mask shift(const short row, const short col) {
     return (((Mask) 1) << pos2Shift(row, col));    // TODO: change into macro or array
 }
 
-size_t pos2Shift(const size_t row, const size_t col) {
+short pos2Shift(const short row, const short col) {
     return ((N * row) + col);   // TODO: change into macro
 }
 
@@ -15,20 +15,22 @@ void copyNode(Node *dest, const Node *orig) {
 }
 
 void copyBoard(Board *dest, const Board *orig) {
-    for(size_t iter = 0; iter < nboards; iter++) {
+    for(short iter = 0; iter < nboards; iter++) {
         dest[iter] = orig[iter];
     }
 }
 
-int makeMove(Node *node, const size_t col) {
+short makeMove(Node *node, const short col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
     ASSERT(!(node->board[BOTH] & shift(N - 1, col)));
 
-    size_t row = 0;
-    for(size_t iter = 0; iter < N; iter++) {
+    short row = 0;
+    for(short iter = 0; iter < N; iter++) {
         row = row + ((node->board[BOTH] & shift(iter, col)) == shift(iter, col));
     }
+
+    ASSERT(row < N);
 
     // Check for won board, and if so set nchildren to 0 and return 0
     node->board[TURN] ^= node->board[BOTH];
@@ -51,7 +53,7 @@ char showTurn(const Side turn) {
 }
 
 void printBoard(const Node *node) {
-    ssize_t row, col;
+    short row, col;
     char lastMove = showTurn(node->turn);
     char nextMove = showTurn(next(node->turn));
     printf("\n");
@@ -68,7 +70,7 @@ void printBoard(const Node *node) {
         printf("\n");
     }
     for(col = 0; col < N; col++) {
-        printf(" %lu", col);
+        printf(" %d", col);
     }
     printf("\n");
 }
