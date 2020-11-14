@@ -1,7 +1,7 @@
 #include "board.h"
 
 Mask shift(const short row, const short col) {
-    return (((Mask) 1) << pos2Shift(row, col));    // TODO: change into macro or array
+    return (((Mask) 1) << pos2Shift(row, col));
 }
 
 void copyNode(Node *dest, const Node *orig) {
