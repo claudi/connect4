@@ -17,8 +17,8 @@ short chooseMove(Node *root, const short depth, const Side side) {
     int beta = INT_MAX;
 
     int heuristic;
-    size_t move = 0;
-    for(size_t iter = 0; iter < root->nchildren; iter++) {
+    short move = 0;
+    for(short iter = 0; iter < root->nchildren; iter++) {
         heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
         free(root->child[iter]);
         if(heuristic > value) {
@@ -28,10 +28,11 @@ short chooseMove(Node *root, const short depth, const Side side) {
     }
     free(root->child);
 
+    ASSERT(move >= 0);
     ASSERT(move < root->nchildren);
 
-    ssize_t col = -1;
-    for(size_t iter = 0; iter <= move; iter++) {
+    short col = -1;
+    for(short iter = 0; iter <= move; iter++) {
         col++;
         ASSERT(col < N);
         while(root->board[BOTH] & shift(N - 1, col)) {
@@ -40,6 +41,7 @@ short chooseMove(Node *root, const short depth, const Side side) {
         }
     }
 
+    ASSERT(col >= 0);
     return col;
 }
 
