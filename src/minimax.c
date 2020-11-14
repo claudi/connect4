@@ -55,7 +55,7 @@ int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side sid
     createChildren(root);
     if(maximizing) {
         value = INT_MIN;
-        for(size_t iter = 0; iter < root->nchildren; iter++) {
+        for(short iter = 0; iter < root->nchildren; iter++) {
             int heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
 
             if(heuristic > value) {
@@ -65,7 +65,7 @@ int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side sid
                 alpha = value;
             }
             if(alpha >= beta) {
-                for(size_t free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
+                for(short free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
                     free(root->child[free_the_children]);
                 }
                 break;
@@ -74,7 +74,7 @@ int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side sid
         }
     } else {
         value = INT_MAX;
-        for(size_t iter = 0; iter < root->nchildren; iter++) {
+        for(short iter = 0; iter < root->nchildren; iter++) {
             int heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
 
             if(heuristic < value) {
@@ -84,7 +84,7 @@ int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side sid
                 beta = value;
             }
             if(beta <= alpha) {
-                for(size_t free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
+                for(short free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
                     free(root->child[free_the_children]);
                 }
                 break;
