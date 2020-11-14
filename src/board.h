@@ -5,8 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define pos2Shift(row, col) ((N * row) + col)
+
 Mask shift(const short row, const short col);
-short pos2Shift(const short row, const short col);
 void copyNode(Node *destination, const Node *origin);
 void copyBoard(Board *destination, const Board *origin);
 short makeMove(Node *node, const short col);

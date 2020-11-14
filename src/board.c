@@ -4,10 +4,6 @@ Mask shift(const short row, const short col) {
     return (((Mask) 1) << pos2Shift(row, col));    // TODO: change into macro or array
 }
 
-short pos2Shift(const short row, const short col) {
-    return ((N * row) + col);   // TODO: change into macro
-}
-
 void copyNode(Node *dest, const Node *orig) {
     copyBoard(dest->board, orig->board);
     dest->turn = orig->turn;
