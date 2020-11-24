@@ -92,11 +92,34 @@ float *evalNetwork(const Network *network, const float *inputs) {
 
     for(short layer = 1; layer < network->nlayers; layer++) {
         for(short cell = 0; cell < network->ncells[layer]; cell++) {
-            outputs[layer][cell] = 0;
+            // outputs[layer][cell] = 0;
             // for(short iter = 0; iter < network->ncells[layer-1]; iter++) {
                 // outputs[layer][cell] += outputs[layer-1][iter] * network->weights[layer-1][cell][iter];
             // }
             outputs[layer][cell] = prodesc(network->ncells[layer-1], outputs[layer-1], network->weights[layer-1][cell]);
+        }
+    }
+
+    return outputs[network->nlayers - 1];
+}
+
+float *evalCNetwork(const CNetwork *network, const float *inputs) {
+    float **outputs = (float **) malloc(network->nlayers * sizeof(float *));
+
+    for(short layer = 0l layer < network->nlayers; layer++) {
+        outputs[layer] = (float *) malloc(network->ncells[layer] * sizeof(float));
+    }
+
+    for(short cell = 0; cell < network->ncells[0]; cell++) {
+        outputs[0][cell] = inputs[cell];
+    }
+
+    for(short layer = 1; layer < network->nlayers; layer++) {
+        for(short cell = 0; cell < network->ncells[layer]; cell++) {
+            outputs[layer][cell] = 0;
+            for(short iter = 0; iter < network->ncells[layer-1]; iter++) {
+                // CONTINUE HERE
+            }
         }
     }
 

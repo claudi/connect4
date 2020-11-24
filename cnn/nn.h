@@ -15,6 +15,13 @@ typedef struct {
     float ***weights;
 } Network;
 
+typedef struct{
+    short nlayers;
+    short *ncells;
+    short *filter;
+    float ***weights;
+} CNetwork;
+
 Network *initNetwork(const short nlayers, const short *topology);
 void printNetwork(const Network *network);
 
