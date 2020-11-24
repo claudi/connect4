@@ -3,22 +3,19 @@
 #include <time.h>
 #include <math.h>
 
-#define DEFAULT_NLAYERS 3
+#define DEFAULT_NLAYERS 4
 #define DEFAULT_NINPUTS 64
-#define DEFAULT_NNEURONS default_neurons
-const short default_neurons[DEFAULT_NLAYERS] = {128, 128, 8};
+#define DEFAULT_TOPOLOGY default_neurons
+// const short default_neurons[DEFAULT_NLAYERS] = {3, 2, 3};
+const short default_neurons[DEFAULT_NLAYERS] = {12, 128, 8, 8};
 
-typedef struct Network Network;
-struct Network {
-    short ninputs;
+typedef struct {
     short nlayers;
-    float *input;       // ninputs
-    short *nneurons;    // nlayers
-    float **neuron;     // nlayers x nneurons
-    float **weight;     // nlayers x nneurons
-};
+    short *ncells;
+    float ***weights;
+} Network;
 
-Network *initNetwork(const short ninputs, const short nlayers, const short *nneurons);
+Network *initNetwork(const short nlayers, const short *topology);
 void printNetwork(const Network *network);
 
 #ifndef DEBUG
