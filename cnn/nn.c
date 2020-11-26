@@ -103,21 +103,26 @@ float *evalNetwork(const Network *network, const float *inputs) {
     return outputs[network->nlayers - 1];
 }
 
-float *evalCNetwork(const CNetwork *network, const float *inputs) {
-    float **outputs = (float **) malloc(network->nlayers * sizeof(float *));
+float *evalCNetwork(const CNetwork *network, const float **inputs) {
+    float ***outputs = (float ***) malloc(network->nlayers * sizeof(float **));
 
-    for(short layer = 0l layer < network->nlayers; layer++) {
-        outputs[layer] = (float *) malloc(network->ncells[layer] * sizeof(float));
+    for(short layer = 0; layer < network->nlayers; layer++) {
+        outputs[layer] = (float **) malloc(network->dimX[layer] * sizeof(float *));
+        for(short cell = 0; cell < network->dimX[layer]; cell++) {
+            outputs[layer][cell] = (float *) malloc(network->dimY[layer] * sizeof(float));
+        }
     }
 
-    for(short cell = 0; cell < network->ncells[0]; cell++) {
-        outputs[0][cell] = inputs[cell];
+    for(short cell_i = 0; cell_i < network->dimX[0]; cell_i++) {
+        for(short cell_j = 0; cell_j < network->dimY[0]; cell_j++) {
+            outputs[0][cell_i][cell_j] = inputs[cell_i][cell_j];
+        }
     }
 
     for(short layer = 1; layer < network->nlayers; layer++) {
-        for(short cell = 0; cell < network->ncells[layer]; cell++) {
-            outputs[layer][cell] = 0;
-            for(short iter = 0; iter < network->ncells[layer-1]; iter++) {
+        for(short cell_i = 0; cell_i < network->dimX[0]; cell_i++) {
+            for(short cell_j = 0; cell_j < network->dimY[0]; cell_j++) {
+                outputs[layer][cell_i][cell_j] = 0;
                 // CONTINUE HERE
             }
         }

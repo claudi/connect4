@@ -17,8 +17,9 @@ typedef struct {
 
 typedef struct{
     short nlayers;
-    short *ncells;
-    short *filter;
+    short **ncells;
+    short *dimX;
+    short *dimY;
     float ***weights;
 } CNetwork;
 
