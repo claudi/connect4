@@ -35,6 +35,7 @@ void printMasks();
 Bool matchMask(const Board *board, const SMask mask);
 unsigned matches(const Board *board, const unsigned length);
 unsigned wonBoard(const Board *board);
+int *matchVector(const Board *board);
 
 #endif // MASKS_GUARD
 

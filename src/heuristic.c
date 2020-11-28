@@ -1,6 +1,28 @@
-#ifndef HEURISTIC_GUARD
-#define HEURISTIC_GUARD
 #include "heuristic.h"
+
+int neuralHeuristic(const Node *node, const Side side) {
+    // Board board[nboards];
+    // copyBoard(board, node->board);
+
+    // if(node->turn == side) {
+        // board[TURN] ^= board[BOTH];
+    // }
+
+    // int nmatch4;
+    // nmatch4 = matches(board, match4);
+    // if(nmatch4 > 0) {
+        // return INT_MIN;
+    // }
+
+    // board[TURN] ^= board[BOTH];
+
+    // nmatch4 = matches(board, match4);
+    // if(nmatch4 > 0) {
+        // return INT_MAX;
+    // }
+
+    return *evalNetwork(network[side], matchVector(node->board));
+}
 
 int simpleHeuristic(const Node *node, const Side side) {
     Board board[nboards];
@@ -23,7 +45,7 @@ int simpleHeuristic(const Node *node, const Side side) {
     return 0;
 }
 
-int heuristic(const Node *node, const Side side) {
+int weightsHeuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 
@@ -58,5 +80,28 @@ int heuristic(const Node *node, const Side side) {
     return heuristic;
 }
 
-#endif // HEURISTIC_GUARD
+int heuristic(const Node *node, const Side side) {
+    Board board[nboards];
+    copyBoard(board, node->board);
+
+    if(node->turn == side) {
+        board[TURN] ^= board[BOTH];
+    }
+
+    int nmatch4;
+    nmatch4 = matches(board, match4);
+    if(nmatch4 > 0) {
+        return INT_MIN;
+    }
+
+    board[TURN] ^= board[BOTH];
+
+    nmatch4 = matches(board, match4);
+    if(nmatch4 > 0) {
+        return INT_MAX;
+    }
+
+    return neuralHeuristic(node, side);
+}
+
 

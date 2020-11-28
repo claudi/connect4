@@ -2,6 +2,7 @@
 #define DEFS_GUARD
 #include <stdint.h> // for uint64_t
 #include <limits.h> // for INT_MIN and INT_MAX
+#include <float.h> // for FLT_MIN and FLT_MAX
 
 #define N 8
 #define next(turn) ((turn == X) ? O : X)
