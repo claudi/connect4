@@ -2,7 +2,7 @@
 
 int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing);
 
-int side(const Side side) {
+int color(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
