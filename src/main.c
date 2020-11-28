@@ -14,10 +14,16 @@ int main(int argc, char **argv) {
     initMasks();
     Node *game = initNode();;
 
+    // int move;
     Side side = X;
     while(game->nchildren) {
-        makeMove(game, chooseMove(game, depth, side));
+        game = machineMove(game, depth, side);
         side = next(side);
+        printNode(game);
+        // if(wonBoard(game->board)) break;
+        // scanf("%d", &move);
+        // makeMove(game, move);
+        // side = next(side);
     }
 
     free(game);
