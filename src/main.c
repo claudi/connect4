@@ -12,17 +12,20 @@ int main(int argc, char **argv) {
         depth = atoi(argv[1]);
     }
 
-    printMenu();
+    // printMenu();
 
     initMasks();
     Node *game = initNode();;
 
     // int move;
+    short turn = 1;
     Side side = X;
     while(game->nchildren) {
         game = machineMove(game, depth, side);
         side = next(side);
-        printNode(game);
+        printInterface(game, turn);
+        turn += side;
+        // printNode(game);
         // if(wonBoard(game->board)) break;
         // scanf("%d", &move);
         // makeMove(game, move);
