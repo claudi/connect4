@@ -1,15 +1,18 @@
 #include "minimax.h"
 
+unsigned exploredPositions;
 int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing);
 
 int color(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
-Node *machineMove(Node *root, const short depth, const Side side) {
+void machineMove(Node *root, const short depth, const Side side) {
     ASSERT(root != NULL);
     ASSERT(depth > 0);
     ASSERT(root->nchildren > 0);
+
+    exploredPositions = 0;
 
     createChildren(root);
     Node *answer = (Node *) malloc(sizeof(Node));
@@ -27,12 +30,13 @@ Node *machineMove(Node *root, const short depth, const Side side) {
         }
         free(root->child[iter]);
     }
-    free(root->child);
 
-    return answer;
+    copyNode(root, answer);
 }
 
 int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing) {
+    exploredPositions++;
+
     if(depth == 0 || root->nchildren == 0) {
         int h = heuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
         return h;
