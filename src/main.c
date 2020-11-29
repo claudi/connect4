@@ -1,8 +1,9 @@
 #include "defs.h"
 #include "board.h"
-#include "tree.h"
+// #include "tree.h"
 #include "minimax.h"
 #include "masks.h"
+#include "bling.h"
 #include <stdio.h>
 
 int main(int argc, char **argv) {
@@ -10,6 +11,8 @@ int main(int argc, char **argv) {
     if(argc == 2) {
         depth = atoi(argv[1]);
     }
+
+    printMenu();
 
     initMasks();
     Node *game = initNode();;
