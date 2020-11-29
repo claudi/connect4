@@ -11,6 +11,7 @@ Mask shift(const short row, const short col);
 void copyNode(Node *destination, const Node *origin);
 void copyBoard(Board *destination, const Board *origin);
 short makeMove(Node *node, const short col);
+char showTurn(const Side side);
 void printBoard(const Node *node);
 void printNode(const Node *node);
 

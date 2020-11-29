@@ -57,10 +57,10 @@ void printBoard(const Node *node) {
         for(col = 0; col < N; col++) {
             if(node->board[TURN] & shift(row, col)) {
                 printf(" %c", lastMove);
-            } else if (node->board[BOTH] & shift(row, col)) {
+            } else if(node->board[BOTH] & shift(row, col)) {
                 printf(" %c", nextMove);
             } else {
-                printf("  ");
+                printf(" ·");
             }
         }
         printf("\n");
@@ -74,7 +74,7 @@ void printBoard(const Node *node) {
 void printNode(const Node *node) {
     printBoard(node);
 
-    printf("last move:\t%c\n", showTurn(node->turn));
-    printf("nchildren:\t%d\n", node->nchildren);
+    // printf("last move:\t%c\n", showTurn(node->turn));
+    // printf("nchildren:\t%d\n", node->nchildren);
 }
 

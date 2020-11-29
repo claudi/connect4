@@ -1,53 +1,44 @@
 #include "minimax.h"
 
+unsigned exploredPositions;
 int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing);
 
-int side(const Side side) {
+int color(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
-short chooseMove(Node *root, const short depth, const Side side) {
+void machineMove(Node *root, const short depth, const Side side) {
     ASSERT(root != NULL);
     ASSERT(depth > 0);
+    ASSERT(root->nchildren > 0);
+
+    exploredPositions = 0;
 
     createChildren(root);
+    Node *answer = (Node *) malloc(sizeof(Node));
 
     int value = INT_MIN;
     int alpha = INT_MIN;
     int beta = INT_MAX;
 
     int heuristic;
-    short move = 0;
     for(short iter = 0; iter < root->nchildren; iter++) {
         heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
-        free(root->child[iter]);
-        if(heuristic > value) {
+        if(heuristic >= value) {
             value = heuristic;
-            move = iter;
+            copyNode(answer, root->child[iter]);
         }
-    }
-    free(root->child);
-
-    ASSERT(move >= 0);
-    ASSERT(move < root->nchildren);
-
-    short col = -1;
-    for(short iter = 0; iter <= move; iter++) {
-        col++;
-        ASSERT(col < N);
-        while(root->board[BOTH] & shift(N - 1, col)) {
-            col++;
-            ASSERT(col < N);
-        }
+        free(root->child[iter]);
     }
 
-    ASSERT(col >= 0);
-    return col;
+    copyNode(root, answer);
 }
 
 int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing) {
+    exploredPositions++;
+
     if(depth == 0 || root->nchildren == 0) {
-        int h = heuristic(root, side);
+        int h = heuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
         return h;
     }
 

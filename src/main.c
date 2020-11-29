@@ -1,26 +1,28 @@
-#include "defs.h"
+#include "bling.h"
 #include "board.h"
-#include "tree.h"
-#include "minimax.h"
+#include "defs.h"
+#include "heuristic.h"
 #include "masks.h"
-#include <stdio.h>
+#include "minimax.h"
+#include "tree.h"
 
-int main(int argc, char **argv) {
-    short depth = 6;
-    if(argc == 2) {
-        depth = atoi(argv[1]);
-    }
-
+int main(void) {
+    // Stats stats = {game, 1, 4, X, X, 0.0, TRUE};
     initMasks();
-    Node *game = initNode();;
+    do {
+        Game *game = initGame();
+        while(game->node->nchildren) {
+            if(game->side == game->playerSide) {
+                humanInput(game);
+            } else {
+                machineMove(game->node, game->depth, game->side);
+            }
+            game->side = next(game->side);
+            game->turn += game->side;
+        }
+        printInterface(game);
+    } while(TRUE);
 
-    Side side = X;
-    while(game->nchildren) {
-        makeMove(game, chooseMove(game, depth, side));
-        side = next(side);
-    }
-
-    free(game);
-    return 0;
+    return EXIT_SUCCESS;
 }
 
