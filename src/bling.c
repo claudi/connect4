@@ -3,6 +3,7 @@
 void printGameBoy(char screen[SCREEN_H][SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]);
 char *difficulty(const short depth);
 char *trimBigNumber(const unsigned num);
+char *posPerSec(unsigned positions, double time);
 void humanInput(Game *game);
 
 void printInterface(const Game *game) {
@@ -58,7 +59,7 @@ void printInterface(const Game *game) {
     sprintf(side[0][pos++], " 1-8 Play on column     ");
     sprintf(side[0][pos++], "   h Toggle help/stats  ");
     sprintf(side[0][pos++], "%4s Position%s explored", trimBigNumber(exploredPositions), exploredPositions == 1 ? "" : "s" );
-    sprintf(side[0][pos++], "                        ");
+    sprintf(side[0][pos++], "%4s per second         ", posPerSec(exploredPositions, elapsedTime));
     sprintf(side[0][pos++], "                        ");
     sprintf(side[0][pos++], "                        ");
 
@@ -68,7 +69,7 @@ void printInterface(const Game *game) {
     sprintf(side[1][pos++], "                        ");
     sprintf(side[1][pos++], " 1-8 Play on column     ");
     sprintf(side[1][pos++], "   h Toggle help/stats  ");
-    sprintf(side[1][pos++], "d1-9 Change difficulty  ");
+    sprintf(side[1][pos++], "  d# Change difficulty  ");
     sprintf(side[1][pos++], "   s Switch sides       ");
     sprintf(side[1][pos++], "   n New game           ");
     sprintf(side[1][pos++], "   q Quit               ");
@@ -155,6 +156,11 @@ char *trimBigNumber(const unsigned num) {
         sprintf(buff, "%dM", num / 1000000);
     }
     return buff;
+}
+
+char *posPerSec(unsigned positions, double time) {
+    double seconds = time / ((double) CLOCKS_PER_SEC);
+    return trimBigNumber(positions / seconds);
 }
 
 void humanInput(Game *game) {
