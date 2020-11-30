@@ -78,7 +78,7 @@ void printInterface(const Game *game) {
         side[1][height][SIDE_W-1] = '\0';
     }
 
-    char credits[2][CREDITS_W] = {" Art source:               ",
+    char credits[2][CREDITS_W] = {" Artwork source:           ",
                                   "www.oocities.org/soho/7373/"};
 
     printGameBoy(screen, side[game->help], credits);
