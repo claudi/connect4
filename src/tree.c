@@ -1,5 +1,7 @@
 #include "tree.h"
 
+void orderChildren(Node *parent);
+
 Node *initNode(void) {
     Node *node = (Node *) malloc(sizeof(Node));
     for(short iter = 0; iter < nboards; iter++) {
@@ -38,6 +40,30 @@ void createChildren(Node *parent) {
         col++;
     }
     ASSERT(col >= 0);
+
+    orderChildren(parent);
+}
+
+void orderChildren(Node *parent) {
+    unsigned *values = (unsigned *) malloc(parent->nchildren * sizeof(unsigned));
+    for(short iter = 0; iter < parent->nchildren; iter++) {
+        values[iter] = matches(parent->child[iter]->board, match3);
+    }
+
+    for(short iter = 1; iter < parent->nchildren; iter++) {
+        Node *auxn = parent->child[iter];
+        unsigned auxv = values[iter];
+
+        short j = iter - 1;
+        while((j >= 0) && (values[j] < auxv)) {
+            parent->child[j+1] = parent->child[j];
+            values[j+1] = values[j];
+
+            j = j - 1;
+        }
+        parent->child[j+1] = auxn;
+        values[j+1] = auxv;
+    }
 }
 
 void createTree(Node *root, const short depth) {
