@@ -26,5 +26,6 @@ typedef struct {
 void printInterface(const Game *game);
 void humanInput(Game *game);
 Game *initGame(void);
+Bool keepPlaying(void);
 
 #endif // BLING_GUARD

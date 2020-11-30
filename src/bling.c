@@ -163,6 +163,7 @@ void humanInput(Game *game) {
     char input = getchar();
     if((input >= '0') && (input <= '9')) {
         if((input == '0') || (input == '9')) {
+            printInterface(game);
             // fprintf(stderr, "Invalid column\n");
         } else {
             makeMove(game->node, input-'0'-1);
@@ -203,11 +204,30 @@ void humanInput(Game *game) {
     }
 }
 
+Bool keepPlaying(void) {
+    printf(" Want to keep on playing? (y/n)\n");
+    printf(" > ");
+
+    char *buff = (char *) malloc(255 * sizeof(char));
+    scanf("%s", buff);
+
+    Bool answer;
+
+    if(buff[0] == 'y') {
+        answer = TRUE;
+    } else if(buff[0] == 'n') {
+        answer = FALSE;
+    } else {
+        printf(" Wrong input.");
+        answer = keepPlaying();
+    }
+
+    return answer;
+}
+
 Game *initGame(void) {
     Game *game = (Game *) malloc(sizeof(Game));
-
     *game = (Game) {initNode(), 1, 4, X, X, 0.0, TRUE};
-
     return game;
 }
 

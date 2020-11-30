@@ -7,7 +7,6 @@
 #include "tree.h"
 
 int main(void) {
-    // Stats stats = {game, 1, 4, X, X, 0.0, TRUE};
     initMasks();
     do {
         Game *game = initGame();
@@ -21,7 +20,7 @@ int main(void) {
             game->turn += game->side;
         }
         printInterface(game);
-    } while(TRUE);
+    } while(keepPlaying());
 
     return EXIT_SUCCESS;
 }
