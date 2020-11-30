@@ -81,7 +81,7 @@ int weightsHeuristic(const Node *node, const Side side) {
 }
 
 int heuristic(const Node *node, const Side side) {
-    return weightsHeuristic(node, side);
+    return neuralHeuristic(node, side);
 }
 
 
