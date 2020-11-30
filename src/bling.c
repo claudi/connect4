@@ -206,8 +206,8 @@ void humanInput(Game *game) {
                 // humanInput(game);
                 break;
             case 'n':   // New game
-                game->turn = 0;
-                game->node = initNode();
+                free(game->node);
+                *game = (Game) {initNode(), 1, game->depth, game->playerSide, next(X), game->help};
                 break;
             default:    // Other
                 // fprintf(stderr, "Invalid input\n");

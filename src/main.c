@@ -20,6 +20,8 @@ int main(void) {
             game->turn += game->side;
         }
         printInterface(game);
+        free(game->node);
+        free(game);
     } while(keepPlaying());
 
     return EXIT_SUCCESS;
