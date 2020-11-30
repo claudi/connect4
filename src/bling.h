@@ -19,7 +19,6 @@ typedef struct {
     short depth;
     Side playerSide;
     Side side;
-    float time;
     Bool help;
 } Game;
 

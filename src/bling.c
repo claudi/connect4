@@ -240,7 +240,8 @@ Bool keepPlaying(void) {
 
 Game *initGame(void) {
     Game *game = (Game *) malloc(sizeof(Game));
-    *game = (Game) {initNode(), 1, 4, X, X, 0.0, TRUE};
+    *game = (Game) {initNode(), 1, 4, X, X, TRUE};
+    elapsedTime = 0;
     return game;
 }
 
