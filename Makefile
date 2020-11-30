@@ -7,7 +7,7 @@ DEPENDS	= $(wildcard $(SRCDIR)*.h)
 OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -pedantic -Werror -Ofast -lm
+CFLAGS = -Wall -Wextra -std=c11 -pedantic -Werror -Ofast -lm
 
 play: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
