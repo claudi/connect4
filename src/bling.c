@@ -166,26 +166,31 @@ char *posPerSec(unsigned positions, double time) {
 void humanInput(Game *game) {
     printInterface(game);
     printf(" > ");
-    char input = getchar();
+    char *buff = (char *) malloc(255 * sizeof(char));
+    scanf("%s", buff);
+
+    char input = buff[0];
     if((input >= '0') && (input <= '9')) {
-        if((input == '0') || (input == '9')) {
+        short move = atoi(buff);
+        if((move <= 0) || (move > N)) {
             printInterface(game);
             // fprintf(stderr, "Invalid column\n");
         } else {
-            makeMove(game->node, input-'0'-1);
+            makeMove(game->node, move);
         }
     } else {
+        short depth;
         switch(input) {
             case 'h':   // Toggle help/stats
                 game->help = not(game->help);
                 humanInput(game);
                 break;
             case 'd':   // Change difficulty
-                input = getchar();
-                if((input - '0' <= 0) || (input - '9' > 0)) {
+                depth = atoi(buff + 1);
+                if(depth <= 0) {
                     game->depth = 4;
                 } else {
-                    game->depth = input - '0';
+                    game->depth = depth;
                 }
                 humanInput(game);
                 break;
