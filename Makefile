@@ -1,6 +1,6 @@
 SRCDIR = src/
 OBJDIR = obj/
-EXECUTS = play play.debug play.profile
+EXECUTS = play #play.debug play.profile
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
@@ -15,6 +15,9 @@ play: $(OBJECTS)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+1462908.tar.gz: $(SOURCES) Makefile
+	tar -czvf $@ $^
+
 .PHONY: clean
 clean:
 	rm -f $(OBJECTS) $(EXECUTS)
@@ -22,16 +25,16 @@ clean:
 .PHONY: all
 all: $(EXECUTS)
 
-.PHONY: debug
-debug: play.debug
+#.PHONY: debug
+#debug: play.debug
 
-play.debug: CFLAGS += -D DEBUG -ggdb
-play.debug: $(SOURCES) $(DEPENDS)
-	$(CC) $(CFLAGS) -o $@ $(SOURCES)
+#play.debug: CFLAGS += -D DEBUG -ggdb
+#play.debug: $(SOURCES) $(DEPENDS)
+#	$(CC) $(CFLAGS) -o $@ $(SOURCES)
 
-.PHONY: profile
-profile: play.profile
+#.PHONY: profile
+#profile: play.profile
 
-play.profile: CFLAGS += -pg
-play.profile: $(SOURCS) $(DEPENDS)
-	$(CC) $(CFLAGS) -o $@ $(SOURCES)
+#play.profile: CFLAGS += -pg
+#play.profile: $(SOURCS) $(DEPENDS)
+#	$(CC) $(CFLAGS) -o $@ $(SOURCES)
