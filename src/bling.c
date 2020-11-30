@@ -176,7 +176,7 @@ void humanInput(Game *game) {
             printInterface(game);
             // fprintf(stderr, "Invalid column\n");
         } else {
-            makeMove(game->node, move);
+            makeMove(game->node, move-1);
         }
     } else {
         short depth;
