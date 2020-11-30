@@ -180,7 +180,6 @@ void humanInput(Game *game) {
                 } else {
                     game->depth = input - '0';
                 }
-                // TODO
                 humanInput(game);
                 break;
             case 'q':   // Quit
