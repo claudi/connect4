@@ -13,7 +13,7 @@ Node *initNode(void) {
     return node;
 }
 
-Node *createChild(Node *parent, const short col) {
+Node *createChild(const Node *parent, const short col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
 
