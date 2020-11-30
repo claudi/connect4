@@ -26,7 +26,7 @@ void machineMove(Node *root, const short depth, const Side side) {
     clock_t start = clock();
     for(short iter = 0; iter < root->nchildren; iter++) {
         heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
-        if(heuristic >= value) {
+        if(heuristic > value) {
             value = heuristic;
             copyNode(answer, root->child[iter]);
         }

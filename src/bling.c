@@ -175,6 +175,8 @@ void humanInput(Game *game) {
         if((move <= 0) || (move > N)) {
             printInterface(game);
             // fprintf(stderr, "Invalid column\n");
+        } else if(fullColumn(game->node->board, move-1)) {
+            humanInput(game);
         } else {
             makeMove(game->node, move-1);
         }

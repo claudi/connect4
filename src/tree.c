@@ -29,7 +29,7 @@ void createChildren(Node *parent) {
 
     short col = 0;
     for(short iter = 0; iter < parent->nchildren; iter++) {
-        while(parent->board[BOTH] & shift(N - 1, col)) {
+        while(fullColumn(parent->board, col)) {
             col++;
             ASSERT(col < N);
         }

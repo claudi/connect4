@@ -19,7 +19,7 @@ void copyBoard(Board *dest, const Board *orig) {
 short makeMove(Node *node, const short col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
-    ASSERT(!(node->board[BOTH] & shift(N - 1, col)));
+    ASSERT(!fullColumn(node->board, col));
 
     short row = 0;
     for(short iter = 0; iter < N; iter++) {
