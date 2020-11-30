@@ -557,7 +557,6 @@ Bool matchMask(const Board *board, const SMask mask) {
 }
 
 unsigned matches(const Board *board, const unsigned length) {
-    ASSERT(length >= 0);
     ASSERT(length < nmatches);
 
     unsigned count = 0;
