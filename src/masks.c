@@ -567,7 +567,12 @@ unsigned matches(const Board *board, const unsigned length) {
 }
 
 int *matchVector(const Board *board) {
-    int *inputs = (int *) malloc(1380 * sizeof(int));
+    unsigned dim = 0;
+    for(short length = 0; length < nmatches - 1; length++) {
+        dim += masksCnt[length];
+    }
+
+    int *inputs = (int *) malloc(dim * sizeof(int));
 
     unsigned pos = 0;
     for(short length = 0; length < nmatches - 1; length++) {
