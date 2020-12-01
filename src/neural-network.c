@@ -3,7 +3,6 @@
 Network *network[nsides];
 Network *initNetwork(FILE *coefs, const short nlayers, const short *topology);
 int relu(int x) {
-    return x;
     return (x >= 0) ? x : 0;
 }
 
