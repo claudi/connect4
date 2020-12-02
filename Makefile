@@ -15,7 +15,7 @@ play: $(OBJECTS)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-1462908.tar.gz: $(SOURCES) Makefile
+1462908.tar.gz: $(SOURCES) $(DEPENDS) Makefile
 	tar -czvf $@ $^
 
 .PHONY: clean
