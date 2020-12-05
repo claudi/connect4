@@ -15,9 +15,13 @@ play: $(OBJECTS)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+release.tar.gz: $(SOURCES) $(DEPENDS) Makefile
+	tar -czvf $@ $^
+
 .PHONY: clean
 clean:
 	rm -f $(OBJECTS) $(EXECUTS)
+	rm -f release.tar.gz
 
 .PHONY: all
 all: $(EXECUTS)
