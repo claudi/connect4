@@ -10,7 +10,6 @@ extern double elapsedTime;
 
 int color(const Side side);
 void machineMove(Node *root, const short depth, const Side side);
-int minimax(Node *root, const short depth);
 
 #endif // MINIMAX_GUARD
 
