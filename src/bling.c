@@ -173,7 +173,7 @@ void humanInput(Game *game) {
     if((input >= '0') && (input <= '9')) {
         short move = atoi(buff);
         if((move <= 0) || (move > N)) {
-            printInterface(game);
+            humanInput(game);
             // fprintf(stderr, "Invalid column\n");
         } else if(fullColumn(game->node->board, move-1)) {
             humanInput(game);
