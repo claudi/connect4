@@ -2,7 +2,7 @@
 
 unsigned exploredPositions;
 double elapsedTime;
-int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing);
+long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing);
 
 int color(const Side side) {
     return (side == X) ? 1 : -1;
@@ -17,10 +17,10 @@ void machineMove(Node *root, const short depth, const Side side) {
     createChildren(root);
     Node *answer = (Node *) malloc(sizeof(Node));
 
-    int value = INT_MIN;
-    int alpha = INT_MIN;
-    int beta = INT_MAX;
-    int heuristic;
+    long value = LONG_MIN;
+    long alpha = LONG_MIN;
+    long beta = LONG_MAX;
+    long heuristic;
 
     exploredPositions = 0;
     clock_t start = clock();
@@ -38,20 +38,20 @@ void machineMove(Node *root, const short depth, const Side side) {
     copyNode(root, answer);
 }
 
-int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side side, const Bool maximizing) {
+long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing) {
     exploredPositions++;
 
     if(depth == 0 || root->nchildren == 0) {
-        int h = heuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
+        long h = heuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
         return h;
     }
 
-    int value;
+    long value;
     createChildren(root);
     if(maximizing) {
-        value = INT_MIN;
+        value = LONG_MIN;
         for(short iter = 0; iter < root->nchildren; iter++) {
-            int heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+            long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
 
             if(heuristic > value) {
                 value = heuristic;
@@ -68,9 +68,9 @@ int alphaBeta(Node *root, int alpha, int beta, const short depth, const Side sid
             free(root->child[iter]);
         }
     } else {
-        value = INT_MAX;
+        value = LONG_MAX;
         for(short iter = 0; iter < root->nchildren; iter++) {
-            int heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+            long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
 
             if(heuristic < value) {
                 value = heuristic;

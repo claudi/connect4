@@ -1,9 +1,7 @@
-#ifndef HEURISTIC_GUARD
-#define HEURISTIC_GUARD
 #include "heuristic.h"
 
-int myHeuristic(Board *board, const Side __attribute((unused)) side) {
-    int heuristic = 0;
+long myHeuristic(Board *board, const Side __attribute((unused)) side) {
+    long heuristic = 0;
 
     heuristic += 2*(matches(board, match1) + 5*matches(board, match2) + 15*matches(board, match3));
     board[TURN] ^= board[BOTH];
@@ -12,8 +10,8 @@ int myHeuristic(Board *board, const Side __attribute((unused)) side) {
     return heuristic;
 }
 
-int controlHeuristic(Board *board, const Side __attribute((unused)) side) {
-    int heuristic = 0;
+long controlHeuristic(Board *board, const Side __attribute((unused)) side) {
+    long heuristic = 0;
 
     heuristic += 2*(matches(board, match2) + 10*matches(board, match3));
     board[TURN] ^= board[BOTH];
@@ -22,11 +20,11 @@ int controlHeuristic(Board *board, const Side __attribute((unused)) side) {
     return heuristic;
 }
 
-int simpleHeuristic(Board __attribute((unused)) *board, const Side __attribute((unused)) side) {
+long simpleHeuristic(Board __attribute((unused)) *board, const Side __attribute((unused)) side) {
     return 0;
 }
 
-int heuristic(const Node *node, const Side side) {
+long heuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 
@@ -35,17 +33,15 @@ int heuristic(const Node *node, const Side side) {
     }
 
     if(matches(board, match4) > 0) {
-        return INT_MIN;
+        return LONG_MIN;
     }
 
     board[TURN] ^= board[BOTH];
 
     if(matches(board, match4) > 0) {
-        return INT_MAX;
+        return LONG_MAX;
     }
 
     return myHeuristic(board, side);
 }
-
-#endif // HEURISTIC_GUARD
 
