@@ -19,7 +19,7 @@ typedef struct Node Node;
 struct Node {
     Board board[nboards];
     Side turn;                  // Last move
-    short int nchildren;
+    short nchildren;
     Node **child;
 };
 
