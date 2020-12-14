@@ -36,6 +36,7 @@ void machineMove(Node *root, const short depth, const Side side) {
     elapsedTime = (double) (end - start);
 
     copyNode(root, answer);
+    free(answer);
 }
 
 long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing) {

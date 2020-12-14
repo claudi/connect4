@@ -51,6 +51,8 @@ void printInterface(const Game *game) {
         screen[height][SCREEN_W-1] = '\0';
     }
 
+    char *exploredPositionsPrint = trimBigNumber(exploredPositions);
+
     char side[2][SIDE_H][SIDE_W];
     short pos = 0;
     sprintf(side[0][pos++], "      Playing as %c      ", showTurn(game->playerSide));
@@ -58,7 +60,7 @@ void printInterface(const Game *game) {
     sprintf(side[0][pos++], "                        ");
     sprintf(side[0][pos++], " 1-8 Play on column     ");
     sprintf(side[0][pos++], "   h Toggle help/stats  ");
-    sprintf(side[0][pos++], "%4s Position%s explored", trimBigNumber(exploredPositions), exploredPositions == 1 ? "" : "s" );
+    sprintf(side[0][pos++], "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
     sprintf(side[0][pos++], "%4s per second         ", posPerSec(exploredPositions, elapsedTime));
     sprintf(side[0][pos++], "                        ");
     sprintf(side[0][pos++], "                        ");
@@ -96,6 +98,7 @@ void printInterface(const Game *game) {
     // for(short height = 0; height < SIDE_H; height++) {
         // printf("%s\n", side[1][height]);
     // }
+    free(exploredPositionsPrint);
 }
 
 void printGameBoy(char screen[SCREEN_H][SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
@@ -215,6 +218,8 @@ void humanInput(Game *game) {
                 break;
         }
     }
+
+    free(buff);
 }
 
 Bool keepPlaying(void) {
@@ -235,6 +240,7 @@ Bool keepPlaying(void) {
         answer = keepPlaying();
     }
 
+    free(buff);
     return answer;
 }
 
