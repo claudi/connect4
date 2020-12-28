@@ -248,7 +248,12 @@ Bool keepPlaying(void) {
 
 Game *initGame(void) {
     Game *game = (Game *) malloc(sizeof(Game));
-    *game = (Game) {initNode(), 1, DEFAULT_DEPTH, X, X, TRUE};
+    *game = (Game) {START_BOARD,
+                    START_TURN,
+                    START_DEPTH,
+                    START_PLAYER_SIDE,
+                    START_SIDE,
+                    START_HELP};
     elapsedTime = 0;
     return game;
 }

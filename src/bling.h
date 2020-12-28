@@ -13,6 +13,13 @@
 #define SIDE_H 9
 #define CREDITS_W 28
 
+#define START_BOARD initNode()
+#define START_TURN 1
+#define START_DEPTH 4
+#define START_PLAYER_SIDE X
+#define START_SIDE X
+#define START_HELP TRUE
+
 typedef struct {
     Node *node;
     short turn;
