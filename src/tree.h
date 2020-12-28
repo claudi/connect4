@@ -15,6 +15,5 @@ Node *createChild(const Node *parent, const short child);
 void createChildren(Node *parent);
 // void printTree(const Node *root);
 
-// TODO: free tree
 #endif // TREE_GUARD
 
