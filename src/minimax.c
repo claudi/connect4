@@ -13,7 +13,6 @@ void machineMove(Node *root, const short depth, const Side side) {
     ASSERT(depth > 0);
     ASSERT(root->nchildren > 0);
 
-
     createChildren(root);
     Node *answer = (Node *) malloc(sizeof(Node));
 
@@ -88,6 +87,7 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
             free(root->child[iter]);
         }
     }
+    free(root->child);
     return value;
 }
 
