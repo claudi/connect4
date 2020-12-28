@@ -24,6 +24,7 @@ int main(void) {
         free(game);
     } while(keepPlaying());
 
+    freeMasks();
     return EXIT_SUCCESS;
 }
 

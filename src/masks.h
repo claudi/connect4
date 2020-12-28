@@ -29,6 +29,7 @@ extern SMask **masks;
 extern unsigned *masksCnt;
 
 void initMasks(void);
+void freeMasks(void);
 void printMask(const Mask mask);
 void printMasks();
 
