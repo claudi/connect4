@@ -52,6 +52,7 @@ void printInterface(const Game *game) {
     }
 
     char *exploredPositionsPrint = trimBigNumber(exploredPositions);
+    char *posPerSecPrint = posPerSec(exploredPositions, elapsedTime);
 
     char side[2][SIDE_H][SIDE_W];
     short pos = 0;
@@ -61,7 +62,7 @@ void printInterface(const Game *game) {
     sprintf(side[0][pos++], " 1-8 Play on column     ");
     sprintf(side[0][pos++], "   h Toggle help/stats  ");
     sprintf(side[0][pos++], "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
-    sprintf(side[0][pos++], "%4s per second         ", posPerSec(exploredPositions, elapsedTime));
+    sprintf(side[0][pos++], "%4s per second         ", posPerSecPrint);
     sprintf(side[0][pos++], "                        ");
     sprintf(side[0][pos++], "                        ");
 
@@ -74,7 +75,7 @@ void printInterface(const Game *game) {
     sprintf(side[1][pos++], "  d# Change difficulty  ");
     sprintf(side[1][pos++], "   s Switch sides       ");
     sprintf(side[1][pos++], "   n New game           ");
-    sprintf(side[1][pos++], "   q Quit               ");
+    sprintf(side[1][pos++], "   q Stop game          ");
 
     for(short height = 0; height < SIDE_H; height++) {
         side[0][height][SIDE_W-1] = '\0';
@@ -98,6 +99,7 @@ void printInterface(const Game *game) {
     // for(short height = 0; height < SIDE_H; height++) {
         // printf("%s\n", side[1][height]);
     // }
+    free(posPerSecPrint);
     free(exploredPositionsPrint);
 }
 
@@ -201,7 +203,7 @@ void humanInput(Game *game) {
                 break;
             case 'q':   // Quit
                 printf("Bye!\n");
-                exit(EXIT_SUCCESS);
+                game->node->nchildren = 0;
                 break;
             case 's':   // Switch sides
                 game->playerSide = next(game->playerSide);
