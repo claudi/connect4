@@ -533,6 +533,14 @@ void initMasks(void) {
     }
 }
 
+void freeMasks(void) {
+    for(short iter = 0; iter < nmatches; iter++) {
+        free(masks[iter]);
+    }
+    free(masks);
+    free(masksCnt);
+}
+
 void printMask(const Mask mask) {
     for(short iter_i = (N - 1); iter_i >= 0; iter_i--) {
         for(short iter_j = 0; iter_j < N; iter_j++) {

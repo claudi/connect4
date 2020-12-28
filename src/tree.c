@@ -64,6 +64,7 @@ void orderChildren(Node *parent) {
         parent->child[j+1] = auxn;
         values[j+1] = auxv;
     }
+    free(values);
 }
 
 void createTree(Node *root, const short depth) {
