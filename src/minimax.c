@@ -34,6 +34,7 @@ void machineMove(Node *root, const short depth, const Side side) {
     clock_t end = clock();
     elapsedTime = (double) (end - start);
 
+    free(root->child);
     copyNode(root, answer);
     free(answer);
 }
@@ -60,12 +61,8 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
                 alpha = value;
             }
             if(alpha >= beta) {
-                for(short free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
-                    free(root->child[free_the_children]);
-                }
                 break;
             }
-            free(root->child[iter]);
         }
     } else {
         value = LONG_MAX;
@@ -79,13 +76,13 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
                 beta = value;
             }
             if(beta <= alpha) {
-                for(short free_the_children = iter; free_the_children < root->nchildren; free_the_children++) {
-                    free(root->child[free_the_children]);
-                }
                 break;
             }
-            free(root->child[iter]);
         }
+    }
+
+    for(short iter = 0; iter < root->nchildren; iter++) {
+        free(root->child[iter]);
     }
     free(root->child);
     return value;
