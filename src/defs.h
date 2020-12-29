@@ -34,7 +34,7 @@ struct Node {
         fprintf(stderr, "\tIn File: %s\n", __FILE__);   \
         fprintf(stderr, "\tAt Line: %d\n", __LINE__);   \
         fprintf(stderr, "\n");                          \
-        exit(1);                                        \
+        exit(EXIT_FAILURE);                             \
     }
 #endif // DEBUG
 
