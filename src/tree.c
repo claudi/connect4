@@ -47,7 +47,11 @@ void createChildren(Node *parent) {
 void orderChildren(Node *parent) {
     unsigned *values = (unsigned *) malloc(parent->nchildren * sizeof(unsigned));
     for(short iter = 0; iter < parent->nchildren; iter++) {
-        values[iter] = matches(parent->child[iter]->board, match3);
+        if(wonBoard(parent->child[iter]->board)) {
+            values[iter] = INT_MAX;
+        } else {
+            values[iter] = matches(parent->child[iter]->board, match3);
+        }
     }
 
     for(short iter = 1; iter < parent->nchildren; iter++) {
