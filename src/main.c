@@ -4,6 +4,7 @@
 #include "heuristic.h"
 #include "masks.h"
 #include "minimax.h"
+#include "red-black.h"
 #include "tree.h"
 
 int main(void) {
