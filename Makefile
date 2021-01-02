@@ -8,6 +8,8 @@ OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -pedantic -Werror -Ofast -lm
+CDEBUGFLAGS = -D DEBUG -ggdb -g
+CPROFILEFLAGS = -pg
 
 play: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
@@ -20,8 +22,7 @@ release.tar.gz: $(SOURCES) $(DEPENDS) Makefile
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) $(EXECUTS)
-	rm -f release.tar.gz
+	rm -f $(OBJECTS) $(EXECUTS) release.tar.gz
 
 .PHONY: all
 all: $(EXECUTS)
@@ -29,13 +30,12 @@ all: $(EXECUTS)
 .PHONY: debug
 debug: play.debug
 
-play.debug: CFLAGS += -D DEBUG -ggdb
 play.debug: $(SOURCES) $(DEPENDS)
-	$(CC) $(CFLAGS) -o $@ $(SOURCES)
+	$(CC) $(CFLAGS) $(CDEBUGFLAGS) -o $@ $(SOURCES)
 
 .PHONY: profile
 profile: play.profile
 
-play.profile: CFLAGS += -pg
 play.profile: $(SOURCS) $(DEPENDS)
-	$(CC) $(CFLAGS) -o $@ $(SOURCES)
+	$(CC) $(CFLAGS) $(CPROFILEFLAGS) -o $@ $(SOURCES)
+
