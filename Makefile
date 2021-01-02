@@ -22,7 +22,7 @@ release.tar.gz: $(SOURCES) $(DEPENDS) Makefile
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) $(EXECUTS) release.tar.gz
+	rm -f $(OBJECTS) $(EXECUTS) release.tar.gz *.out
 
 .PHONY: all
 all: $(EXECUTS)
@@ -38,4 +38,9 @@ profile: play.profile
 
 play.profile: $(SOURCS) $(DEPENDS)
 	$(CC) $(CFLAGS) $(CPROFILEFLAGS) -o $@ $(SOURCES)
+
+.PHONY: lint
+lint: lint.out
+lint.out:
+	splint src/*.c > lint.out
 

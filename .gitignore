@@ -9,7 +9,7 @@
 !Makefile
 
 .tags
-gmon.out
+*.out
 
 doc/
 play.*
