@@ -19,8 +19,11 @@ Key boardToKey(const Board *board) {
     /* Key key = * ((Key *) &board[TURN]);
      * key = key << N*N;
      * key = key + ((Key) board[BOTH]);
-     */ return key;
+     * return key;
+     */
 }
+
+Key mirrorKey(const Key key);
 
 void printRBTree(void) {
     printf("%lu\n", sizeof(Key));
