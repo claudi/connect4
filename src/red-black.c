@@ -16,10 +16,10 @@ void printKey(const Key key) {
 
 Key boardToKey(const Board *board) {
     return ((* ((Key *) &board[TURN])) << N*N) + ((Key) board[BOTH]);
-    Key key = * ((Key *) &board[TURN]);
-    key = key << N*N;
-    key = key + ((Key) board[BOTH]);
-    return key;
+    /* Key key = * ((Key *) &board[TURN]);
+     * key = key << N*N;
+     * key = key + ((Key) board[BOTH]);
+     */ return key;
 }
 
 void printRBTree(void) {
