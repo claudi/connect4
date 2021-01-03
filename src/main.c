@@ -9,6 +9,7 @@
 
 int main(void) {
     initMasks();
+    initKeys();
     do {
         Game *game = initGame();
         while(game->node->nchildren) {
@@ -26,6 +27,7 @@ int main(void) {
     } while(keepPlaying());
 
     freeMasks();
+    freeKeys();
     return EXIT_SUCCESS;
 }
 
