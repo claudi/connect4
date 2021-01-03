@@ -4,6 +4,7 @@ void printGameBoy(char screen[SCREEN_H][SCREEN_W], char side[SIDE_H][SIDE_W], ch
 char *difficulty(const short depth);
 char *trimBigNumber(const unsigned num);
 char *posPerSec(unsigned positions, double time);
+double secondsElapsed(double time);
 void humanInput(Game *game);
 
 void printInterface(const Game *game) {
@@ -63,7 +64,7 @@ void printInterface(const Game *game) {
     sprintf(side[0][pos++], "   h Toggle help/stats  ");
     sprintf(side[0][pos++], "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
     sprintf(side[0][pos++], "%4s per second         ", posPerSecPrint);
-    sprintf(side[0][pos++], "                        ");
+    sprintf(side[0][pos++], "%4.1lf seconds elapsed    ", secondsElapsed(elapsedTime));
     sprintf(side[0][pos++], "                        ");
 
     pos = 0;
@@ -166,6 +167,10 @@ char *trimBigNumber(const unsigned num) {
 char *posPerSec(unsigned positions, double time) {
     double seconds = time / ((double) CLOCKS_PER_SEC);
     return trimBigNumber(positions / seconds);
+}
+
+double secondsElapsed(double time) {
+    return time / ((double) CLOCKS_PER_SEC);
 }
 
 void humanInput(Game *game) {
