@@ -5,6 +5,17 @@
 #include <stdio.h>
 
 typedef __uint128_t Key;
+typedef enum {BLACK, RED} Color;
+
+typedef struct RBNode RBNode;
+struct RBNode {
+    RBNode *parent;
+    RBNode *left;
+    RBNode *right;
+    Color color;
+    Key key;
+    long heuristic;
+};
 
 extern Key *verticalKeys;
 
