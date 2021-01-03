@@ -14,3 +14,7 @@ void printKey(const Key key) {
     printf("\n");
 }
 
+Key boardToKey(const Board *board) {
+    return ((* ((Key *) &board[TURN])) << N*N) + ((Key) board[BOTH]);
+}
+
