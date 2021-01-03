@@ -18,3 +18,28 @@ Key boardToKey(const Board *board) {
     return ((* ((Key *) &board[TURN])) << N*N) + ((Key) board[BOTH]);
 }
 
+Key mirrorKey(const Key key) {
+    Key result = (Key) 0;
+    for(short iter = 0; iter < N; iter++) {
+        result |= (key & verticalKeys[iter]) << (N-1 - iter) >> iter;
+    }
+    return result;
+}
+
+Key *verticalKeys;
+void initKeys(void) {
+    verticalKeys = (Key *) malloc(N * sizeof(Key));
+    verticalKeys[0] = (Key) 0;
+    for(short iter = 0; iter < 2*N; iter++) {
+        verticalKeys[0] |= keyShift(iter, 0);
+    }
+
+    for(short key = 1; key < N; key++) {
+        verticalKeys[key] = verticalKeys[0] << key;
+    }
+}
+
+void freeKeys(void) {
+    free(verticalKeys);
+}
+

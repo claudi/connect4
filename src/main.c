@@ -2,12 +2,15 @@
 #include "board.h"
 #include "defs.h"
 #include "heuristic.h"
+#include "key.h"
 #include "masks.h"
 #include "minimax.h"
 #include "tree.h"
 
 int main(void) {
     initMasks();
+    initKeys();
+
     do {
         Game *game = initGame();
         while(game->node->nchildren) {
@@ -25,6 +28,7 @@ int main(void) {
     } while(keepPlaying());
 
     freeMasks();
+    freeKeys();
     return EXIT_SUCCESS;
 }
 
