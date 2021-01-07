@@ -11,7 +11,7 @@ typedef struct {
 } Entry;
 
 typedef struct {
-    unsigned short size;
+    unsigned long size;
     Entry entry[T_BUFFER];
 } Table;
 
