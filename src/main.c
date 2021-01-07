@@ -5,11 +5,13 @@
 #include "key.h"
 #include "masks.h"
 #include "minimax.h"
+#include "table.h"
 #include "tree.h"
 
 int main(void) {
     initMasks();
     initKeys();
+    initTables();
 
     do {
         Game *game = initGame();
@@ -29,6 +31,7 @@ int main(void) {
 
     freeMasks();
     freeKeys();
+    freeTables();
     return EXIT_SUCCESS;
 }
 
