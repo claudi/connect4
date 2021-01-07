@@ -1,6 +1,6 @@
 # Connect 4
 
-Control view:
+## Game interface
 ```
          ___________________________
         |OFFo oON                   |
