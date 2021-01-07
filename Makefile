@@ -7,7 +7,7 @@ DEPENDS	= $(wildcard $(SRCDIR)*.h)
 OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Wshadow -Wconversion -std=c11 -pedantic -Werror -fshort-enum -Ofast -lm
+CFLAGS = -Wall -Wextra -Wshadow -Wconversion -std=c11 -pedantic -Werror -fshort-enums -Ofast -lm
 CDEBUGFLAGS = -D DEBUG -ggdb -g3
 CPROFILEFLAGS = -pg
 
