@@ -1,12 +1,15 @@
 #include "table.h"
 
-void printEntry(const Entry *entry) {
-    printf("%llx\t%ld\n", (unsigned long long) entry->key, entry->heuristic);
+
+void printEntry(const Entry entry) {
+    printf("%llx\t%ld\n", (unsigned long long) entry.key, entry.heuristic);
 }
 
 void printTable(const Table *table) {
+    ASSERT(table->size < T_BUFFER);
     for(short iter = 0; iter < table->size; iter++) {
-        printEntry(table->entry);
+        printf("%d\t", iter);
+        printEntry(table->entry[iter]);
     }
 }
 

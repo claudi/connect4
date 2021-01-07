@@ -17,7 +17,7 @@ typedef struct {
 
 extern Table *tables;
 
-void printEntry(const Entry *entry);
+void printEntry(const Entry entry);
 void printTable(const Table *table);
 void initTables(void);
 void freeTables(void);
