@@ -1,6 +1,5 @@
 #include "table.h"
 
-
 void printEntry(const Entry entry) {
     printf("%llx\t%ld\n", (unsigned long long) entry.key, entry.heuristic);
 }
