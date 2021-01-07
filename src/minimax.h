@@ -2,6 +2,7 @@
 #define MINIMAX_GUARD
 #include "defs.h"
 #include "tree.h"
+#include "table.h"
 #include "heuristic.h"
 #include <time.h>
 

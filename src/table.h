@@ -19,6 +19,7 @@ extern Table *tables;
 
 void printEntry(const Entry entry);
 void printTable(const Table *table);
+void addEntry(Table *table, const Board *board, const long heuristic);
 void initTables(void);
 void freeTables(void);
 

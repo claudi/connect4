@@ -53,6 +53,9 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
         value = LONG_MIN;
         for(short iter = 0; iter < root->nchildren; iter++) {
             long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+            if(tables->size < T_BUFFER) {
+                addEntry(tables, root->child[iter]->board, heuristic);
+            }
 
             if(heuristic > value) {
                 value = heuristic;
@@ -68,6 +71,9 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
         value = LONG_MAX;
         for(short iter = 0; iter < root->nchildren; iter++) {
             long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+            if(tables->size < T_BUFFER) {
+                addEntry(tables, root->child[iter]->board, heuristic);
+            }
 
             if(heuristic < value) {
                 value = heuristic;

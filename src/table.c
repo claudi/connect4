@@ -13,6 +13,13 @@ void printTable(const Table *table) {
     }
 }
 
+void addEntry(Table *table, const Board *board, const long heuristic) {
+    ASSERT(table->size < T_BUFFER);
+    table->entry[table->size].key = boardToKey(board);
+    table->entry[table->size].heuristic = heuristic;
+    table->size += 1;
+}
+
 Table *tables;
 void initTables(void) {
     tables = (Table *) malloc(sizeof(Table));
