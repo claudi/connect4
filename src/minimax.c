@@ -52,8 +52,15 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
     if(maximizing) {
         value = LONG_MIN;
         for(short iter = 0; iter < root->nchildren; iter++) {
-            long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
-            addEntry(tables, root->child[iter]->board, heuristic);
+            long heuristic;
+            Key key = boardToKey(root->child[iter]->board);
+            const Entry *entry = findEntry(tables, key);
+            if(entry == NULL) {
+                heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+                addEntry(tables, key, heuristic);
+            } else {
+                heuristic = entry->heuristic;
+            }
 
             if(heuristic > value) {
                 value = heuristic;
@@ -68,8 +75,15 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
     } else {
         value = LONG_MAX;
         for(short iter = 0; iter < root->nchildren; iter++) {
-            long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
-            addEntry(tables, root->child[iter]->board, heuristic);
+            long heuristic;
+            Key key = boardToKey(root->child[iter]->board);
+            const Entry *entry = findEntry(tables, key);
+            if(entry == NULL) {
+                heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+                addEntry(tables, key, heuristic);
+            } else {
+                heuristic = entry->heuristic;
+            }
 
             if(heuristic < value) {
                 value = heuristic;
