@@ -207,7 +207,6 @@ void humanInput(Game *game) {
                 humanInput(game);
                 break;
             case 'q':   // Quit
-                printf("Bye!\n");
                 game->node->nchildren = 0;
                 break;
             case 's':   // Switch sides
