@@ -46,7 +46,7 @@ void printInterface(const Game *game) {
     // screen[SCREEN_H-1][0] = '(';
     // screen[SCREEN_H-1][SCREEN_W-2] = ')';
     for(short col = 0; col < N; col++) {
-        screen[SCREEN_H-1][2*col + 1] = '0' + col + 1;
+        screen[SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
     }
     for(short height = 0; height < SCREEN_H; height++) {
         screen[height][SCREEN_W-1] = '\0';
@@ -166,7 +166,7 @@ char *trimBigNumber(const unsigned num) {
 
 char *posPerSec(unsigned positions, double time) {
     double seconds = time / ((double) CLOCKS_PER_SEC);
-    return trimBigNumber(positions / seconds);
+    return trimBigNumber((unsigned) (((double) positions) / seconds));
 }
 
 double secondsElapsed(double time) {
@@ -181,7 +181,7 @@ void humanInput(Game *game) {
 
     char input = buff[0];
     if((input >= '0') && (input <= '9')) {
-        short move = atoi(buff);
+        short move = (short) atoi(buff);
         if((move <= 0) || (move > N)) {
             humanInput(game);
             // fprintf(stderr, "Invalid column\n");
@@ -198,7 +198,7 @@ void humanInput(Game *game) {
                 humanInput(game);
                 break;
             case 'd':   // Change difficulty
-                depth = atoi(buff + 1);
+                depth = (short) atoi(buff + 1);
                 if(depth <= 0) {
                     game->depth = 4;
                 } else {
