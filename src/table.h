@@ -19,7 +19,8 @@ extern Table *tables;
 
 void printEntry(const Entry entry);
 void printTable(const Table *table);
-void addEntry(Table *table, const Board *board, const long heuristic);
+void addEntry(Table *table, const Key key, const long heuristic);
+const Entry *findEntry(const Table *table, const Key key);
 void initTables(void);
 void freeTables(void);
 

@@ -1,6 +1,6 @@
 #include "table.h"
 
-const Entry *findEntryIndex(const Table *table, const Key key) {
+const Entry *findEntry(const Table *table, const Key key) {
     ASSERT(table->size < T_BUFFER);
 
     for(unsigned long iter = 0; iter < table->size; iter++) {
@@ -24,10 +24,9 @@ void printTable(const Table *table) {
     }
 }
 
-void addEntry(Table *table, const Board *board, const long heuristic) {
+void addEntry(Table *table, const Key key, const long heuristic) {
     if(table->size < T_BUFFER) {
-        const Key key = boardToKey(board);
-        if(findEntryIndex(table, key) == NULL) {
+        if(findEntry(table, key) == NULL) {
             table->entry[table->size].key = key;
             table->entry[table->size].heuristic = heuristic;
             table->size += 1;
