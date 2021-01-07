@@ -1,7 +1,7 @@
 #include "table.h"
 
 const Entry *findEntry(const Table *table, const Key key) {
-    ASSERT(table->size < T_BUFFER);
+    ASSERT(table->size <= T_BUFFER);
 
     for(unsigned long iter = 0; iter < table->size; iter++) {
         if(table->entry[iter].key == key) {
