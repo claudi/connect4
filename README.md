@@ -36,6 +36,6 @@
 
 ## Quick start
 ```
-make
-./play
+$ make
+$ ./play
 ```
