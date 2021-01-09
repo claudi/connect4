@@ -41,6 +41,6 @@ play.profile: $(SOURCS) $(DEPENDS)
 
 .PHONY: lint
 lint: lint.out
-lint.out:
-	splint src/*.c > lint.out
+lint.out: $(SOURCES) $(DEPENDS)
+	splint -booltype Bool $^ > $@
 
