@@ -18,4 +18,6 @@ typedef struct {
     Bool help;
 } Game;
 
+Game *initGame(void);
+
 #endif // GAME_GUARD
