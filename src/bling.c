@@ -16,8 +16,8 @@ void printInterface(const Game *game) {
     }
 
     char buffer[7];
-    sprintf(buffer, "%6d", game->turn);
-    sprintf(screen[0], "        Turn %s  ", buffer + 4);
+    snprintf(buffer, 7, "%6d", game->turn);
+    snprintf(screen[0], SCREEN_W, "        Turn %s  ", buffer + 4);
 
     char lastMove = showTurn(game->node->turn);
     char nextMove = showTurn(next(game->node->turn));
@@ -57,26 +57,26 @@ void printInterface(const Game *game) {
 
     char side[2][SIDE_H][SIDE_W];
     short pos = 0;
-    sprintf(side[0][pos++], "      Playing as %c      ", showTurn(game->playerSide));
-    sprintf(side[0][pos++], "    Difficulty %s        ", difficulty(game->depth));
-    sprintf(side[0][pos++], "                        ");
-    sprintf(side[0][pos++], " 1-8 Play on column     ");
-    sprintf(side[0][pos++], "   h Toggle help/stats  ");
-    sprintf(side[0][pos++], "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
-    sprintf(side[0][pos++], "%4s per second         ", posPerSecPrint);
-    sprintf(side[0][pos++], "%4.1lf seconds elapsed    ", secondsElapsed(elapsedTime));
-    sprintf(side[0][pos++], "                        ");
+    snprintf(side[0][pos++], SIDE_W, "      Playing as %c      ", showTurn(game->playerSide));
+    snprintf(side[0][pos++], SIDE_W, "    Difficulty %s", difficulty(game->depth));
+    snprintf(side[0][pos++], SIDE_W, "                        ");
+    snprintf(side[0][pos++], SIDE_W, " 1-8 Play on column     ");
+    snprintf(side[0][pos++], SIDE_W, "   h Toggle help/stats  ");
+    snprintf(side[0][pos++], SIDE_W, "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
+    snprintf(side[0][pos++], SIDE_W, "%4s per second         ", posPerSecPrint);
+    snprintf(side[0][pos++], SIDE_W, "%4.1lf seconds elapsed    ", secondsElapsed(elapsedTime));
+    snprintf(side[0][pos++], SIDE_W, "                        ");
 
     pos = 0;
-    sprintf(side[1][pos++], "      Playing as %c      ", showTurn(game->playerSide));
-    sprintf(side[1][pos++], "    Difficulty %s        ", difficulty(game->depth));
-    sprintf(side[1][pos++], "                        ");
-    sprintf(side[1][pos++], " 1-8 Play on column     ");
-    sprintf(side[1][pos++], "   h Toggle help/stats  ");
-    sprintf(side[1][pos++], "  d# Change difficulty  ");
-    sprintf(side[1][pos++], "   s Switch sides       ");
-    sprintf(side[1][pos++], "   n New game           ");
-    sprintf(side[1][pos++], "   q Stop game          ");
+    snprintf(side[1][pos++], SIDE_W, "      Playing as %c      ", showTurn(game->playerSide));
+    snprintf(side[1][pos++], SIDE_W, "    Difficulty %s", difficulty(game->depth));
+    snprintf(side[1][pos++], SIDE_W, "                        ");
+    snprintf(side[1][pos++], SIDE_W, " 1-8 Play on column     ");
+    snprintf(side[1][pos++], SIDE_W, "   h Toggle help/stats  ");
+    snprintf(side[1][pos++], SIDE_W, "  d# Change difficulty  ");
+    snprintf(side[1][pos++], SIDE_W, "   s Switch sides       ");
+    snprintf(side[1][pos++], SIDE_W, "   n New game           ");
+    snprintf(side[1][pos++], SIDE_W, "   q Stop game          ");
 
     for(short height = 0; height < SIDE_H; height++) {
         side[0][height][SIDE_W-1] = '\0';
@@ -155,11 +155,11 @@ char *difficulty(const short depth) {
 char *trimBigNumber(const unsigned num) {
     char *buff = (char *) malloc(25 * sizeof(char));
     if(num < 1000) {
-        sprintf(buff, "%d", num);
+        snprintf(buff, 25, "%d", num);
     } else if(num < 1000000) {
-        sprintf(buff, "%dK", num / 1000);
+        snprintf(buff, 25, "%dK", num / 1000);
     } else {
-        sprintf(buff, "%dM", num / 1000000);
+        snprintf(buff, 25, "%dM", num / 1000000);
     }
     return buff;
 }
