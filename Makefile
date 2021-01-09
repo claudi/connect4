@@ -36,7 +36,7 @@ play.debug: $(SOURCES) $(DEPENDS)
 .PHONY: profile
 profile: play.profile
 
-play.profile: $(SOURCS) $(DEPENDS)
+play.profile: $(SOURCES) $(DEPENDS)
 	$(CC) $(CFLAGS) $(CPROFILEFLAGS) -o $@ $(SOURCES)
 
 .PHONY: lint
