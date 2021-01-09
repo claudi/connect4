@@ -10,6 +10,13 @@
 #define START_PLAYER_SIDE X
 #define START_SIDE X
 #define START_HELP TRUE
+#define START_STATS emptyStats()
+
+typedef struct {
+    unsigned exploredPositions;
+    double elapsedTime;
+    short lastMove;
+} Stats;
 
 typedef struct {
     Node *node;
@@ -18,9 +25,11 @@ typedef struct {
     Side playerSide;
     Side side;
     Bool help;
+    Stats stats;
 } Game;
 
 Game *initGame(void);
 void resetGame(Game *game);
+Stats emptyStats(void);
 
 #endif // GAME_GUARD

@@ -7,7 +7,8 @@ Game newGame(void) {
         .depth = START_DEPTH,
         .playerSide = START_PLAYER_SIDE,
         .side = START_SIDE,
-        .help = START_HELP
+        .help = START_HELP,
+        .stats = START_STATS
     };
     return game;
 }
@@ -22,5 +23,14 @@ Game *initGame(void) {
 void resetGame(Game *game) {
     free(game->node);
     *game = newGame();
+}
+
+Stats emptyStats(void) {
+    Stats stats = {
+        .exploredPositions = 0,
+        .elapsedTime = 0.0f,
+        .lastMove = 0
+    };
+    return stats;
 }
 
