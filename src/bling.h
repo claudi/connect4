@@ -2,6 +2,7 @@
 #define BLING_GUARD
 #include "defs.h"
 #include "board.h"
+#include "game.h"
 #include "minimax.h"
 #include <stdio.h>
 

@@ -6,12 +6,6 @@
 #include <time.h>
 
 #define N 8
-#define START_BOARD initNode()
-#define START_TURN 1
-#define START_DEPTH 4
-#define START_PLAYER_SIDE X
-#define START_SIDE X
-#define START_HELP TRUE
 
 #define next(turn) ((turn == X) ? O : X)
 #define not(b) ((b == TRUE) ? FALSE : TRUE)
@@ -29,15 +23,6 @@ struct Node {
     short nchildren;
     Node **child;
 };
-
-typedef struct {
-    Node *node;
-    short turn;
-    short depth;
-    Side playerSide;
-    Side side;
-    Bool help;
-} Game;
 
 #ifndef DEBUG
     #define ASSERT(n) {}

@@ -1,6 +1,7 @@
 #include "bling.h"
 #include "board.h"
 #include "defs.h"
+#include "game.h"
 #include "heuristic.h"
 #include "masks.h"
 #include "minimax.h"
