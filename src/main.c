@@ -15,7 +15,7 @@ int main(void) {
             if(game->side == game->playerSide) {
                 humanInput(game);
             } else {
-                machineMove(game->node, game->depth, game->side);
+                machineMove(game);
             }
             game->side = next(game->side);
             game->turn += game->side;

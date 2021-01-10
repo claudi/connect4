@@ -211,7 +211,7 @@ void humanInput(Game *game) {
                 break;
             case 's':   // Switch sides
                 game->playerSide = next(game->playerSide);
-                machineMove(game->node, game->depth, game->side);
+                machineMove(game);
                 // humanInput(game);
                 break;
             case 'n':   // New game

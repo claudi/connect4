@@ -8,7 +8,11 @@ int color(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
-void machineMove(Node *root, const short depth, const Side side) {
+void machineMove(Game *game) {
+    Node *root = game->node;
+    const short depth = game->depth;
+    const Side side = game->side;
+
     ASSERT(root != NULL);
     ASSERT(depth > 0);
     ASSERT(root->nchildren > 0);

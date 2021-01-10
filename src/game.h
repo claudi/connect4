@@ -2,7 +2,6 @@
 #define GAME_GUARD
 #include "defs.h"
 #include "tree.h"
-#include "minimax.h"
 
 #define START_BOARD initNode()
 #define START_TURN 1
@@ -34,3 +33,4 @@ Stats emptyStats(void);
 Game newGame(void);
 
 #endif // GAME_GUARD
+
