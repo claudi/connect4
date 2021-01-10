@@ -6,9 +6,6 @@
 #include "tree.h"
 #include <time.h>
 
-extern unsigned exploredPositions;
-extern double elapsedTime;
-
 int color(const Side side);
 void machineMove(Game *game);
 

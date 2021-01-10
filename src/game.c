@@ -3,7 +3,6 @@
 Game *initGame(void) {
     Game *game = (Game *) malloc(sizeof(Game));
     *game = newGame();
-    elapsedTime = 0;
     return game;
 }
 

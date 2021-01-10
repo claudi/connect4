@@ -1,7 +1,6 @@
 #include "minimax.h"
 
-unsigned exploredPositions;
-double elapsedTime;
+static unsigned exploredPositions;
 long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing);
 
 int color(const Side side) {
@@ -36,7 +35,8 @@ void machineMove(Game *game) {
         free(root->child[iter]);
     }
     clock_t end = clock();
-    elapsedTime = (double) (end - start);
+    game->stats.elapsedTime = (double) (end - start);
+    game->stats.exploredPositions = exploredPositions;
 
     free(root->child);
     copyNode(root, answer);

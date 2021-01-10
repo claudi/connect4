@@ -8,6 +8,9 @@ double secondsElapsed(double time);
 void humanInput(Game *game);
 
 void printInterface(const Game *game) {
+    double elapsedTime = game->stats.elapsedTime;
+    unsigned exploredPositions = game->stats.exploredPositions;
+
     char screen[SCREEN_H][SCREEN_W];
     for(short height = 0; height < SCREEN_H; height++) {
         for(short width = 0; width < SCREEN_W-1; width++) {
