@@ -9,8 +9,8 @@
 
 int main(void) {
     initMasks();
+    Game *game = initGame();
     do {
-        Game *game = initGame();
         while(game->node->nchildren) {
             if(game->side == game->playerSide) {
                 humanInput(game);
@@ -21,10 +21,11 @@ int main(void) {
             game->turn += game->side;
         }
         printInterface(game);
-        free(game->node);
-        free(game);
+        resetGame(game);
     } while(keepPlaying());
 
+    free(game->node);
+    free(game);
     freeMasks();
     return EXIT_SUCCESS;
 }
