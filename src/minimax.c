@@ -37,6 +37,8 @@ void machineMove(Game *game) {
     clock_t end = clock();
     game->stats.elapsedTime = (double) (end - start);
     game->stats.exploredPositions = exploredPositions;
+    game->stats.lastMove = iter; // PLACEHOLDER -> calculate actual column.
+                                 // Child freeing might be a problem
     game->stats.lastHeuristic = value;
 
     free(root->child);
