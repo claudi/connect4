@@ -2,9 +2,9 @@
 
 unsigned exploredPositions;
 double elapsedTime;
-long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing);
+static long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing);
 
-int color(const Side side) {
+static int color(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
@@ -39,7 +39,7 @@ void machineMove(Node *root, const short depth, const Side side) {
     free(answer);
 }
 
-long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing) {
+static long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing) {
     exploredPositions++;
 
     if(depth == 0 || root->nchildren == 0) {
