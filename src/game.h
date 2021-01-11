@@ -15,6 +15,7 @@ typedef struct {
     unsigned exploredPositions;
     double elapsedTime;
     short lastMove;
+    long lastHeuristic;
 } Stats;
 
 typedef struct {

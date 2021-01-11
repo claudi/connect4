@@ -15,7 +15,8 @@ Stats emptyStats(void) {
     Stats stats = {
         .exploredPositions = 0,
         .elapsedTime = 0.0f,
-        .lastMove = 0
+        .lastMove = 0,
+        .lastHeuristic = 0
     };
     return stats;
 }
