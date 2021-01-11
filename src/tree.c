@@ -21,7 +21,7 @@ Node *createChild(const Node *parent, const short col) {
 
     Node *child = (Node *) malloc(sizeof(Node));
     copyNode(child, parent);
-    makeMove(child, col);   // TODO: Check return value
+    makeMove(child, col);
 
     return child;
 }
