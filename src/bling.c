@@ -8,6 +8,9 @@ double secondsElapsed(double time);
 void humanInput(Game *game);
 
 void printInterface(const Game *game) {
+    double elapsedTime = game->stats.elapsedTime;
+    unsigned exploredPositions = game->stats.exploredPositions;
+
     char screen[SCREEN_H][SCREEN_W];
     for(short height = 0; height < SCREEN_H; height++) {
         for(short width = 0; width < SCREEN_W-1; width++) {
@@ -46,7 +49,11 @@ void printInterface(const Game *game) {
     // screen[SCREEN_H-1][0] = '(';
     // screen[SCREEN_H-1][SCREEN_W-2] = ')';
     for(short col = 0; col < N; col++) {
-        screen[SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
+        if(col == game->stats.lastMove) {
+            screen[SCREEN_H-1][2*col + 1] = '^';
+        } else {
+            screen[SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
+        }
     }
     for(short height = 0; height < SCREEN_H; height++) {
         screen[height][SCREEN_W-1] = '\0';
@@ -54,6 +61,7 @@ void printInterface(const Game *game) {
 
     char *exploredPositionsPrint = trimBigNumber(exploredPositions);
     char *posPerSecPrint = posPerSec(exploredPositions, elapsedTime);
+    char *heuristicValue = trimBigNumber(game->stats.lastHeuristic);
 
     char side[2][SIDE_H][SIDE_W];
     short pos = 0;
@@ -65,7 +73,7 @@ void printInterface(const Game *game) {
     snprintf(side[0][pos++], SIDE_W, "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
     snprintf(side[0][pos++], SIDE_W, "%4s per second         ", posPerSecPrint);
     snprintf(side[0][pos++], SIDE_W, "%4.1lf seconds elapsed    ", secondsElapsed(elapsedTime));
-    snprintf(side[0][pos++], SIDE_W, "                        ");
+    snprintf(side[0][pos++], SIDE_W, "%4s Position score", heuristicValue);
 
     pos = 0;
     snprintf(side[1][pos++], SIDE_W, "      Playing as %c      ", showTurn(game->playerSide));
@@ -102,6 +110,7 @@ void printInterface(const Game *game) {
     // }
     free(posPerSecPrint);
     free(exploredPositionsPrint);
+    free(heuristicValue);
 }
 
 void printGameBoy(char screen[SCREEN_H][SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
@@ -211,12 +220,12 @@ void humanInput(Game *game) {
                 break;
             case 's':   // Switch sides
                 game->playerSide = next(game->playerSide);
-                machineMove(game->node, game->depth, game->side);
+                machineMove(game);
                 // humanInput(game);
                 break;
             case 'n':   // New game
-                free(game->node);
-                *game = (Game) {initNode(), 1, game->depth, game->playerSide, next(X), game->help};
+                resetGame(game);
+                game->side = next(game->side);
                 break;
             default:    // Other
                 // fprintf(stderr, "Invalid input\n");
@@ -248,19 +257,5 @@ Bool keepPlaying(void) {
 
     free(buff);
     return answer;
-}
-
-Game *initGame(void) {
-    Game *game = (Game *) malloc(sizeof(Game));
-    *game = (Game) {
-        .node = START_BOARD,
-        .turn = START_TURN,
-        .depth = START_DEPTH,
-        .playerSide = START_PLAYER_SIDE,
-        .side = START_SIDE,
-        .help = START_HELP
-    };
-    elapsedTime = 0;
-    return game;
 }
 

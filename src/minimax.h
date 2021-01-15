@@ -1,14 +1,12 @@
 #ifndef MINIMAX_GUARD
 #define MINIMAX_GUARD
 #include "defs.h"
-#include "tree.h"
+#include "game.h"
 #include "heuristic.h"
+#include "tree.h"
 #include <time.h>
 
-extern unsigned exploredPositions;
-extern double elapsedTime;
-
-void machineMove(Node *root, const short depth, const Side side);
+void machineMove(Game *game);
 
 #endif // MINIMAX_GUARD
 

@@ -1,6 +1,7 @@
 #include "bling.h"
 #include "board.h"
 #include "defs.h"
+#include "game.h"
 #include "heuristic.h"
 #include "masks.h"
 #include "minimax.h"
@@ -8,22 +9,23 @@
 
 int main(void) {
     initMasks();
+    Game *game = initGame();
     do {
-        Game *game = initGame();
         while(game->node->nchildren) {
             if(game->side == game->playerSide) {
                 humanInput(game);
             } else {
-                machineMove(game->node, game->depth, game->side);
+                machineMove(game);
             }
             game->side = next(game->side);
             game->turn += game->side;
         }
         printInterface(game);
-        free(game->node);
-        free(game);
+        resetGame(game);
     } while(keepPlaying());
 
+    free(game->node);
+    free(game);
     freeMasks();
     return EXIT_SUCCESS;
 }
