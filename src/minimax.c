@@ -24,9 +24,10 @@ void machineMove(Game *game) {
     long beta = LONG_MAX;
     long heuristic;
 
+    short iter;
     exploredPositions = 0;
     clock_t start = clock();
-    for(short iter = 0; iter < root->nchildren; iter++) {
+    for(iter = 0; iter < root->nchildren; iter++) {
         heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
         if(heuristic > value) {
             value = heuristic;
