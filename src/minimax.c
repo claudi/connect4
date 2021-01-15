@@ -25,24 +25,20 @@ void machineMove(Game *game) {
     long heuristic;
 
     exploredPositions = 0;
-    short col = 0;
     clock_t start = clock();
     for(short iter = 0; iter < root->nchildren; iter++) {
-        while(fullColumn(root->board, col)) {
-            col++;
-        }
         heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
         if(heuristic > value) {
             value = heuristic;
             copyNode(answer, root->child[iter]);
         }
         free(root->child[iter]);
-        col++;
     }
     clock_t end = clock();
+
     game->stats.elapsedTime = (double) (end - start);
     game->stats.exploredPositions = exploredPositions;
-    game->stats.lastMove = col;
+    // game->stats.lastMove = col;
     game->stats.lastHeuristic = value;
 
     free(root->child);
