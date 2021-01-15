@@ -1,6 +1,7 @@
 #include "masks.h"
 
 SMask **masks;
+SMask *wonMasks;
 unsigned *masksCnt;
 
 void initMasks(void) {
@@ -531,6 +532,20 @@ void initMasks(void) {
             pos++;
         }
     }
+
+    wonMasks = (SMask *) malloc(4 * sizeof(SMask));
+    // H1111
+    wonMasks[0].main = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
+    wonMasks[0].anti = (Mask) 0;
+    // R1111
+    wonMasks[0].main = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
+    wonMasks[0].anti = (Mask) 0;
+    // L1111
+    wonMasks[0].main = shift(3,0) | shift(2,1) | shift(1,2) | shift(0,3);
+    wonMasks[0].anti = (Mask) 0;
+    // V1111
+    wonMasks[0].main = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
+    wonMasks[0].anti = (Mask) 0;
 }
 
 void freeMasks(void) {
@@ -539,6 +554,7 @@ void freeMasks(void) {
     }
     free(masks);
     free(masksCnt);
+    free(wonMasks);
 }
 
 void printMask(const Mask mask) {
