@@ -58,7 +58,6 @@ void orderChildren(Node *parent) {
             values[iter] = matches(parent->child[iter]->board, match3);
         }
         col++;
-        ASSERT(col < N);
     }
 
     for(short iter = 1; iter < parent->nchildren; iter++) {
