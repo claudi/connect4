@@ -16,6 +16,19 @@ void copyBoard(Board *dest, const Board *orig) {
     }
 }
 
+short findCol(const Board *parent, const short child) {
+    short col = 0;
+    for(short iter = 0; iter < child; iter++) {
+        while(fullColumn(parent, col)) {
+            col++;
+            ASSERT(col < N);
+        }
+        ASSERT(col < N);
+        col++;
+    }
+    return col;
+}
+
 short makeMove(Node *node, const short col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
