@@ -68,7 +68,7 @@ void printInterface(const Game *game) {
     snprintf(side[0][pos++], SIDE_W, "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
     snprintf(side[0][pos++], SIDE_W, "%4s per second         ", posPerSecPrint);
     snprintf(side[0][pos++], SIDE_W, "%4.1lf seconds elapsed    ", secondsElapsed(elapsedTime));
-    snprintf(side[0][pos++], SIDE_W, "                        ");
+    snprintf(side[0][pos++], SIDE_W, "%4s Position score", trimBigNumber(game->stats.lastHeuristic));
 
     pos = 0;
     snprintf(side[1][pos++], SIDE_W, "      Playing as %c      ", showTurn(game->playerSide));
