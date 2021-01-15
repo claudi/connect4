@@ -5,7 +5,7 @@
 #include "minimax.h"
 #include <stdio.h>
 
-#define not(b) ( (b == TRUE) ? FALSE : TRUE )
+#define not(b) (((b) == TRUE) ? FALSE : TRUE)
 
 #define SCREEN_W 18
 #define SCREEN_H 10
