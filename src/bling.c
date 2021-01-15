@@ -49,7 +49,11 @@ void printInterface(const Game *game) {
     // screen[SCREEN_H-1][0] = '(';
     // screen[SCREEN_H-1][SCREEN_W-2] = ')';
     for(short col = 0; col < N; col++) {
-        screen[SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
+        if(col == game->stats.lastMove) {
+            screen[SCREEN_H-1][2*col + 1] = '^';
+        } else {
+            screen[SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
+        }
     }
     for(short height = 0; height < SCREEN_H; height++) {
         screen[height][SCREEN_W-1] = '\0';
