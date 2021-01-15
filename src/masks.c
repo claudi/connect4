@@ -590,14 +590,50 @@ unsigned matches(const Board *board, const unsigned length) {
     return count;
 }
 
+short max(const short n, const short m) {
+    return ((n >  m) ? n : m);
+}
+
+short min(const short n, const short m) {
+    return ((n >  m) ? m : n);
+}
+
 Bool wonBoardCol(const Board *board, const short __attribute((unused)) col) {
     short row = N - 1;
     while(!(board[BOTH] & shift(row, col))) {
         row--;
     }
     ASSERT(row >= 0);
+    SMask mask;
 
-    return matches(board, match4) > 0;
+    printf("%d %d\n", row, col);
+    printMask(board[BOTH]);
+    // H
+    mask = wonMasks[0];
+    mask.main <<= pos2Shift(row, col-4);
+    for(short iter = 0; col + iter < N; iter++) {
+        mask.main <<= pos2Shift(0,1);
+        printMask(mask.main);
+        if(matchMask(board, mask)) {
+            printf("H match at row %d, col %d\n", row, col);
+        }
+    }
+    // R
+    mask = wonMasks[1];
+    // L
+    mask = wonMasks[2];
+    // V
+    mask = wonMasks[3];
+    if(row >= 4) {
+        mask.main <<= pos2Shift(row-3, col);
+        printMask(mask.main);
+        if(matchMask(board, mask)) {
+            printf("V match at row %d, col %d\n", row, col);
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 unsigned wonBoard(const Board *board) {
