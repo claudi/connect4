@@ -574,6 +574,10 @@ unsigned matches(const Board *board, const unsigned length) {
     return count;
 }
 
+Bool wonBoardCol(const Board *board, const short __attribute((unused)) col) {
+    return matches(board, match4) > 0;
+}
+
 unsigned wonBoard(const Board *board) {
     return matches(board, match4);
 }
