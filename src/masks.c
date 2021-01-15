@@ -591,6 +591,12 @@ unsigned matches(const Board *board, const unsigned length) {
 }
 
 Bool wonBoardCol(const Board *board, const short __attribute((unused)) col) {
+    short row = N - 1;
+    while(!(board[BOTH] & shift(row, col))) {
+        row--;
+    }
+    ASSERT(row >= 0);
+
     return matches(board, match4) > 0;
 }
 
