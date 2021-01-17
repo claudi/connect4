@@ -1,5 +1,8 @@
 # Connect 4
 
+This game was initially developed as an assignment of the Advanced Programming
+class given by Vicenç Soler Ruíz in the Bachelor's degree in Mathematics at UAB.
+
 ## Game interface
 ```
          ___________________________
