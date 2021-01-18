@@ -34,6 +34,10 @@ void addEntry(Table *table, const Key key, const long heuristic) {
     }
 }
 
+void resetTable(Table *table) {
+    table->size = 0;
+}
+
 Table *tables;
 void initTables(void) {
     tables = (Table *) malloc(sizeof(Table));

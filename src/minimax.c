@@ -34,6 +34,8 @@ void machineMove(Node *root, const short depth, const Side side) {
     clock_t end = clock();
     elapsedTime = (double) (end - start);
 
+    resetTable(tables);
+
     free(root->child);
     copyNode(root, answer);
     free(answer);

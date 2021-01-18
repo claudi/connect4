@@ -21,6 +21,7 @@ void printEntry(const Entry entry);
 void printTable(const Table *table);
 void addEntry(Table *table, const Key key, const long heuristic);
 const Entry *findEntry(const Table *table, const Key key);
+void resetTable(Table *table);
 void initTables(void);
 void freeTables(void);
 
