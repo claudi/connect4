@@ -42,6 +42,6 @@ long heuristic(const Node *node, const Side side) {
         return LONG_MAX;
     }
 
-    return myHeuristic(board, side);
+    return simpleHeuristic(board, side);
 }
 
