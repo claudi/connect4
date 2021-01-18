@@ -3,7 +3,7 @@
 #include "defs.h"
 #include "key.h"
 
-#define T_BUFFER 512
+#define T_BUFFER 2048
 
 typedef struct {
     Key key;
