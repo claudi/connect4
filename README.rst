@@ -6,9 +6,8 @@ class given by Vicenç Soler Ruíz in the Bachelor's degree in Mathematics at UA
 
 Game interface
 --------------
-.. code::
+.. code-block::
 
-   $ ./play
             ___________________________
            |OFFo oON                   |
            | .-----------------------. |	      Playing as X
