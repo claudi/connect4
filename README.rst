@@ -6,6 +6,7 @@ class given by Vicenç Soler Ruíz in the Bachelor's degree in Mathematics at UA
 
 Game interface
 --------------
+
 .. code-block::
 
             ___________________________
@@ -42,6 +43,7 @@ Game interface
 
 Quick start
 -----------
+
 .. code::
 
    $ make
