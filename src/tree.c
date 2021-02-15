@@ -50,7 +50,7 @@ void orderChildren(Node *parent) {
         if(wonBoard(parent->child[iter]->board)) {
             values[iter] = INT_MAX;
         } else {
-            values[iter] = matches(parent->child[iter]->board, match3);
+            values[iter] = heuristic(parent->child[iter], next(parent->turn));
         }
     }
 
