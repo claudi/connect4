@@ -19,8 +19,6 @@ void printEntry(const Entry entry) {
 }
 
 void printTable(const Table *table) {
-    ASSERT(table->size <= T_BUFFER);
-
     for(unsigned long iter = 0; iter < table->size; iter++) {
         printf("%lu\t", iter);
         printEntry(table->entry[iter]);
