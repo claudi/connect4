@@ -24,7 +24,7 @@ long simpleHeuristic(Board __attribute((unused)) *board, const Side __attribute(
     return 0;
 }
 
-long heuristic(const Node *node, const Side side) {
+long getHeuristic(const Node *node, const Side side) {
     Board board[nboards];
     copyBoard(board, node->board);
 

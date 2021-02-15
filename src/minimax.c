@@ -51,7 +51,7 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
     exploredPositions++;
 
     if(depth == 0 || root->nchildren == 0) {
-        long h = heuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
+        long h = getHeuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
         return h;
     }
 
