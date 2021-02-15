@@ -22,12 +22,11 @@ void machineMove(Game *game) {
     long value = LONG_MIN;
     long alpha = LONG_MIN;
     long beta = LONG_MAX;
-    long heuristic;
 
     exploredPositions = 0;
     clock_t start = clock();
     for(short iter = 0; iter < root->nchildren; iter++) {
-        heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+        long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
         if(heuristic > value) {
             value = heuristic;
             copyNode(answer, root->child[iter]);
