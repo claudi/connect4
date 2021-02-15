@@ -25,11 +25,11 @@ void printTable(const Table *table) {
     }
 }
 
-void addEntry(Table *table, const Key key, const long heuristic) {
-    unsigned index = getIndex(table, key);
+void addEntry(Table *table, const Entry entry) {
+    unsigned index = getIndex(table, entry.key);
 
-    table->entry[index].key = key;
-    table->entry[index].heuristic = heuristic;
+    table->entry[index].key = entry.key;
+    table->entry[index].heuristic = entry.heuristic;
 }
 
 void resetTable(Table *table) {

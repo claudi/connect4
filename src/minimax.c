@@ -59,7 +59,7 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
                 heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
-                addEntry(tables, key, heuristic);
+                addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
             } else {
                 heuristic = entry->heuristic;
             }
@@ -82,7 +82,7 @@ long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side 
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
                 heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
-                addEntry(tables, key, heuristic);
+                addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
             } else {
                 heuristic = entry->heuristic;
             }
