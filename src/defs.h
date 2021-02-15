@@ -6,7 +6,9 @@
 #include <time.h>
 
 #define N 8
-#define next(turn) ((turn == X) ? O : X)
+
+#define next(turn) (((turn) == X) ? O : X)
+#define not(b) (((b) == TRUE) ? FALSE : TRUE)
 
 enum {TURN, BOTH, nboards};
 typedef enum {FALSE, TRUE} Bool;

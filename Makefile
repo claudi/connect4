@@ -7,8 +7,8 @@ DEPENDS	= $(wildcard $(SRCDIR)*.h)
 OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -pedantic -Werror -Ofast -lm
-CDEBUGFLAGS = -D DEBUG -ggdb -g
+CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -fshort-enums -Ofast
+CDEBUGFLAGS = -D DEBUG -ggdb -g3
 CPROFILEFLAGS = -pg
 
 play: $(OBJECTS)
@@ -36,11 +36,11 @@ play.debug: $(SOURCES) $(DEPENDS)
 .PHONY: profile
 profile: play.profile
 
-play.profile: $(SOURCS) $(DEPENDS)
+play.profile: $(SOURCES) $(DEPENDS)
 	$(CC) $(CFLAGS) $(CPROFILEFLAGS) -o $@ $(SOURCES)
 
 .PHONY: lint
 lint: lint.out
-lint.out:
-	splint src/*.c > lint.out
+lint.out: $(SOURCES) $(DEPENDS)
+	splint -booltype Bool -boolfalse FALSE -booltrue TRUE $^ > $@
 

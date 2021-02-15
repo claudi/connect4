@@ -21,7 +21,7 @@ Node *createChild(const Node *parent, const short col) {
 
     Node *child = (Node *) malloc(sizeof(Node));
     copyNode(child, parent);
-    makeMove(child, col);   // TODO: Check return value
+    makeMove(child, col);
 
     return child;
 }
@@ -50,7 +50,7 @@ void orderChildren(Node *parent) {
         if(wonBoard(parent->child[iter]->board)) {
             values[iter] = INT_MAX;
         } else {
-            values[iter] = matches(parent->child[iter]->board, match3);
+            values[iter] = heuristic(parent->child[iter], next(parent->turn));
         }
     }
 

@@ -1,14 +1,17 @@
 #include "minimax.h"
 
-unsigned exploredPositions;
-double elapsedTime;
-long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing);
+static unsigned exploredPositions;
+static long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing);
 
-int color(const Side side) {
+static int color(const Side side) {
     return (side == X) ? 1 : -1;
 }
 
-void machineMove(Node *root, const short depth, const Side side) {
+void machineMove(Game *game) {
+    Node *root = game->node;
+    const short depth = game->depth;
+    const Side side = game->side;
+
     ASSERT(root != NULL);
     ASSERT(depth > 0);
     ASSERT(root->nchildren > 0);
@@ -32,7 +35,11 @@ void machineMove(Node *root, const short depth, const Side side) {
         free(root->child[iter]);
     }
     clock_t end = clock();
-    elapsedTime = (double) (end - start);
+
+    game->stats.elapsedTime = (double) (end - start);
+    game->stats.exploredPositions = exploredPositions;
+    // game->stats.lastMove = col;
+    game->stats.lastHeuristic = value;
 
     resetTable(tables);
 
@@ -41,7 +48,7 @@ void machineMove(Node *root, const short depth, const Side side) {
     free(answer);
 }
 
-long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing) {
+static long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing) {
     exploredPositions++;
 
     if(depth == 0 || root->nchildren == 0) {

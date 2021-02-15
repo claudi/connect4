@@ -512,6 +512,7 @@ void initMasks(void) {
 
         }
     }
+
     // L1111
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {

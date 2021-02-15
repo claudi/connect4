@@ -2,6 +2,7 @@
 #define TREE_GUARD
 #include "defs.h"
 #include "board.h"
+#include "heuristic.h"
 #include <stdio.h>
 #include <stdlib.h>
 
