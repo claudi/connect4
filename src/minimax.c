@@ -41,6 +41,8 @@ void machineMove(Game *game) {
     // game->stats.lastMove = col;
     game->stats.lastHeuristic = value;
 
+    resetTable(tables);
+
     free(root->child);
     copyNode(root, answer);
     free(answer);
@@ -59,7 +61,15 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
     if(maximizing) {
         value = LONG_MIN;
         for(short iter = 0; iter < root->nchildren; iter++) {
-            long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+            long heuristic;
+            Key key = boardToKey(root->child[iter]->board);
+            const Entry *entry = findEntry(tables, key);
+            if(entry == NULL) {
+                heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+                addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
+            } else {
+                heuristic = entry->heuristic;
+            }
 
             if(heuristic > value) {
                 value = heuristic;
@@ -74,7 +84,15 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
     } else {
         value = LONG_MAX;
         for(short iter = 0; iter < root->nchildren; iter++) {
-            long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+            long heuristic;
+            Key key = boardToKey(root->child[iter]->board);
+            const Entry *entry = findEntry(tables, key);
+            if(entry == NULL) {
+                heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+                addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
+            } else {
+                heuristic = entry->heuristic;
+            }
 
             if(heuristic < value) {
                 value = heuristic;
