@@ -25,26 +25,28 @@ void printTable(const Table *table) {
 }
 
 void addEntry(Table *table, const Key key, const long heuristic) {
-    if(table->size < T_BUFFER) {
-        if(findEntry(table, key) == NULL) {
-            table->entry[table->size].key = key;
-            table->entry[table->size].heuristic = heuristic;
-            table->size += 1;
-        }
-    }
+    unsigned index = getIndex(table, key);
+
+    table->entry[index].key = key;
+    table->entry[index].heuristic = heuristic;
 }
 
 void resetTable(Table *table) {
-    table->size = 0;
+    for(unsigned iter = 0; iter < table->size; iter++) {
+        table->entry[iter].key = (Key) 0;
+    }
 }
 
 Table *tables;
 void initTables(void) {
     tables = (Table *) malloc(sizeof(Table));
-    tables->size = 0;
+    tables->size = T_BUFFER;
+    tables->entry = (Entry *) malloc(T_BUFFER * sizeof(Entry));
+    resetTable(tables);
 }
 
 void freeTables(void) {
+    free(tables->entry);
     free(tables);
 }
 

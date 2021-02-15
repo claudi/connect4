@@ -12,7 +12,7 @@ typedef struct {
 
 typedef struct {
     unsigned long size;
-    Entry entry[T_BUFFER];
+    Entry *entry;
 } Table;
 
 extern Table *tables;
