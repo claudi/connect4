@@ -1,14 +1,17 @@
 #include "table.h"
 
-const Entry *findEntry(const Table *table, const Key key) {
-    ASSERT(table->size <= T_BUFFER);
+unsigned getIndex(const Table *table, const Key key) {
+    return key % table->size;
+}
 
-    for(unsigned long iter = 0; iter < table->size; iter++) {
-        if(table->entry[iter].key == key) {
-            return table->entry + iter;
-        }
+const Entry *findEntry(const Table *table, const Key key) {
+    unsigned index = getIndex(table, key);
+
+    if(table->entry[index].key == key) {
+        return table->entry + index;
+    } else {
+        return NULL;
     }
-    return NULL;
 }
 
 void printEntry(const Entry entry) {
