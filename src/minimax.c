@@ -22,12 +22,11 @@ void machineMove(Game *game) {
     long value = LONG_MIN;
     long alpha = LONG_MIN;
     long beta = LONG_MAX;
-    long heuristic;
 
     exploredPositions = 0;
     clock_t start = clock();
     for(short iter = 0; iter < root->nchildren; iter++) {
-        heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+        long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
         if(heuristic > value) {
             value = heuristic;
             copyNode(answer, root->child[iter]);
@@ -52,7 +51,7 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
     exploredPositions++;
 
     if(depth == 0 || root->nchildren == 0) {
-        long h = heuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
+        long h = getHeuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
         return h;
     }
 

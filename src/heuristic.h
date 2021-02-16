@@ -4,7 +4,7 @@
 #include "masks.h"
 #include <stdlib.h>
 
-long heuristic(const Node *node, const Side side);
+long getHeuristic(const Node *node, const Side side);
 
 #endif // HEURISTIC_GUARD
 

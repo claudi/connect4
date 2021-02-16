@@ -164,11 +164,11 @@ char *difficulty(const short depth) {
 char *trimBigNumber(const unsigned num) {
     char *buff = (char *) malloc(25 * sizeof(char));
     if(num < 1000) {
-        snprintf(buff, 25, "%d", num);
+        snprintf(buff, 25, "%u", num);
     } else if(num < 1000000) {
-        snprintf(buff, 25, "%dK", num / 1000);
+        snprintf(buff, 25, "%uK", num / 1000);
     } else {
-        snprintf(buff, 25, "%dM", num / 1000000);
+        snprintf(buff, 25, "%uM", num / 1000000);
     }
     return buff;
 }

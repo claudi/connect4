@@ -44,3 +44,8 @@ lint: lint.out
 lint.out: $(SOURCES) $(DEPENDS)
 	splint -booltype Bool -boolfalse FALSE -booltrue TRUE $^ > $@
 
+.PHONY: check
+check: check.out
+check.out: $(SOURCES) $(DEPENDS)
+	cppcheck --enable=all $^ &> $@
+
