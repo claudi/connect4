@@ -41,8 +41,8 @@ void resetTable(Table *table) {
 Table *tables;
 void initTables(void) {
     tables = (Table *) malloc(sizeof(Table));
-    tables->size = T_BUFFER;
-    tables->entry = (Entry *) malloc(T_BUFFER * sizeof(Entry));
+    tables->size = TABLE_SIZE;
+    tables->entry = (Entry *) malloc(TABLE_SIZE * sizeof(Entry));
     resetTable(tables);
 }
 
