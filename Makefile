@@ -8,7 +8,7 @@ OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -fshort-enums -Ofast
-CDEBUGFLAGS = -D DEBUG -ggdb -g3
+CDEBUGFLAGS = -D DEBUG -ggdb -g3 -O0
 CPROFILEFLAGS = -pg
 
 play: $(OBJECTS)
