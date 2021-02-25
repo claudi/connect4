@@ -27,7 +27,7 @@ Key mirrorKey(const Key key) {
 }
 
 Key *verticalKeys;
-void initKeys(void) {
+void __attribute__((constructor)) initKeys(void) {
     verticalKeys = (Key *) malloc(N * sizeof(Key));
     verticalKeys[0] = (Key) 0;
     for(short iter = 0; iter < 2*N; iter++) {
@@ -39,7 +39,7 @@ void initKeys(void) {
     }
 }
 
-void freeKeys(void) {
+void __attribute__((destructor)) freeKeys(void) {
     free(verticalKeys);
 }
 

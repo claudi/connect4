@@ -3,7 +3,7 @@
 SMask **masks;
 unsigned *masksCnt;
 
-void initMasks(void) {
+void __attribute__((constructor)) initMasks(void) {
     masks = (SMask **) malloc(nmatches * sizeof(SMask *));
     masksCnt = (unsigned *) malloc(nmatches * sizeof(unsigned));
 
@@ -534,7 +534,7 @@ void initMasks(void) {
     }
 }
 
-void freeMasks(void) {
+void __attribute__((destructor)) freeMasks(void) {
     for(short iter = 0; iter < nmatches; iter++) {
         free(masks[iter]);
     }

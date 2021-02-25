@@ -10,10 +10,6 @@
 #include "tree.h"
 
 int main(void) {
-    initMasks();
-    initKeys();
-    initTables();
-
     Game *game = initGame();
     do {
         while(game->node->nchildren) {
@@ -31,9 +27,6 @@ int main(void) {
 
     free(game->node);
     free(game);
-    freeMasks();
-    freeKeys();
-    freeTables();
     return EXIT_SUCCESS;
 }
 
