@@ -15,7 +15,12 @@ void printKey(const Key key) {
 }
 
 Key boardToKey(const Board *board) {
-    return ((* ((Key *) &board[TURN])) << N*N) + ((Key) board[BOTH]);
+    Key key = ((* ((Key *) &board[TURN])) << N*N) + ((Key) board[BOTH]);
+    Key mirrored = mirrorKey(key);
+    if(mirrored > key) {
+        key = mirrored;
+    }
+    return key;
 }
 
 Key mirrorKey(const Key key) {

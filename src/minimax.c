@@ -16,6 +16,12 @@ void machineMove(Game *game) {
     ASSERT(depth > 0);
     ASSERT(root->nchildren > 0);
 
+    resetTable(tables);
+
+    for(short iter = 0; iter < depth - 1; iter++) {
+        alphaBeta(root, LONG_MIN, LONG_MAX, iter, side, FALSE);
+    }
+
     createChildren(root);
     Node *answer = (Node *) malloc(sizeof(Node));
 
@@ -39,8 +45,6 @@ void machineMove(Game *game) {
     game->stats.exploredPositions = exploredPositions;
     // game->stats.lastMove = col;
     game->stats.lastHeuristic = value;
-
-    resetTable(tables);
 
     free(root->child);
     copyNode(root, answer);
