@@ -39,14 +39,14 @@ void resetTable(Table *table) {
 }
 
 Table *tables;
-void initTables(void) {
+void __attribute__((constructor)) initTables(void) {
     tables = (Table *) malloc(sizeof(Table));
     tables->size = TABLE_SIZE;
     tables->entry = (Entry *) malloc(TABLE_SIZE * sizeof(Entry));
     resetTable(tables);
 }
 
-void freeTables(void) {
+void __attribute__((destructor)) freeTables(void) {
     free(tables->entry);
     free(tables);
 }
