@@ -1,10 +1,6 @@
 #include "table.h"
 
-unsigned getIndex(const Table *table, Key key) {
-    Key mirrored = mirrorKey(key);
-    if(mirrored > key) {
-        key = mirrored;
-    }
+unsigned getIndex(const Table *table, const Key key) {
     return key % table->size;
 }
 
