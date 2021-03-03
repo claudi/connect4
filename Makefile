@@ -22,7 +22,7 @@ release.tar.gz: $(SOURCES) $(DEPENDS) Makefile
 
 .PHONY: clean
 clean:
-	rm -f $(OBJECTS) $(EXECUTS) release.tar.gz *.out
+	$(RM) $(OBJECTS) $(EXECUTS) release.tar.gz *.out
 
 .PHONY: all
 all: $(EXECUTS)
