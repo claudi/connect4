@@ -18,3 +18,4 @@ Game *initGame(void);
 Bool keepPlaying(void);
 
 #endif // BLING_GUARD
+
