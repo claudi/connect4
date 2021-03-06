@@ -9,6 +9,7 @@
 #include "table.h"
 #include "tree.h"
 
+#ifndef HEADLESS
 int main(void) {
     Game *game = initGame();
     do {
@@ -29,4 +30,12 @@ int main(void) {
     free(game);
     return EXIT_SUCCESS;
 }
+#else
+int main(void) {
+    Game *game = initGame();
+    machineMove(game);
+    printf("%u\n", game->stats.exploredPositions);
+    return EXIT_SUCCESS;
+}
+#endif // HEADLESS
 
