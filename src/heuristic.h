@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 long getHeuristic(const Node *node, const Side side);
+long getOrderingHeuristic(const Node *node, const Side side);
 
 #endif // HEURISTIC_GUARD
 

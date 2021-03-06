@@ -45,3 +45,24 @@ long getHeuristic(const Node *node, const Side side) {
     return simpleHeuristic(board, side);
 }
 
+long getOrderingHeuristic(const Node *node, const Side side) {
+    Board board[nboards];
+    copyBoard(board, node->board);
+
+    if(node->turn == side) {
+        board[TURN] ^= board[BOTH];
+    }
+
+    if(matches(board, match4) > 0) {
+        return LONG_MIN;
+    }
+
+    board[TURN] ^= board[BOTH];
+
+    if(matches(board, match4) > 0) {
+        return LONG_MAX;
+    }
+
+    return myHeuristic(board, side);
+}
+
