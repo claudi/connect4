@@ -1,6 +1,6 @@
 SRCDIR = src/
 OBJDIR = obj/
-EXECUTS = play play.debug play.profile
+EXECUTS = play play.debug play.profile play.headless
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
@@ -9,6 +9,7 @@ OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 CC = gcc
 CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -fshort-enums -Ofast
 CDEBUGFLAGS = -D DEBUG -ggdb -g3 -O0
+CHEADLESSFLAGS = -D HEADLESS -D START_DEPTH=6
 CPROFILEFLAGS = -pg
 
 play: $(OBJECTS)
@@ -32,6 +33,12 @@ debug: play.debug
 
 play.debug: $(SOURCES) $(DEPENDS)
 	$(CC) $(CFLAGS) $(CDEBUGFLAGS) -o $@ $(SOURCES)
+
+.PHONY: headless
+headless: play.headless
+
+play.headless: $(SOURCES) $(DEPENDS)
+	$(CC) $(CFLAGS) $(CHEADLESSFLAGS) -o $@ $(SOURCES)
 
 .PHONY: profile
 profile: play.profile
