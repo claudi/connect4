@@ -45,23 +45,15 @@ void createChildren(Node *parent) {
 }
 
 void orderChildren(Node *parent) {
-    unsigned *values = (unsigned *) malloc(parent->nchildren * sizeof(unsigned));
+    Side side = next(parent->turn);
+    long *values = (long *) malloc(parent->nchildren * sizeof(long));
     for(short iter = 0; iter < parent->nchildren; iter++) {
-        if(wonBoard(parent->child[iter]->board)) {
-            values[iter] = INT_MAX;
-        } else {
-            if(matches(parent->child[iter]->board, match4) > 0) {
-                values[iter] = UINT_MAX;
-            } else {
-                values[iter] = matches(parent->child[iter]->board, match3);
-            }
-            // values[iter] = getHeuristic(parent->child[iter], next(parent->turn));
-        }
+        values[iter] = getOrderingHeuristic(parent->child[iter], side);
     }
 
     for(short iter = 1; iter < parent->nchildren; iter++) {
         Node *auxn = parent->child[iter];
-        unsigned auxv = values[iter];
+        long auxv = values[iter];
 
         short j = iter - 1;
         while((j >= 0) && (values[j] < auxv)) {
