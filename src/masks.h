@@ -30,12 +30,14 @@ extern unsigned *masksCnt;
 
 void initMasks(void);
 void freeMasks(void);
+void initCoefs(const char *FILENameX, const char *FILENameO);
 void printMask(const Mask mask);
 void printMasks();
 
 Bool matchMask(const Board *board, const SMask mask);
 unsigned matches(const Board *board, const unsigned length);
 unsigned wonBoard(const Board *board);
+long weightedMatches(const Board *board, const Side side);
 
 #endif // MASKS_GUARD
 
