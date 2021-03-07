@@ -5,7 +5,9 @@
 
 #define START_BOARD initNode()
 #define START_TURN 1
+#ifndef START_DEPTH
 #define START_DEPTH 4
+#endif // START_DEPTH
 #define START_PLAYER_SIDE X
 #define START_SIDE X
 #define START_HELP TRUE
