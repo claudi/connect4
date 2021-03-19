@@ -114,7 +114,7 @@ void printInterface(const Game *game) {
 }
 
 void printGameBoy(char screen[SCREEN_H][SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
-    char *padding = "     ";
+    const char *padding = "     ";
     for(short iter = 0; iter < 80; iter++) {
         printf("\n");
     }
