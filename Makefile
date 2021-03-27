@@ -54,5 +54,5 @@ lint.out: $(SOURCES) $(DEPENDS)
 .PHONY: check
 check: check.out
 check.out: $(SOURCES) $(DEPENDS)
-	cppcheck --std=c11 --enable=all $^ &> $@
+	cppcheck --std=c11 --enable=all --suppress=missingIncludeSystem $^ &> $@
 
