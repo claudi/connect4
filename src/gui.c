@@ -30,10 +30,14 @@ App *initSDL(void) {
         return NULL;
     }
 
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    const char value[2] = "1"; // Enable vsync
+    SDL_bool hints = SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, value);
+    if(hints != SDL_TRUE) {
+        SDL_Log("Could not set requested hint: SDL_HINT_RENDER_SCALE_QUALITY = %s\n", value);
+    }
 
-    const int index = -1;
-    const int rendererFlags = SDL_RENDERER_ACCELERATED;
+    const int index = -1; // the first rendering driver supporting the requested flags
+    const int rendererFlags = SDL_RENDERER_ACCELERATED; // the renderer uses hardware acceleration
     app->renderer = SDL_CreateRenderer(app->window, index, rendererFlags);
 
     if(app->renderer == NULL) {
