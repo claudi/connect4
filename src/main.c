@@ -2,7 +2,6 @@
 #include "board.h"
 #include "defs.h"
 #include "game.h"
-#include "gui.h"
 #include "heuristic.h"
 #include "key.h"
 #include "masks.h"
@@ -11,6 +10,8 @@
 #include "tree.h"
 
 #ifndef HEADLESS
+#include "gui.h"
+
 int main(void) {
     Game *game = initGame();
     do {
