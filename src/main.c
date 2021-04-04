@@ -12,7 +12,10 @@
 #ifndef HEADLESS
 #include "gui.h"
 
-int main(void) {
+int main(int __attribute__((unused)) argc, char __attribute__((unused)) *argv[]) {
+    initSDL();
+    atexit(freeSDL);
+
     Game *game = initGame();
     do {
         while(game->node->nchildren) {

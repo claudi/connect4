@@ -13,5 +13,10 @@ typedef struct {
     SDL_Window *window;
 } App;
 
+extern App app;
+
+void initSDL(void);
+void freeSDL(void);
+
 #endif // HEADLESS
 #endif // GUI_GUARD
