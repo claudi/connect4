@@ -17,6 +17,7 @@ int main(void) {
     if(app == NULL) {
         return EXIT_FAILURE;
     }
+    SDL_Log("SDL Successfully initialised\n");
 
     Game *game = initGame();
     do {
