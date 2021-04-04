@@ -7,7 +7,7 @@ App *initSDL(void) {
     *app = (App) { NULL, NULL };
 
     if(SDL_Init(SDL_INIT_VIDEO) != 0) {
-        SDL_Log("Couldn't initialize SDL: %s\n", SDL_GetError());
+        SDL_Log("ERROR: Couldn't initialize SDL: %s\n", SDL_GetError());
         freeSDL(app);
         return NULL;
     }
@@ -37,7 +37,7 @@ App *initSDL(void) {
     app->renderer = SDL_CreateRenderer(app->window, index, rendererFlags);
 
     if(app->renderer == NULL) {
-        SDL_Log("Failed to create renderer: %s\n", SDL_GetError());
+        SDL_Log("ERROR: Failed to create renderer: %s\n", SDL_GetError());
         freeSDL(app);
         return NULL;
     }
