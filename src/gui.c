@@ -22,7 +22,8 @@ App *initSDL(void) {
             windowFlags);
 
     if(app->window == NULL) {
-        SDL_Log("ERROR: Failed to open %d x %d window: %s\n",
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                "Failed to open %d x %d window: %s\n",
                 SCREEN_WIDTH,
                 SCREEN_HEIGHT,
                 SDL_GetError());
@@ -33,7 +34,9 @@ App *initSDL(void) {
     const char value[2] = "1"; // Enable vsync
     SDL_bool hints = SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, value);
     if(hints != SDL_TRUE) {
-        SDL_Log("Could not set requested hint: SDL_HINT_RENDER_SCALE_QUALITY = %s\n", value);
+        SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION,
+                "Failed to set hint: SDL_HINT_RENDER_SCALE_QUALITY = %s\n",
+                value);
     }
 
     const int index = -1; // the first rendering driver supporting the requested flags
@@ -41,7 +44,9 @@ App *initSDL(void) {
     app->renderer = SDL_CreateRenderer(app->window, index, rendererFlags);
 
     if(app->renderer == NULL) {
-        SDL_Log("ERROR: Failed to create renderer: %s\n", SDL_GetError());
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                "Failed to create renderer: %s\n",
+                SDL_GetError());
         freeSDL(app);
         return NULL;
     }
