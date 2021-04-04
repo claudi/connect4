@@ -9,14 +9,12 @@
 #define SCREEN_HEIGHT 720
 
 typedef struct {
-    SDL_Renderer *renderer;
     SDL_Window *window;
+    SDL_Renderer *renderer;
 } App;
 
-extern App app;
-
-void initSDL(void);
-void freeSDL(void);
+App *initSDL(void);
+void freeSDL(App *app);
 
 #endif // HEADLESS
 #endif // GUI_GUARD

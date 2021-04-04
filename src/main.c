@@ -12,9 +12,11 @@
 #ifndef HEADLESS
 #include "gui.h"
 
-int main(int __attribute__((unused)) argc, char __attribute__((unused)) *argv[]) {
-    initSDL();
-    atexit(freeSDL);
+int main(void) {
+    App *app = initSDL();
+    if(app == NULL) {
+        return EXIT_FAILURE;
+    }
 
     Game *game = initGame();
     do {
@@ -33,6 +35,7 @@ int main(int __attribute__((unused)) argc, char __attribute__((unused)) *argv[])
 
     free(game->node);
     free(game);
+    freeSDL(app);
     return EXIT_SUCCESS;
 }
 #else

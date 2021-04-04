@@ -2,45 +2,45 @@
 
 #ifndef HEADLESS
 
-App app;
+App *initSDL(void) {
+    App *app = malloc(sizeof(App));
+    *app = (App) { NULL, NULL };
 
-void initSDL(void)
-{
-    int rendererFlags, windowFlags;
-
-    rendererFlags = SDL_RENDERER_ACCELERATED;
-
-    windowFlags = 0;
-
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        printf("Couldn't initialize SDL: %s\n", SDL_GetError());
-        exit(1);
+    if(SDL_Init(SDL_INIT_VIDEO) != 0) {
+        SDL_Log("Couldn't initialize SDL: %s\n", SDL_GetError());
+        freeSDL(app);
+        return NULL;
     }
 
-    app.window = SDL_CreateWindow("Connect 4", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+    const char windowName[10] = "Connect 4";
+    const int windowFlags = 0;
+    app->window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 
-    if (!app.window)
-    {
-        printf("Failed to open %d x %d window: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
-        exit(1);
+    if(app->window == NULL) {
+        SDL_Log("Failed to open %d x %d window: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
+        freeSDL(app);
+        return NULL;
     }
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
-    app.renderer = SDL_CreateRenderer(app.window, -1, rendererFlags);
+    const int index = -1;
+    const int rendererFlags = SDL_RENDERER_ACCELERATED;
+    app->renderer = SDL_CreateRenderer(app->window, index, rendererFlags);
 
-    if (!app.renderer)
-    {
-        printf("Failed to create renderer: %s\n", SDL_GetError());
-        exit(1);
+    if(app->renderer == NULL) {
+        SDL_Log("Failed to create renderer: %s\n", SDL_GetError());
+        freeSDL(app);
+        return NULL;
     }
+
+    return app;
 }
 
-void freeSDL(void)
-{
-	SDL_DestroyRenderer(app.renderer);
-	SDL_DestroyWindow(app.window);
+void freeSDL(App *app) {
+    SDL_Log("Shutting down SDL\n");
+    SDL_DestroyWindow(app->window);
+    SDL_DestroyRenderer(app->renderer);
 	SDL_Quit();
 }
 
