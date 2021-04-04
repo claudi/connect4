@@ -14,10 +14,18 @@ App *initSDL(void) {
 
     const char windowName[10] = "Connect 4";
     const int windowFlags = 0;
-    app->window = SDL_CreateWindow(windowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+    app->window = SDL_CreateWindow(windowName,
+            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_UNDEFINED,
+            SCREEN_WIDTH,
+            SCREEN_HEIGHT,
+            windowFlags);
 
     if(app->window == NULL) {
-        SDL_Log("Failed to open %d x %d window: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
+        SDL_Log("ERROR: Failed to open %d x %d window: %s\n",
+                SCREEN_WIDTH,
+                SCREEN_HEIGHT,
+                SDL_GetError());
         freeSDL(app);
         return NULL;
     }
