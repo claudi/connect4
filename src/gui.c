@@ -14,7 +14,8 @@ App *initSDL(void) {
 
     const char windowName[10] = "Connect 4";
     const int windowFlags = 0;
-    app->window = SDL_CreateWindow(windowName,
+    app->window = SDL_CreateWindow(
+            windowName,
             SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED,
             SCREEN_WIDTH,
@@ -22,7 +23,8 @@ App *initSDL(void) {
             windowFlags);
 
     if(app->window == NULL) {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+        SDL_LogError(
+                SDL_LOG_CATEGORY_APPLICATION,
                 "Failed to open %d x %d window: %s\n",
                 SCREEN_WIDTH,
                 SCREEN_HEIGHT,
@@ -34,7 +36,8 @@ App *initSDL(void) {
     const char value[2] = "1"; // Enable vsync
     SDL_bool hints = SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, value);
     if(hints != SDL_TRUE) {
-        SDL_LogWarn(SDL_LOG_CATEGORY_APPLICATION,
+        SDL_LogWarn(
+                SDL_LOG_CATEGORY_APPLICATION,
                 "Failed to set hint: SDL_HINT_RENDER_SCALE_QUALITY = %s\n",
                 value);
     }
@@ -44,7 +47,8 @@ App *initSDL(void) {
     app->renderer = SDL_CreateRenderer(app->window, index, rendererFlags);
 
     if(app->renderer == NULL) {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+        SDL_LogError(
+                SDL_LOG_CATEGORY_APPLICATION,
                 "Failed to create renderer: %s\n",
                 SDL_GetError());
         freeSDL(app);
