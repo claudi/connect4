@@ -65,4 +65,13 @@ void freeSDL(App *app) {
 	SDL_Quit();
 }
 
+void render(App *app, Game __attribute__((unused)) *game) {
+    SDL_SetRenderDrawColor(app->renderer, 0, 100, 100, 100);
+    SDL_RenderClear(app->renderer);
+}
+
+void update(App *app) {
+    SDL_RenderPresent(app->renderer);
+}
+
 #endif // HEADLESS

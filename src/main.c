@@ -29,6 +29,8 @@ int main(void) {
             }
             game->side = next(game->side);
             game->turn += game->side;
+            render(app, game);
+            update(app);
         }
         printInterface(game);
         resetGame(game);

@@ -17,5 +17,8 @@ typedef struct {
 App *initSDL(void);
 void freeSDL(App *app);
 
+void render(App *app, Game *game);
+void update(App *app);
+
 #endif // HEADLESS
 #endif // GUI_GUARD
