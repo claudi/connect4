@@ -1,6 +1,7 @@
 #ifndef GUI_GUARD
 #define GUI_GUARD
 #include "defs.h"
+#include "game.h"
 
 #ifndef HEADLESS
 #include "SDL2/SDL.h"

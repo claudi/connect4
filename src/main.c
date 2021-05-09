@@ -32,7 +32,8 @@ int main(void) {
         }
         printInterface(game);
         resetGame(game);
-    } while(keepPlaying());
+        keepPlaying(game);
+    } while(game->keepPlaying);
 
     free(game->node);
     free(game);

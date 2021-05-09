@@ -237,25 +237,22 @@ void humanInput(Game *game) {
     free(buff);
 }
 
-Bool keepPlaying(void) {
+void keepPlaying(Game *game) {
     printf(" Want to keep on playing? (y/n)\n");
     printf(" > ");
 
     char *buff = (char *) malloc(255 * sizeof(char));
     scanf("%s", buff);
 
-    Bool answer;
-
     if(buff[0] == 'y') {
-        answer = TRUE;
+        game->keepPlaying = TRUE;
     } else if(buff[0] == 'n') {
-        answer = FALSE;
+        game->keepPlaying = FALSE;
     } else {
         printf(" Wrong input.");
-        answer = keepPlaying();
+        keepPlaying(game);
     }
 
     free(buff);
-    return answer;
 }
 
