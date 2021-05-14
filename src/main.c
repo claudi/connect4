@@ -22,6 +22,8 @@ int main(void) {
     Game *game = initGame();
     do {
         while(game->node->nchildren) {
+            render(app, game);
+            update(app);
             if(game->side == game->playerSide) {
                 humanInput(game);
             } else {
@@ -29,9 +31,9 @@ int main(void) {
             }
             game->side = next(game->side);
             game->turn += game->side;
-            render(app, game);
-            update(app);
         }
+        render(app, game);
+        update(app);
         printInterface(game);
         resetGame(game);
         keepPlaying(game);
