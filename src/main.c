@@ -20,6 +20,8 @@ int main(void) {
     SDL_Log("SDL Successfully initialised\n");
 
     Game *game = initGame();
+    render(app, game);
+    update(app);
     do {
         while(game->node->nchildren) {
             render(app, game);
