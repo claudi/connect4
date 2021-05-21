@@ -1,5 +1,15 @@
 #include "heuristic.h"
 
+long weightedHeuristic(Board *board, const Side side) {
+    long heuristic = 0;
+
+    heuristic += weightedMatches(board, side);
+    board[TURN] ^= board[BOTH];
+    heuristic -= weightedMatches(board, next(side));
+
+    return  heuristic;
+}
+
 long myHeuristic(Board *board, const Side __attribute((unused)) side) {
     long heuristic = 0;
 
@@ -42,7 +52,7 @@ long getHeuristic(const Node *node, const Side side) {
         return LONG_MAX;
     }
 
-    return simpleHeuristic(board, side);
+    return myHeuristic(board, side);
 }
 
 long getOrderingHeuristic(const Node *node, const Side side) {
@@ -63,6 +73,6 @@ long getOrderingHeuristic(const Node *node, const Side side) {
         return LONG_MAX;
     }
 
-    return myHeuristic(board, side);
+    return weightedHeuristic(board, side);
 }
 

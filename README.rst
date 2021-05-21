@@ -13,7 +13,7 @@ Game interface
            |OFFo oON                   |
            | .-----------------------. |	      Playing as X
            | |  .-----------------.  | |	    Difficulty HARD
-           | |  |        Turn  7  |  | |	
+           | |  |        Turn  7  |  | |
            | |  | - - - - - - - - |  | |	 1-8 Play on column
            | |))| - - - - - - - - |  | |	   h Toggle help/stats
            | |  | - - - - - - - - |  | |	  d# Change difficulty

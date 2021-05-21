@@ -31,7 +31,11 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 #else
-int main(void) {
+int main(int argc, char **argv) {
+    if(argc != 3) {
+        return EXIT_FAILURE;
+    }
+    initCoefs(argv[1], argv[2]);
     Game *game = initGame();
     machineMove(game);
     printf("%u\n", game->stats.exploredPositions);
