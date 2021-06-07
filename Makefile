@@ -8,7 +8,7 @@ OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -Ofast
-LFLAGS = `sdl2-config --cflags` -lSDL2
+LFLAGS = `sdl2-config --cflags --libs`
 CDEBUGFLAGS = -D DEBUG -ggdb -g3 -O0
 CHEADLESSFLAGS = -D HEADLESS -D START_DEPTH=6
 CPROFILEFLAGS = -pg
