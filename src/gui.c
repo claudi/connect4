@@ -68,6 +68,22 @@ void freeSDL(App *app) {
 void render(App *app, Game __attribute__((unused)) *game) {
     SDL_SetRenderDrawColor(app->renderer, 0, 100, 100, 100);
     SDL_RenderClear(app->renderer);
+
+    SDL_SetRenderDrawColor(app->renderer, 255, 255, 255, 255);
+    for(size_t iter = 0; iter < N-1; iter++) {
+        SDL_RenderDrawLine(
+                app->renderer,
+                0,
+                (SCREEN_HEIGHT/2) + (SCREEN_HEIGHT/N)*(iter - (N-1)/2),
+                SCREEN_WIDTH,
+                (SCREEN_HEIGHT/2) + (SCREEN_HEIGHT/N)*(iter - (N-1)/2));
+        SDL_RenderDrawLine(
+                app->renderer,
+                (SCREEN_WIDTH/2) + (SCREEN_WIDTH/N)*(iter - (N-1)/2),
+                0,
+                (SCREEN_WIDTH/2) + (SCREEN_WIDTH/N)*(iter - (N-1)/2),
+                SCREEN_HEIGHT);
+    }
 }
 
 void update(App *app) {
