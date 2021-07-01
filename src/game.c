@@ -29,7 +29,8 @@ Game newGame(void) {
         .playerSide = START_PLAYER_SIDE,
         .side = START_SIDE,
         .help = START_HELP,
-        .stats = START_STATS
+        .stats = START_STATS,
+        .keepPlaying = TRUE,
     };
     return game;
 }

@@ -1,6 +1,6 @@
 #include "bling.h"
 
-void printGameBoy(char screen[SCREEN_H][SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]);
+void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]);
 char *difficulty(const short depth);
 char *trimBigNumber(const unsigned num);
 char *posPerSec(unsigned positions, double time);
@@ -11,16 +11,16 @@ void printInterface(const Game *game) {
     double elapsedTime = game->stats.elapsedTime;
     unsigned exploredPositions = game->stats.exploredPositions;
 
-    char screen[SCREEN_H][SCREEN_W];
-    for(short height = 0; height < SCREEN_H; height++) {
-        for(short width = 0; width < SCREEN_W-1; width++) {
+    char screen[GB_SCREEN_H][GB_SCREEN_W];
+    for(short height = 0; height < GB_SCREEN_H; height++) {
+        for(short width = 0; width < GB_SCREEN_W-1; width++) {
             screen[height][width] = ' ';
         }
     }
 
     char buffer[7];
     snprintf(buffer, 7, "%6d", game->turn);
-    snprintf(screen[0], SCREEN_W, "        Turn %s  ", buffer + 4);
+    snprintf(screen[0], GB_SCREEN_W, "        Turn %s  ", buffer + 4);
 
     char lastMove = showTurn(game->node->turn);
     char nextMove = showTurn(next(game->node->turn));
@@ -39,24 +39,24 @@ void printInterface(const Game *game) {
         }
     }
 
-    // for(short width = 0; width < SCREEN_W-1; width++) {
-        // screen[SCREEN_H-2][width] = '_';
+    // for(short width = 0; width < GB_SCREEN_W-1; width++) {
+        // screen[GB_SCREEN_H-2][width] = '_';
     // }
-    for(short width = 2; width < SCREEN_W-2; width++) {
-        screen[SCREEN_H-1][width] = ':';
+    for(short width = 2; width < GB_SCREEN_W-2; width++) {
+        screen[GB_SCREEN_H-1][width] = ':';
         width++;
     }
-    // screen[SCREEN_H-1][0] = '(';
-    // screen[SCREEN_H-1][SCREEN_W-2] = ')';
+    // screen[GB_SCREEN_H-1][0] = '(';
+    // screen[GB_SCREEN_H-1][GB_SCREEN_W-2] = ')';
     for(short col = 0; col < N; col++) {
         if(col == game->stats.lastMove) {
-            screen[SCREEN_H-1][2*col + 1] = '^';
+            screen[GB_SCREEN_H-1][2*col + 1] = '^';
         } else {
-            screen[SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
+            screen[GB_SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
         }
     }
-    for(short height = 0; height < SCREEN_H; height++) {
-        screen[height][SCREEN_W-1] = '\0';
+    for(short height = 0; height < GB_SCREEN_H; height++) {
+        screen[height][GB_SCREEN_W-1] = '\0';
     }
 
     char *exploredPositionsPrint = trimBigNumber(exploredPositions);
@@ -97,7 +97,7 @@ void printInterface(const Game *game) {
     printGameBoy(screen, side[game->help], credits);
 
     // printf("\n\n");
-    // for(short height = 0; height < SCREEN_H; height++) {
+    // for(short height = 0; height < GB_SCREEN_H; height++) {
         // printf("%s\n", screen[height]);
     // }
     // printf("\n");
@@ -113,7 +113,7 @@ void printInterface(const Game *game) {
     free(heuristicValue);
 }
 
-void printGameBoy(char screen[SCREEN_H][SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
+void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
     const char *padding = "     ";
     for(short iter = 0; iter < 80; iter++) {
         printf("\n");
@@ -237,25 +237,22 @@ void humanInput(Game *game) {
     free(buff);
 }
 
-Bool keepPlaying(void) {
+void keepPlaying(Game *game) {
     printf(" Want to keep on playing? (y/n)\n");
     printf(" > ");
 
     char *buff = (char *) malloc(255 * sizeof(char));
     scanf("%s", buff);
 
-    Bool answer;
-
     if(buff[0] == 'y') {
-        answer = TRUE;
+        game->keepPlaying = TRUE;
     } else if(buff[0] == 'n') {
-        answer = FALSE;
+        game->keepPlaying = FALSE;
     } else {
         printf(" Wrong input.");
-        answer = keepPlaying();
+        keepPlaying(game);
     }
 
     free(buff);
-    return answer;
 }
 

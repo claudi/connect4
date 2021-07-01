@@ -28,6 +28,7 @@ typedef struct {
     Side side;
     Bool help;
     Stats stats;
+    Bool keepPlaying;
 } Game;
 
 Game *initGame(void);
