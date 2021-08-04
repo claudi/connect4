@@ -89,6 +89,16 @@ void update(App *app) {
 }
 
 int gui_main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv) {
+    App *app = initSDL();
+    if(app == NULL) {
+        return EXIT_FAILURE;
+    }
+    SDL_Log("SDL Successfully initialised\n");
+
+    render(app, NULL);
+    update(app);
+
+    freeSDL(app);
     return EXIT_SUCCESS;
 }
 
