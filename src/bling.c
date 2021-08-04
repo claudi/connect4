@@ -257,6 +257,24 @@ void keepPlaying(Game *game) {
 }
 
 int ascii_main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv) {
+    Game *game = initGame();
+    do {
+        while(game->node->nchildren) {
+            if(game->side == game->playerSide) {
+                humanInput(game);
+            } else {
+                machineMove(game);
+            }
+            game->side = next(game->side);
+            game->turn += game->side;
+        }
+        printInterface(game);
+        resetGame(game);
+        keepPlaying(game);
+    } while(game->keepPlaying);
+
+    free(game->node);
+    free(game);
     return EXIT_SUCCESS;
 }
 
