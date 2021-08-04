@@ -256,3 +256,7 @@ void keepPlaying(Game *game) {
     free(buff);
 }
 
+int ascii_main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv) {
+    return EXIT_SUCCESS;
+}
+

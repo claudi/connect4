@@ -22,5 +22,7 @@ void humanInput(Game *game);
 Game *initGame(void);
 void keepPlaying(Game *game);
 
+int ascii_main(int argc, char **argv);
+
 #endif // BLING_GUARD
 

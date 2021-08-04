@@ -88,3 +88,7 @@ void update(App *app) {
     SDL_RenderPresent(app->renderer);
 }
 
+int gui_main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv) {
+    return EXIT_SUCCESS;
+}
+
