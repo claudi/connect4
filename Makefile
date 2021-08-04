@@ -7,13 +7,14 @@ DEPENDS	= $(wildcard $(SRCDIR)*.h)
 OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -fshort-enums -Ofast
+CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -Ofast
+LFLAGS = `sdl2-config --cflags --libs`
 CDEBUGFLAGS = -D DEBUG -ggdb -g3 -O0
 CHEADLESSFLAGS = -D HEADLESS -D START_DEPTH=6
 CPROFILEFLAGS = -pg
 
 play: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -32,7 +33,7 @@ all: $(EXECUTS)
 debug: play.debug
 
 play.debug: $(SOURCES) $(DEPENDS)
-	$(CC) $(CFLAGS) $(CDEBUGFLAGS) -o $@ $(SOURCES)
+	$(CC) $(CFLAGS) $(CDEBUGFLAGS) -o $@ $(SOURCES) $(LFLAGS)
 
 .PHONY: headless
 headless: play.headless
@@ -44,7 +45,7 @@ play.headless: $(SOURCES) $(DEPENDS)
 profile: play.profile
 
 play.profile: $(SOURCES) $(DEPENDS)
-	$(CC) $(CFLAGS) $(CPROFILEFLAGS) -o $@ $(SOURCES)
+	$(CC) $(CFLAGS) $(CPROFILEFLAGS) -o $@ $(SOURCES) $(LFLAGS)
 
 .PHONY: lint
 lint: lint.out

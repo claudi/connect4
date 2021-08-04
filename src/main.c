@@ -10,10 +10,22 @@
 #include "tree.h"
 
 #ifndef HEADLESS
+#include "gui.h"
+
 int main(void) {
+    App *app = initSDL();
+    if(app == NULL) {
+        return EXIT_FAILURE;
+    }
+    SDL_Log("SDL Successfully initialised\n");
+
     Game *game = initGame();
+    render(app, game);
+    update(app);
     do {
         while(game->node->nchildren) {
+            render(app, game);
+            update(app);
             if(game->side == game->playerSide) {
                 humanInput(game);
             } else {
@@ -22,12 +34,16 @@ int main(void) {
             game->side = next(game->side);
             game->turn += game->side;
         }
+        render(app, game);
+        update(app);
         printInterface(game);
         resetGame(game);
-    } while(keepPlaying());
+        keepPlaying(game);
+    } while(game->keepPlaying);
 
     free(game->node);
     free(game);
+    freeSDL(app);
     return EXIT_SUCCESS;
 }
 #else
