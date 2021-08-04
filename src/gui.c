@@ -1,7 +1,5 @@
 #include "gui.h"
 
-#ifndef HEADLESS
-
 App *initSDL(void) {
     App *app = malloc(sizeof(App));
     *app = (App) { NULL, NULL };
@@ -90,4 +88,3 @@ void update(App *app) {
     SDL_RenderPresent(app->renderer);
 }
 
-#endif // HEADLESS
