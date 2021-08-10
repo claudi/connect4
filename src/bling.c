@@ -23,7 +23,7 @@ void printInterface(const Game *game) {
     snprintf(screen[0], GB_SCREEN_W, "        Turn %s  ", buffer + 4);
 
     char lastMove = showTurn(game->node->turn);
-    char nextMove = showTurn(next(game->node->turn));
+    char nextMove = showTurn(NEXT(game->node->turn));
     char emptySlot = '-';
     char slot;
     for(short row = 0; row < N; row++) {
@@ -122,16 +122,16 @@ void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_
     printf("%s   |OFFo oON                   |\n", padding);
     printf("%s   | .-----------------------. |\t%s\n", padding, side[0]);
     printf("%s   | |  .-----------------.  | |\t%s\n", padding, side[1]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[0], side[2]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[1], side[3]);
-    printf("%s   | |))|"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[2], side[4]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[3], side[5]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[4], side[6]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[5], side[7]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[6], side[8]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\n", padding, screen[7]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[8], credits[0]);
-    printf("%s   | |  |"colorON"%s"colorOFF"|  | |\t%s\n", padding, screen[9], credits[1]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[0], side[2]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[1], side[3]);
+    printf("%s   | |))|"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[2], side[4]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[3], side[5]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[4], side[6]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[5], side[7]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[6], side[8]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\n", padding, screen[7]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[8], credits[0]);
+    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[9], credits[1]);
     printf("%s   | |  '-----------------'  | |\n", padding);
     printf("%s   | |__GAME BOY_____________/ |\n", padding);
     printf("%s   |          ________         |\n", padding);
@@ -194,7 +194,7 @@ void humanInput(Game *game) {
         if((move <= 0) || (move > N)) {
             humanInput(game);
             // fprintf(stderr, "Invalid column\n");
-        } else if(fullColumn(game->node->board, move-1)) {
+        } else if(FULL_COLUMN(game->node->board, move-1)) {
             humanInput(game);
         } else {
             makeMove(game->node, move-1);
@@ -203,7 +203,7 @@ void humanInput(Game *game) {
         short depth;
         switch(input) {
             case 'h':   // Toggle help/stats
-                game->help = not(game->help);
+                game->help = NOT(game->help);
                 humanInput(game);
                 break;
             case 'd':   // Change difficulty
@@ -219,13 +219,13 @@ void humanInput(Game *game) {
                 game->node->nchildren = 0;
                 break;
             case 's':   // Switch sides
-                game->playerSide = next(game->playerSide);
+                game->playerSide = NEXT(game->playerSide);
                 machineMove(game);
                 // humanInput(game);
                 break;
             case 'n':   // New game
                 resetGame(game);
-                game->side = next(game->side);
+                game->side = NEXT(game->side);
                 break;
             default:    // Other
                 // fprintf(stderr, "Invalid input\n");

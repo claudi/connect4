@@ -31,7 +31,7 @@ int main(void) {
             } else {
                 machineMove(game);
             }
-            game->side = next(game->side);
+            game->side = NEXT(game->side);
             game->turn += game->side;
         }
         render(app, game);

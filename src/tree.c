@@ -31,7 +31,7 @@ void createChildren(Node *parent) {
 
     short col = 0;
     for(short iter = 0; iter < parent->nchildren; iter++) {
-        while(fullColumn(parent->board, col)) {
+        while(FULL_COLUMN(parent->board, col)) {
             col++;
             ASSERT(col < N);
         }
@@ -45,7 +45,7 @@ void createChildren(Node *parent) {
 }
 
 void orderChildren(Node *parent) {
-    Side side = next(parent->turn);
+    Side side = NEXT(parent->turn);
     long *values = (long *) malloc(parent->nchildren * sizeof(long));
     for(short iter = 0; iter < parent->nchildren; iter++) {
         values[iter] = getOrderingHeuristic(parent->child[iter], side);
