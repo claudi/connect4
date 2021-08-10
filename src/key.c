@@ -1,7 +1,7 @@
 #include "key.h"
 
 Key keyShift(const short row, const short col) {
-    return (((Key) 1) << pos2Shift(row, col));
+    return (((Key) 1) << POS_TO_SHIFT(row, col));
 }
 
 void printKey(const Key key) {

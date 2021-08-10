@@ -22,9 +22,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(0,0);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,1) | shift(0,2) | shift(0,3);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -32,9 +32,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(0,1);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,0) | shift(0,2) | shift(0,3);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -42,9 +42,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(0,2);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,0) | shift(0,1) | shift(0,3);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -52,9 +52,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(0,3);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,0) | shift(0,1) | shift(0,2);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -63,9 +63,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(0,0);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(1,1) | shift(2,2) | shift(3,3);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -73,9 +73,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(1,1);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,0) | shift(2,2) | shift(3,3);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -83,9 +83,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(2,2);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,0) | shift(1,1) | shift(3,3);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -93,9 +93,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(3,3);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,0) | shift(1,1) | shift(2,2);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -104,9 +104,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(0,3);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(1,2) | shift(2,1) | shift(3,0);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -114,9 +114,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(1,2);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,3) | shift(2,1) | shift(3,0);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -124,9 +124,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(2,1);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,3) | shift(1,2) | shift(3,0);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -134,9 +134,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match1][pos].main = shift(3,0);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(0,3) | shift(1,2) | shift(2,1);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -145,9 +145,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < N; col++) {
             masks[match1][pos].main = shift(0,0);
-            masks[match1][pos].main <<= pos2Shift(row, col);
+            masks[match1][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match1][pos].anti = shift(1,0) | shift(2,0) | shift(3,0);
-            masks[match1][pos].anti <<= pos2Shift(row, col);
+            masks[match1][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -160,9 +160,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,0) | shift(0,1);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,2) | shift(0,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -170,9 +170,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,0) | shift(0,2);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,1) | shift(0,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -180,9 +180,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,1) | shift(0,2);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,0) | shift(0,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -190,9 +190,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,0) | shift(0,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,1) | shift(0,2);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -200,9 +200,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,1) | shift(0,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,0) | shift(0,2);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -210,9 +210,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,2) | shift(0,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,0) | shift(0,1);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -221,9 +221,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,0) | shift(1,1);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(2,2) | shift(3,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -231,9 +231,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,0) | shift(2,2);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(1,1) | shift(3,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -241,9 +241,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(1,1) | shift(2,2);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,0) | shift(3,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -251,9 +251,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(0,0) | shift(3,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(1,1) | shift(2,2);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -261,9 +261,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(1,1) | shift(3,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,0) | shift(2,2);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -271,9 +271,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(2,2) | shift(3,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(0,0) | shift(1,1);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -282,9 +282,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(3,0) | shift(2,1);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(1,2) | shift(0,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -292,9 +292,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(3,0) | shift(1,2);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(2,1) | shift(0,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -302,9 +302,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(2,1) | shift(1,2);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(3,0) | shift(0,3);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -312,9 +312,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(3,0) | shift(0,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(2,1) | shift(1,2);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -322,9 +322,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(2,1) | shift(0,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(3,0) | shift(1,2);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -332,9 +332,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match2][pos].main = shift(1,2) | shift(0,3);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(3,0) | shift(2,1);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -343,9 +343,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < N; col++) {
             masks[match2][pos].main = shift(0,0) | shift(1,0);
-            masks[match2][pos].main <<= pos2Shift(row, col);
+            masks[match2][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match2][pos].anti = shift(2,0) | shift(3,0);
-            masks[match2][pos].anti <<= pos2Shift(row, col);
+            masks[match2][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -358,9 +358,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(0,0) | shift(0,1) | shift(0,2);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(0,3);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -368,9 +368,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(0,0) | shift(0,1) | shift(0,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(0,2);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -378,9 +378,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(0,0) | shift(0,2) | shift(0,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(0,1);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -388,9 +388,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(0,1) | shift(0,2) | shift(0,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(0,0);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -399,9 +399,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(0,0) | shift(1,1) | shift(2,2);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(3,3);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -409,9 +409,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(0,0) | shift(1,1) | shift(3,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(2,2);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -419,9 +419,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(0,0) | shift(2,2) | shift(3,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(1,1);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -429,9 +429,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(1,1) | shift(2,2) | shift(3,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(0,0);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -440,9 +440,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(3,0) | shift(2,1) | shift(1,2);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(0,3);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -450,9 +450,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(3,0) | shift(2,1) | shift(0,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(1,2);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -460,9 +460,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(3,0) | shift(1,2) | shift(0,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(2,1);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -470,9 +470,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match3][pos].main = shift(2,1) | shift(1,2) | shift(0,3);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(3,0);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -481,9 +481,9 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < N; col++) {
             masks[match3][pos].main = shift(0,0) | shift(1,0) | shift(2,0);
-            masks[match3][pos].main <<= pos2Shift(row, col);
+            masks[match3][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match3][pos].anti = shift(3,0);
-            masks[match3][pos].anti <<= pos2Shift(row, col);
+            masks[match3][pos].anti <<= POS_TO_SHIFT(row, col);
             pos++;
         }
     }
@@ -496,7 +496,7 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < N; row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match4][pos].main = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
-            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match4][pos].anti = (Mask) 0;
             pos++;
         }
@@ -506,7 +506,7 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match4][pos].main = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
-            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match4][pos].anti = (Mask) 0;
             pos++;
 
@@ -517,7 +517,7 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < (N - 3); col++) {
             masks[match4][pos].main = shift(3,0) | shift(2,1) | shift(1,2) | shift(0,3);
-            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match4][pos].anti = (Mask) 0;
             pos++;
         }
@@ -527,7 +527,7 @@ void __attribute__((constructor)) initMasks(void) {
     for(unsigned row = 0; row < (N - 3); row++) {
         for(unsigned col = 0; col < N; col++) {
             masks[match4][pos].main = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
-            masks[match4][pos].main <<= pos2Shift(row, col);
+            masks[match4][pos].main <<= POS_TO_SHIFT(row, col);
             masks[match4][pos].anti = (Mask) 0;
             pos++;
         }

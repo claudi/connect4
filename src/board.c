@@ -1,7 +1,7 @@
 #include "board.h"
 
 Mask shift(const short row, const short col) {
-    return (((Mask) 1) << pos2Shift(row, col));
+    return (((Mask) 1) << POS_TO_SHIFT(row, col));
 }
 
 void copyNode(Node *dest, const Node *orig) {
@@ -19,7 +19,7 @@ void copyBoard(Board *dest, const Board *orig) {
 short makeMove(Node *node, const short col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
-    ASSERT(!fullColumn(node->board, col));
+    ASSERT(!FULL_COLUMN(node->board, col));
 
     short row = 0;
     for(short iter = 0; iter < N; iter++) {
