@@ -23,7 +23,7 @@ void printInterface(const Game *game) {
     snprintf(screen[0], GB_SCREEN_W, "        Turn %s  ", buffer + 4);
 
     char lastMove = showTurn(game->node->turn);
-    char nextMove = showTurn(next(game->node->turn));
+    char nextMove = showTurn(NEXT(game->node->turn));
     char emptySlot = '-';
     char slot;
     for(short row = 0; row < N; row++) {
@@ -203,7 +203,7 @@ void humanInput(Game *game) {
         short depth;
         switch(input) {
             case 'h':   // Toggle help/stats
-                game->help = not(game->help);
+                game->help = NOT(game->help);
                 humanInput(game);
                 break;
             case 'd':   // Change difficulty
@@ -219,13 +219,13 @@ void humanInput(Game *game) {
                 game->node->nchildren = 0;
                 break;
             case 's':   // Switch sides
-                game->playerSide = next(game->playerSide);
+                game->playerSide = NEXT(game->playerSide);
                 machineMove(game);
                 // humanInput(game);
                 break;
             case 'n':   // New game
                 resetGame(game);
-                game->side = next(game->side);
+                game->side = NEXT(game->side);
                 break;
             default:    // Other
                 // fprintf(stderr, "Invalid input\n");

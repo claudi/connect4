@@ -45,7 +45,7 @@ void createChildren(Node *parent) {
 }
 
 void orderChildren(Node *parent) {
-    Side side = next(parent->turn);
+    Side side = NEXT(parent->turn);
     long *values = (long *) malloc(parent->nchildren * sizeof(long));
     for(short iter = 0; iter < parent->nchildren; iter++) {
         values[iter] = getOrderingHeuristic(parent->child[iter], side);

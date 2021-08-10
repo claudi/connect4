@@ -7,8 +7,8 @@
 
 #define N 8
 
-#define next(turn) (((turn) == X) ? O : X)
-#define not(b) (((b) == TRUE) ? FALSE : TRUE)
+#define NEXT(turn) (((turn) == X) ? O : X)
+#define NOT(b) (((b) == TRUE) ? FALSE : TRUE)
 
 enum {TURN, BOTH, nboards};
 typedef enum {FALSE, TRUE} Bool;

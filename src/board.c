@@ -33,7 +33,7 @@ short makeMove(Node *node, const short col) {
     node->board[TURN] |= shift(row, col);
     node->board[BOTH] |= shift(row, col);
 
-    node->turn = next(node->turn);
+    node->turn = NEXT(node->turn);
 
     if(wonBoard(node->board)) {
         node->nchildren = 0;
@@ -51,7 +51,7 @@ char showTurn(const Side turn) {
 void printBoard(const Node *node) {
     short row, col;
     char lastMove = showTurn(node->turn);
-    char nextMove = showTurn(next(node->turn));
+    char nextMove = showTurn(NEXT(node->turn));
     printf("\n");
     for(row = N - 1; row >= 0; row--) {
         for(col = 0; col < N; col++) {
