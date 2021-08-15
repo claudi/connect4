@@ -1,6 +1,6 @@
 #include "commands.h"
 
-command commands[] = {
+const command commands[] = {
     { "headless", headless_main },
     { "ascii", ascii_main },
     { "gui", gui_main },
