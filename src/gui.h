@@ -2,8 +2,6 @@
 #define GUI_GUARD
 #include "defs.h"
 #include "game.h"
-
-#ifndef HEADLESS
 #include "SDL2/SDL.h"
 
 #define SCREEN_WIDTH  1280
@@ -20,5 +18,6 @@ void freeSDL(App *app);
 void render(App *app, Game *game);
 void update(App *app);
 
-#endif // HEADLESS
+int gui_main(int argc, char **argv);
+
 #endif // GUI_GUARD

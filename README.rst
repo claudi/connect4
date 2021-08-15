@@ -47,5 +47,8 @@ Quick start
 .. code::
 
    $ make
-   $ ./play
+   $ ./play <command>
+
+where :code:`<command>` can be any of :code:`ascii`, :code:`gui` and
+:code:`headless`
 

@@ -1,6 +1,6 @@
 SRCDIR = src/
 OBJDIR = obj/
-EXECUTS = play play.debug play.profile play.headless
+EXECUTS = play play.debug play.profile
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
@@ -10,7 +10,6 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -Ofast
 LFLAGS = `sdl2-config --cflags --libs`
 CDEBUGFLAGS = -D DEBUG -ggdb -g3 -O0
-CHEADLESSFLAGS = -D HEADLESS -D START_DEPTH=6
 CPROFILEFLAGS = -pg
 
 play: $(OBJECTS)
@@ -34,12 +33,6 @@ debug: play.debug
 
 play.debug: $(SOURCES) $(DEPENDS)
 	$(CC) $(CFLAGS) $(CDEBUGFLAGS) -o $@ $(SOURCES) $(LFLAGS)
-
-.PHONY: headless
-headless: play.headless
-
-play.headless: $(SOURCES) $(DEPENDS)
-	$(CC) $(CFLAGS) $(CHEADLESSFLAGS) -o $@ $(SOURCES)
 
 .PHONY: profile
 profile: play.profile

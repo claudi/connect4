@@ -1,7 +1,5 @@
 #include "gui.h"
 
-#ifndef HEADLESS
-
 App *initSDL(void) {
     App *app = malloc(sizeof(App));
     *app = (App) { NULL, NULL };
@@ -90,4 +88,17 @@ void update(App *app) {
     SDL_RenderPresent(app->renderer);
 }
 
-#endif // HEADLESS
+int gui_main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv) {
+    App *app = initSDL();
+    if(app == NULL) {
+        return EXIT_FAILURE;
+    }
+    SDL_Log("SDL Successfully initialised\n");
+
+    render(app, NULL);
+    update(app);
+
+    freeSDL(app);
+    return EXIT_SUCCESS;
+}
+
