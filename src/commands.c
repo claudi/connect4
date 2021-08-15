@@ -8,7 +8,13 @@ command commands[] = {
 
 int handle_commands(int argc, char **argv) {
     const size_t ncommands = ARRAY_SIZE(commands);
+
     if(argc < 2) {
+        fprintf(stderr, "usage: %s <command>\n", argv[0]);
+        fprintf(stderr, "where <command> can be any of\n");
+        for(size_t iter = 0; iter < ncommands; iter++) {
+            fprintf(stderr, "    %s\n", commands[iter].name);
+        }
         return EXIT_FAILURE;
     }
 
