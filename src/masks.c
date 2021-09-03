@@ -1,6 +1,6 @@
 #include "masks.h"
 
-SMask masks1[] = {
+const SMask masks1[] = {
 	// H1000
 	{ .main = (Mask) 0x0000000000000001, .anti = (Mask) 0x000000000000000E },
 	{ .main = (Mask) 0x0000000000000002, .anti = (Mask) 0x000000000000001C },
@@ -1616,14 +1616,14 @@ SMask masks4[] = {
 	{ .main = (Mask) 0x8080808000000000, .anti = (Mask) 0x0000000000000000 },
 };
 
-SMask *masks[] = {
+const SMask *masks[] = {
 	masks1,
 	masks2,
 	masks3,
 	masks4,
 };
 
-unsigned masksCnt[] = {
+const unsigned masksCnt[] = {
     6400,
     9280,
     6400,
@@ -2289,12 +2289,6 @@ void initMasks(void) {
         printf("\t%u,\n", masksCount[match]);
     }
     printf("};\n");
-}
-
-void __attribute__((destructor)) freeMasks(void) {
-    for(short iter = 0; iter < nmatches; iter++) {
-        free(masks[iter]);
-    }
 }
 
 void printMask(const Mask mask) {
