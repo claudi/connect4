@@ -1624,10 +1624,10 @@ const SMask *masks[] = {
 };
 
 const unsigned masksCnt[] = {
-    6400,
-    9280,
-    6400,
-    2080,
+    400,
+    580,
+    400,
+    130,
 };
 
 void printSMask(const SMask mask) {
