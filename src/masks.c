@@ -1623,7 +1623,7 @@ const SMask *masks[] = {
 	masks4,
 };
 
-const unsigned masksCnt[] = {
+const unsigned nmasks[] = {
     400,
     580,
     400,
@@ -2231,7 +2231,7 @@ void initMasks(void) {
     printf("};\n");
 
     printf("\n");
-    printf("unsigned masksCnt[] = {\n");
+    printf("unsigned nmasks[] = {\n");
     for(Matches match = 0; match < nmatches; match++) {
         printf("\t%u,\n", masksCount[match]);
     }
@@ -2250,7 +2250,7 @@ void printMask(const Mask mask) {
 
 void printMasks() {
     for(Matches iter = 0; iter < nmatches; iter++) {
-        for(unsigned length = 0; length < masksCnt[iter]; length++) {
+        for(unsigned length = 0; length < nmasks[iter]; length++) {
             printMask(masks[iter][length].main);
         }
     }
@@ -2265,7 +2265,7 @@ unsigned matches(const Board *board, const unsigned length) {
     ASSERT(length < nmatches);
 
     unsigned count = 0;
-    for(unsigned mask = 0; mask < masksCnt[length]; mask++) {
+    for(unsigned mask = 0; mask < nmasks[length]; mask++) {
         count += matchMask(board, masks[length][mask]);
     }
     return count;
