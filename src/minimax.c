@@ -16,7 +16,10 @@ void machineMove(Game *game) {
     ASSERT(depth > 0);
     ASSERT(root->nchildren > 0);
 
-    Prune start_prune = { LONG_MIN, LONG_MAX };
+    const Prune start_prune = {
+        .alpha = LONG_MIN,
+        .beta = LONG_MAX
+    };
 
     for(short iter = 0; iter < depth - 1; iter++) {
         alphaBeta(root, start_prune, iter, side, FALSE);
