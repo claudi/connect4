@@ -1647,7 +1647,6 @@ void initMasks(void) {
 
     combinations = (nmasks1 - 1)/3;
     masksCount[match1] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
-    unsigned count = 0;
     // H1000
     printf("\n\t// H1000\n");
     for(unsigned row = 0; row < N; row++) {
@@ -1657,7 +1656,6 @@ void initMasks(void) {
             mask.anti = shift(0,1) | shift(0,2) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H0100
@@ -1669,7 +1667,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(0,2) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H0010
@@ -1681,7 +1678,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(0,1) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H0001
@@ -1693,7 +1689,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(0,1) | shift(0,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -1706,7 +1701,6 @@ void initMasks(void) {
             mask.anti = shift(1,1) | shift(2,2) | shift(3,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R0100
@@ -1718,7 +1712,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(2,2) | shift(3,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R0010
@@ -1730,7 +1723,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(1,1) | shift(3,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R0001
@@ -1742,7 +1734,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(1,1) | shift(2,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -1755,7 +1746,6 @@ void initMasks(void) {
             mask.anti = shift(1,2) | shift(2,1) | shift(3,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L0100
@@ -1767,7 +1757,6 @@ void initMasks(void) {
             mask.anti = shift(0,3) | shift(2,1) | shift(3,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L0010
@@ -1779,7 +1768,6 @@ void initMasks(void) {
             mask.anti = shift(0,3) | shift(1,2) | shift(3,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L0001
@@ -1791,7 +1779,6 @@ void initMasks(void) {
             mask.anti = shift(0,3) | shift(1,2) | shift(2,1);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -1804,7 +1791,6 @@ void initMasks(void) {
             mask.anti = shift(1,0) | shift(2,0) | shift(3,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -1815,7 +1801,6 @@ void initMasks(void) {
 
     combinations = (nmasks2 - 1)/3;
     masksCount[match2] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
-    count = 0;
     // H1100
     printf("\n\t// H1100\n");
     for(unsigned row = 0; row < N; row++) {
@@ -1825,7 +1810,6 @@ void initMasks(void) {
             mask.anti = shift(0,2) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H1010
@@ -1837,7 +1821,6 @@ void initMasks(void) {
             mask.anti = shift(0,1) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H0110
@@ -1849,7 +1832,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H1001
@@ -1861,7 +1843,6 @@ void initMasks(void) {
             mask.anti = shift(0,1) | shift(0,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H0101
@@ -1873,7 +1854,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(0,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H0011
@@ -1885,7 +1865,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(0,1);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -1898,7 +1877,6 @@ void initMasks(void) {
             mask.anti = shift(2,2) | shift(3,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R1010
@@ -1910,7 +1888,6 @@ void initMasks(void) {
             mask.anti = shift(1,1) | shift(3,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R0110
@@ -1922,7 +1899,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(3,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R1001
@@ -1934,7 +1910,6 @@ void initMasks(void) {
             mask.anti = shift(1,1) | shift(2,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R0101
@@ -1946,7 +1921,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(2,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R0011
@@ -1958,7 +1932,6 @@ void initMasks(void) {
             mask.anti = shift(0,0) | shift(1,1);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -1971,7 +1944,6 @@ void initMasks(void) {
             mask.anti = shift(1,2) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L1010
@@ -1983,7 +1955,6 @@ void initMasks(void) {
             mask.anti = shift(2,1) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L0110
@@ -1995,7 +1966,6 @@ void initMasks(void) {
             mask.anti = shift(3,0) | shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L1001
@@ -2007,7 +1977,6 @@ void initMasks(void) {
             mask.anti = shift(2,1) | shift(1,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L0101
@@ -2019,7 +1988,6 @@ void initMasks(void) {
             mask.anti = shift(3,0) | shift(1,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L0011
@@ -2031,7 +1999,6 @@ void initMasks(void) {
             mask.anti = shift(3,0) | shift(2,1);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2044,7 +2011,6 @@ void initMasks(void) {
             mask.anti = shift(2,0) | shift(3,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2055,7 +2021,6 @@ void initMasks(void) {
 
     combinations = (nmasks3 - 1)/3;
     masksCount[match3] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
-    count = 0;
     // H1110
     printf("\n\t// H1110\n");
     for(unsigned row = 0; row < N; row++) {
@@ -2065,7 +2030,6 @@ void initMasks(void) {
             mask.anti = shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H1101
@@ -2077,7 +2041,6 @@ void initMasks(void) {
             mask.anti = shift(0,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H1011
@@ -2089,7 +2052,6 @@ void initMasks(void) {
             mask.anti = shift(0,1);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // H0111
@@ -2101,7 +2063,6 @@ void initMasks(void) {
             mask.anti = shift(0,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2114,7 +2075,6 @@ void initMasks(void) {
             mask.anti = shift(3,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R1101
@@ -2126,7 +2086,6 @@ void initMasks(void) {
             mask.anti = shift(2,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R1011
@@ -2138,7 +2097,6 @@ void initMasks(void) {
             mask.anti = shift(1,1);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // R0111
@@ -2150,7 +2108,6 @@ void initMasks(void) {
             mask.anti = shift(0,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2163,7 +2120,6 @@ void initMasks(void) {
             mask.anti = shift(0,3);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L1101
@@ -2175,7 +2131,6 @@ void initMasks(void) {
             mask.anti = shift(1,2);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L1011
@@ -2187,7 +2142,6 @@ void initMasks(void) {
             mask.anti = shift(2,1);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
     // L0111
@@ -2199,7 +2153,6 @@ void initMasks(void) {
             mask.anti = shift(3,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2212,7 +2165,6 @@ void initMasks(void) {
             mask.anti = shift(3,0);
             mask.anti <<= POS_TO_SHIFT(row, col);
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2224,7 +2176,6 @@ void initMasks(void) {
 
     combinations = (nmasks4 - 1)/3;
     masksCount[match4] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
-    count = 0;
     // H1111
     printf("\n\t// H1111\n");
     for(unsigned row = 0; row < N; row++) {
@@ -2233,7 +2184,6 @@ void initMasks(void) {
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0;
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2245,7 +2195,6 @@ void initMasks(void) {
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0;
             printSMask(mask);
-            count++;
 
         }
     }
@@ -2258,7 +2207,6 @@ void initMasks(void) {
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0;
             printSMask(mask);
-            count++;
         }
     }
 
@@ -2270,7 +2218,6 @@ void initMasks(void) {
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0;
             printSMask(mask);
-            count++;
         }
     }
 
