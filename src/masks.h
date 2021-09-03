@@ -29,14 +29,7 @@ typedef enum { H1111, R1111, L1111, V1111, nmasks4 } Masks4;
 extern const SMask *masks[];
 extern const size_t nmasks[];
 
-void initMasks(void);
-void freeMasks(void);
-void printMask(const Mask mask);
-void printMasks();
-
-Bool matchMask(const Board *board, const SMask mask);
 unsigned matches(const Board *board, const unsigned length);
-
 Mask shift(const short row, const short col);
 
 #endif // MASKS_GUARD
