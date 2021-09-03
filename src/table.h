@@ -15,8 +15,6 @@ typedef struct {
     Entry *entry;
 } Table;
 
-extern Table *tables;
-
 void addEntry(Table *table, const Entry entry);
 const Entry *findEntry(const Table *table, const Key key);
 void resetTable(Table *table);

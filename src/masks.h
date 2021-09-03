@@ -26,9 +26,6 @@ typedef enum { H1110, H1101, H1011, H0111,
                V1110, nmasks3 } Masks3;
 typedef enum { H1111, R1111, L1111, V1111, nmasks4 } Masks4;
 
-extern const SMask *masks[];
-extern const size_t nmasks[];
-
 unsigned matches(const Board *board, const unsigned length);
 Mask shift(const short row, const short col);
 

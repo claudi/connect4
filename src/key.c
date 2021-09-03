@@ -1,5 +1,7 @@
 #include "key.h"
 
+static Key *verticalKeys;
+
 static void printKey(const Key key);
 static Key mirrorKey(const Key key);
 static void initKeys(void);
@@ -36,7 +38,7 @@ static Key mirrorKey(const Key key) {
     return result;
 }
 
-Key *verticalKeys;
+static Key *verticalKeys;
 static void __attribute__((constructor)) initKeys(void) {
     verticalKeys = (Key *) malloc(N * sizeof(Key));
     verticalKeys[0] = (Key) 0;

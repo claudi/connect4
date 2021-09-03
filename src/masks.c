@@ -1,12 +1,15 @@
 #include "masks.h"
 
+static const SMask *masks[nmatches];
+static const size_t nmasks[nmatches];
+
 static void initMasks(void);
 static void printMask(const Mask mask);
 static void printMasks();
 
 static Bool matchMask(const Board *board, const SMask mask);
 
-const SMask masks1[] = {
+static const SMask masks1[] = {
 	// H1000
 	{ .main = (Mask) 0x0000000000000001, .anti = (Mask) 0x000000000000000E },
 	{ .main = (Mask) 0x0000000000000002, .anti = (Mask) 0x000000000000001C },
@@ -434,7 +437,7 @@ const SMask masks1[] = {
 	{ .main = (Mask) 0x0000008000000000, .anti = (Mask) 0x8080800000000000 },
 };
 
-const SMask masks2[] = {
+static const SMask masks2[] = {
 	// H1100
 	{ .main = (Mask) 0x0000000000000003, .anti = (Mask) 0x000000000000000C },
 	{ .main = (Mask) 0x0000000000000006, .anti = (Mask) 0x0000000000000018 },
@@ -1054,7 +1057,7 @@ const SMask masks2[] = {
 	{ .main = (Mask) 0x0000808000000000, .anti = (Mask) 0x8080000000000000 },
 };
 
-const SMask masks3[] = {
+static const SMask masks3[] = {
 	// H1110
 	{ .main = (Mask) 0x0000000000000007, .anti = (Mask) 0x0000000000000008 },
 	{ .main = (Mask) 0x000000000000000E, .anti = (Mask) 0x0000000000000010 },
@@ -1482,7 +1485,7 @@ const SMask masks3[] = {
 	{ .main = (Mask) 0x0080808000000000, .anti = (Mask) 0x8000000000000000 },
 };
 
-const SMask masks4[] = {
+static const SMask masks4[] = {
 	// H1111
 	{ .main = (Mask) 0x000000000000000F, .anti = (Mask) 0x0000000000000000 },
 	{ .main = (Mask) 0x000000000000001E, .anti = (Mask) 0x0000000000000000 },
@@ -1622,14 +1625,14 @@ const SMask masks4[] = {
 	{ .main = (Mask) 0x8080808000000000, .anti = (Mask) 0x0000000000000000 },
 };
 
-const SMask *masks[] = {
+static const SMask *masks[] = {
 	masks1,
 	masks2,
 	masks3,
 	masks4,
 };
 
-const size_t nmasks[] = {
+static const size_t nmasks[] = {
     400,
     580,
     400,
