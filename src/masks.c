@@ -428,7 +428,7 @@ const SMask masks1[] = {
 	{ .main = (Mask) 0x0000008000000000, .anti = (Mask) 0x8080800000000000 },
 };
 
-SMask masks2[] = {
+const SMask masks2[] = {
 	// H1100
 	{ .main = (Mask) 0x0000000000000003, .anti = (Mask) 0x000000000000000C },
 	{ .main = (Mask) 0x0000000000000006, .anti = (Mask) 0x0000000000000018 },
@@ -1048,7 +1048,7 @@ SMask masks2[] = {
 	{ .main = (Mask) 0x0000808000000000, .anti = (Mask) 0x8080000000000000 },
 };
 
-SMask masks3[] = {
+const SMask masks3[] = {
 	// H1110
 	{ .main = (Mask) 0x0000000000000007, .anti = (Mask) 0x0000000000000008 },
 	{ .main = (Mask) 0x000000000000000E, .anti = (Mask) 0x0000000000000010 },
@@ -1476,7 +1476,7 @@ SMask masks3[] = {
 	{ .main = (Mask) 0x0080808000000000, .anti = (Mask) 0x8000000000000000 },
 };
 
-SMask masks4[] = {
+const SMask masks4[] = {
 	// H1111
 	{ .main = (Mask) 0x000000000000000F, .anti = (Mask) 0x0000000000000000 },
 	{ .main = (Mask) 0x000000000000001E, .anti = (Mask) 0x0000000000000000 },
