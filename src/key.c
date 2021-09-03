@@ -1,10 +1,15 @@
 #include "key.h"
 
-Key keyShift(const short row, const short col) {
+static void printKey(const Key key);
+static Key mirrorKey(const Key key);
+static void initKeys(void);
+static void freeKeys(void);
+
+static Key keyShift(const short row, const short col) {
     return (((Key) 1) << POS_TO_SHIFT(row, col));
 }
 
-void printKey(const Key key) {
+static void printKey(const Key key) {
     for(short iter_i = (2*N - 1); iter_i >= 0; iter_i--) {
         for(short iter_j = 0; iter_j < N; iter_j++) {
             printf("%c", (key & keyShift(iter_i, iter_j)) ? '1' : '0');
@@ -23,7 +28,7 @@ Key boardToKey(const Board *board) {
     return key;
 }
 
-Key mirrorKey(const Key key) {
+static Key mirrorKey(const Key key) {
     Key result = (Key) 0;
     for(short iter = 0; iter < N; iter++) {
         result |= (key & verticalKeys[iter]) << (N-1 - iter) >> iter;
@@ -32,7 +37,7 @@ Key mirrorKey(const Key key) {
 }
 
 Key *verticalKeys;
-void __attribute__((constructor)) initKeys(void) {
+static void __attribute__((constructor)) initKeys(void) {
     verticalKeys = (Key *) malloc(N * sizeof(Key));
     verticalKeys[0] = (Key) 0;
     for(short iter = 0; iter < 2*N; iter++) {
@@ -44,7 +49,7 @@ void __attribute__((constructor)) initKeys(void) {
     }
 }
 
-void __attribute__((destructor)) freeKeys(void) {
+static void __attribute__((destructor)) freeKeys(void) {
     free(verticalKeys);
 }
 
