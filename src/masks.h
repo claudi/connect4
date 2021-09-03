@@ -1,9 +1,10 @@
 #ifndef MASKS_GUARD
 #define MASKS_GUARD
 #include "defs.h"
-#include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#define POS_TO_SHIFT(row, col) ((N * (row)) + (col))
 
 typedef struct {
     Mask main;
@@ -25,17 +26,8 @@ typedef enum { H1110, H1101, H1011, H0111,
                V1110, nmasks3 } Masks3;
 typedef enum { H1111, R1111, L1111, V1111, nmasks4 } Masks4;
 
-extern const SMask *masks[];
-extern const size_t nmasks[];
-
-void initMasks(void);
-void freeMasks(void);
-void printMask(const Mask mask);
-void printMasks();
-
-Bool matchMask(const Board *board, const SMask mask);
 unsigned matches(const Board *board, const unsigned length);
-unsigned wonBoard(const Board *board);
+Mask shift(const short row, const short col);
 
 #endif // MASKS_GUARD
 

@@ -17,11 +17,6 @@
 #define COLOR_OFF "\033[0;0m" // default
 #endif // __linux__
 
-void printInterface(const Game *game);
-void humanInput(Game *game);
-Game *initGame(void);
-void keepPlaying(Game *game);
-
 int ascii_main(int argc, char **argv);
 
 #endif // BLING_GUARD

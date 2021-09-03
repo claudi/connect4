@@ -1,6 +1,12 @@
 #include "gui.h"
 
-App *initSDL(void) {
+static App *initSDL(void);
+static void freeSDL(App *app);
+
+static void render(App *app, Game *game);
+static void update(App *app);
+
+static App *initSDL(void) {
     App *app = malloc(sizeof(App));
     *app = (App) { NULL, NULL };
 
@@ -56,14 +62,14 @@ App *initSDL(void) {
     return app;
 }
 
-void freeSDL(App *app) {
+static void freeSDL(App *app) {
     SDL_Log("Shutting down SDL\n");
     SDL_DestroyWindow(app->window);
     SDL_DestroyRenderer(app->renderer);
 	SDL_Quit();
 }
 
-void render(App *app, Game __attribute__((unused)) *game) {
+static void render(App *app, Game __attribute__((unused)) *game) {
     SDL_SetRenderDrawColor(app->renderer, 0, 100, 100, 100);
     SDL_RenderClear(app->renderer);
 
@@ -84,7 +90,7 @@ void render(App *app, Game __attribute__((unused)) *game) {
     }
 }
 
-void update(App *app) {
+static void update(App *app) {
     SDL_RenderPresent(app->renderer);
 }
 

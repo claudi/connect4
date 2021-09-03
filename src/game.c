@@ -1,5 +1,8 @@
 #include "game.h"
 
+static Stats emptyStats(void);
+static Game newGame(void);
+
 Game *initGame(void) {
     Game *game = (Game *) malloc(sizeof(Game));
     *game = newGame();
@@ -11,7 +14,7 @@ void resetGame(Game *game) {
     *game = newGame();
 }
 
-Stats emptyStats(void) {
+static Stats emptyStats(void) {
     Stats stats = {
         .exploredPositions = 0,
         .elapsedTime = 0.0f,
@@ -21,7 +24,7 @@ Stats emptyStats(void) {
     return stats;
 }
 
-Game newGame(void) {
+static Game newGame(void) {
     Game game = {
         .node = START_BOARD,
         .turn = START_TURN,

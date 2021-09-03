@@ -1,13 +1,13 @@
 #include "bling.h"
 
-void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]);
-char *difficulty(const short depth);
-char *trimBigNumber(const unsigned num);
-char *posPerSec(unsigned positions, double time);
-double secondsElapsed(double time);
-void humanInput(Game *game);
+static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]);
+static char *difficulty(const short depth);
+static char *trimBigNumber(const unsigned num);
+static char *posPerSec(unsigned positions, double time);
+static double secondsElapsed(double time);
+static void humanInput(Game *game);
 
-void printInterface(const Game *game) {
+static void printInterface(const Game *game) {
     double elapsedTime = game->stats.elapsedTime;
     unsigned exploredPositions = game->stats.exploredPositions;
 
@@ -113,7 +113,7 @@ void printInterface(const Game *game) {
     free(heuristicValue);
 }
 
-void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
+static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
     const char *padding = "     ";
     for(short iter = 0; iter < 80; iter++) {
         printf("\n");
@@ -149,7 +149,7 @@ void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_
     printf("%s   '------------------------`\n", padding);
 }
 
-char *difficulty(const short depth) {
+static char *difficulty(const short depth) {
     if(depth < 3) {
         return "EASY";
     } else if(depth < 5) {
@@ -161,7 +161,7 @@ char *difficulty(const short depth) {
     }
 }
 
-char *trimBigNumber(const unsigned num) {
+static char *trimBigNumber(const unsigned num) {
     char *buff = (char *) malloc(25 * sizeof(char));
     if(num < 1000) {
         snprintf(buff, 25, "%u", num);
@@ -173,16 +173,16 @@ char *trimBigNumber(const unsigned num) {
     return buff;
 }
 
-char *posPerSec(unsigned positions, double time) {
+static char *posPerSec(unsigned positions, double time) {
     double seconds = time / ((double) CLOCKS_PER_SEC);
     return trimBigNumber((unsigned) (((double) positions) / seconds));
 }
 
-double secondsElapsed(double time) {
+static double secondsElapsed(double time) {
     return time / ((double) CLOCKS_PER_SEC);
 }
 
-void humanInput(Game *game) {
+static void humanInput(Game *game) {
     printInterface(game);
     printf(" > ");
     char *buff = (char *) malloc(255 * sizeof(char));
@@ -237,7 +237,7 @@ void humanInput(Game *game) {
     free(buff);
 }
 
-void keepPlaying(Game *game) {
+static void keepPlaying(Game *game) {
     printf(" Want to keep on playing? (y/n)\n");
     printf(" > ");
 

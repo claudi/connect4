@@ -12,12 +12,6 @@ typedef struct {
     SDL_Renderer *renderer;
 } App;
 
-App *initSDL(void);
-void freeSDL(App *app);
-
-void render(App *app, Game *game);
-void update(App *app);
-
 int gui_main(int argc, char **argv);
 
 #endif // GUI_GUARD

@@ -1,5 +1,6 @@
 #ifndef HEURISTIC_GUARD
 #define HEURISTIC_GUARD
+#include "board.h"
 #include "defs.h"
 #include "masks.h"
 #include <stdlib.h>

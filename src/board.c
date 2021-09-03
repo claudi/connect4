@@ -1,8 +1,7 @@
 #include "board.h"
 
-Mask shift(const short row, const short col) {
-    return (((Mask) 1) << POS_TO_SHIFT(row, col));
-}
+static unsigned wonBoard(const Board *board);
+static void printBoard(const Node *node);
 
 void copyNode(Node *dest, const Node *orig) {
     copyBoard(dest->board, orig->board);
@@ -44,11 +43,15 @@ short makeMove(Node *node, const short col) {
     return 0;
 }
 
+static unsigned wonBoard(const Board *board) {
+    return matches(board, match4);
+}
+
 char showTurn(const Side turn) {
     return (turn == X) ? 'X' : 'O';
 }
 
-void printBoard(const Node *node) {
+static void printBoard(const Node *node) {
     short row, col;
     char lastMove = showTurn(node->turn);
     char nextMove = showTurn(NEXT(node->turn));
