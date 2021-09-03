@@ -653,6 +653,21 @@ void __attribute__((constructor)) initMasks(void) {
     }
 
     printf("};\n");
+
+    printf("\n");
+    printf("SMask *masks[] = {\n");
+    for(Matches match = 0; match < nmatches; match++) {
+        printf("\tmasks%d,\n", match);
+    }
+    printf("};\n");
+
+    printf("\n");
+    printf("unsigned masksCnt[] = {\n");
+    for(Matches match = 0; match < nmatches; match++) {
+        printf("\t%u,\n", masksCnt[match]);
+    }
+    printf("};\n");
+
 }
 
 void __attribute__((destructor)) freeMasks(void) {
