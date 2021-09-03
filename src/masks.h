@@ -1,9 +1,10 @@
 #ifndef MASKS_GUARD
 #define MASKS_GUARD
 #include "defs.h"
-#include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#define POS_TO_SHIFT(row, col) ((N * (row)) + (col))
 
 typedef struct {
     Mask main;
@@ -36,6 +37,8 @@ void printMasks();
 Bool matchMask(const Board *board, const SMask mask);
 unsigned matches(const Board *board, const unsigned length);
 unsigned wonBoard(const Board *board);
+
+Mask shift(const short row, const short col);
 
 #endif // MASKS_GUARD
 

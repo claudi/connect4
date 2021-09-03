@@ -2271,7 +2271,7 @@ unsigned matches(const Board *board, const unsigned length) {
     return count;
 }
 
-unsigned wonBoard(const Board *board) {
-    return matches(board, match4);
+Mask shift(const short row, const short col) {
+    return (((Mask) 1) << POS_TO_SHIFT(row, col));
 }
 
