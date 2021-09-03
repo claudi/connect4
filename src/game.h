@@ -32,6 +32,7 @@ typedef struct {
 } Game;
 
 Game *initGame(void);
+void resetGame(Game *game);
 
 #endif // GAME_GUARD
 
