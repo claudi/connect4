@@ -1,6 +1,11 @@
 #include "table.h"
 
-unsigned getIndex(const Table *table, const Key key) {
+static void printEntry(const Entry entry);
+static void printTable(const Table *table);
+static void initTables(void);
+static void freeTables(void);
+
+static unsigned getIndex(const Table *table, const Key key) {
     return key % table->size;
 }
 
@@ -14,11 +19,11 @@ const Entry *findEntry(const Table *table, const Key key) {
     }
 }
 
-void printEntry(const Entry entry) {
+static void printEntry(const Entry entry) {
     printf("%llx\t%ld\n", (unsigned long long) entry.key, entry.heuristic);
 }
 
-void printTable(const Table *table) {
+static void printTable(const Table *table) {
     for(unsigned long iter = 0; iter < table->size; iter++) {
         printf("%lu\t", iter);
         printEntry(table->entry[iter]);
@@ -39,14 +44,14 @@ void resetTable(Table *table) {
 }
 
 Table *tables;
-void __attribute__((constructor)) initTables(void) {
+static void __attribute__((constructor)) initTables(void) {
     tables = (Table *) malloc(sizeof(Table));
     tables->size = TABLE_SIZE;
     tables->entry = (Entry *) malloc(TABLE_SIZE * sizeof(Entry));
     resetTable(tables);
 }
 
-void __attribute__((destructor)) freeTables(void) {
+static void __attribute__((destructor)) freeTables(void) {
     free(tables->entry);
     free(tables);
 }
