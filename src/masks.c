@@ -2182,7 +2182,7 @@ void initMasks(void) {
         for(unsigned col = 0; col < (N - 3); col++) {
             mask.main = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
-            mask.anti = (Mask) 0;
+            mask.anti = (Mask) 0x0000000000000000;
             printSMask(mask);
         }
     }
@@ -2193,7 +2193,7 @@ void initMasks(void) {
         for(unsigned col = 0; col < (N - 3); col++) {
             mask.main = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
-            mask.anti = (Mask) 0;
+            mask.anti = (Mask) 0x0000000000000000;
             printSMask(mask);
 
         }
@@ -2205,7 +2205,7 @@ void initMasks(void) {
         for(unsigned col = 0; col < (N - 3); col++) {
             mask.main = shift(3,0) | shift(2,1) | shift(1,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
-            mask.anti = (Mask) 0;
+            mask.anti = (Mask) 0x0000000000000000;
             printSMask(mask);
         }
     }
@@ -2216,7 +2216,7 @@ void initMasks(void) {
         for(unsigned col = 0; col < N; col++) {
             mask.main = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
             mask.main <<= POS_TO_SHIFT(row, col);
-            mask.anti = (Mask) 0;
+            mask.anti = (Mask) 0x0000000000000000;
             printSMask(mask);
         }
     }
@@ -2258,7 +2258,7 @@ void printMasks() {
 
 Bool matchMask(const Board *board, const SMask mask) {
     return ((board[TURN] & mask.main) == (mask.main))
-        && ((board[BOTH] & mask.anti) == ((Mask) 0));
+        && ((board[BOTH] & mask.anti) == ((Mask) 0x0000000000000000));
 }
 
 unsigned matches(const Board *board, const unsigned length) {
