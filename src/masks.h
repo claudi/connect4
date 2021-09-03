@@ -26,7 +26,7 @@ typedef enum {H1110, H1101, H1011, H0111,
 typedef enum {H1111, R1111, L1111, V1111, nmasks4} Masks4;
 
 extern const SMask *masks[];
-extern const unsigned nmasks[];
+extern const size_t nmasks[];
 
 void initMasks(void);
 void freeMasks(void);

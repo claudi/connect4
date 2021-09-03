@@ -1623,7 +1623,7 @@ const SMask *masks[] = {
 	masks4,
 };
 
-const unsigned nmasks[] = {
+const size_t nmasks[] = {
     400,
     580,
     400,
@@ -1636,8 +1636,8 @@ void printSMask(const SMask mask) {
 
 void initMasks(void) {
     SMask mask;
-    unsigned masksCount[nmatches];
-    unsigned Hcnt, Rcnt, Lcnt, Vcnt, combinations;
+    size_t masksCount[nmatches];
+    size_t Hcnt, Rcnt, Lcnt, Vcnt, combinations;
     Hcnt = N*(N - 3);
     Rcnt = (N - 3)*(N - 3);
     Lcnt = (N - 3)*(N - 3);
@@ -2233,7 +2233,7 @@ void initMasks(void) {
     printf("\n");
     printf("unsigned nmasks[] = {\n");
     for(Matches match = 0; match < nmatches; match++) {
-        printf("\t%u,\n", masksCount[match]);
+        printf("\t%zu,\n", masksCount[match]);
     }
     printf("};\n");
 }
