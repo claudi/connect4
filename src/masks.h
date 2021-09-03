@@ -1,8 +1,6 @@
 #ifndef MASKS_GUARD
 #define MASKS_GUARD
 #include "defs.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 #define POS_TO_SHIFT(row, col) ((N * (row)) + (col))
 

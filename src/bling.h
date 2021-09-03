@@ -4,7 +4,6 @@
 #include "board.h"
 #include "game.h"
 #include "minimax.h"
-#include <stdio.h>
 
 #define GB_SCREEN_W 18
 #define GB_SCREEN_H 10

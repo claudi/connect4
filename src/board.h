@@ -2,8 +2,6 @@
 #define BOARD_GUARD
 #include "defs.h"
 #include "masks.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 #define FULL_COLUMN(b,c) ((b)[BOTH] & shift(N - 1, (c)))
 
