@@ -1,6 +1,7 @@
 #include "tree.h"
 
-void orderChildren(Node *parent);
+static Node *createChild(const Node *parent, const short child);
+static void orderChildren(Node *parent);
 
 Node *initNode(void) {
     Node *node = (Node *) malloc(sizeof(Node));
@@ -15,7 +16,7 @@ Node *initNode(void) {
     return node;
 }
 
-Node *createChild(const Node *parent, const short col) {
+static Node *createChild(const Node *parent, const short col) {
     ASSERT(col < N);
     ASSERT(col >= 0);
 
@@ -44,7 +45,7 @@ void createChildren(Node *parent) {
     orderChildren(parent);
 }
 
-void orderChildren(Node *parent) {
+static void orderChildren(Node *parent) {
     Side side = NEXT(parent->turn);
     long *values = (long *) malloc(parent->nchildren * sizeof(long));
     for(short iter = 0; iter < parent->nchildren; iter++) {
@@ -68,7 +69,7 @@ void orderChildren(Node *parent) {
     free(values);
 }
 
-void createTree(Node *root, const short depth) {
+static void createTree(Node *root, const short depth) {
     ASSERT(depth >= 0);
 
     if(depth == 0) {
@@ -82,7 +83,7 @@ void createTree(Node *root, const short depth) {
     }
 }
 
-void printTree(const Node *root) {
+static void printTree(const Node *root) {
     printNode(root);
     for(short iter = 0; iter < root->nchildren; iter++) {
         printTree(root->child[iter]);
