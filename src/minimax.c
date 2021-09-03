@@ -1,7 +1,8 @@
 #include "minimax.h"
 
 static unsigned exploredPositions;
-static long alphaBeta(Node *root, Prune prune, const short depth, const Side side, const Bool maximizing);
+static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status);
+static const MinimaxStatus nextStatus(const MinimaxStatus status);
 
 static int color(const Side side) {
     return (side == X) ? 1 : -1;
@@ -22,18 +23,28 @@ void machineMove(Game *game) {
     };
 
     for(short iter = 0; iter < depth - 1; iter++) {
-        alphaBeta(root, start_prune, iter, side, FALSE);
+        const MinimaxStatus start_status = {
+            .depth = iter,
+            .side = side,
+            .maximizing = FALSE
+        };
+        alphaBeta(root, start_prune, start_status);
     }
 
     createChildren(root);
     Node *answer = (Node *) malloc(sizeof(Node));
 
     long value = LONG_MIN;
+    const MinimaxStatus start_status = {
+        .depth = depth - 1,
+        .side = side,
+        .maximizing = FALSE,
+    };
 
     exploredPositions = 0;
     clock_t start = clock();
     for(short iter = 0; iter < root->nchildren; iter++) {
-        long heuristic = alphaBeta(root->child[iter], start_prune, depth - 1, side, FALSE);
+        long heuristic = alphaBeta(root->child[iter], start_prune, start_status);
         if(heuristic > value) {
             value = heuristic;
             copyNode(answer, root->child[iter]);
@@ -52,24 +63,24 @@ void machineMove(Game *game) {
     free(answer);
 }
 
-static long alphaBeta(Node *root, Prune prune, const short depth, const Side side, const Bool maximizing) {
+static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
     exploredPositions++;
 
-    if(depth == 0 || root->nchildren == 0) {
-        long h = getHeuristic(root, side) - color(side) * color(root->turn) * ( N*N - depth );
+    if(status.depth == 0 || root->nchildren == 0) {
+        long h = getHeuristic(root, status.side) - color(status.side) * color(root->turn) * ( N*N - status.depth );
         return h;
     }
 
     long value;
     createChildren(root);
-    if(maximizing) {
+    if(status.maximizing) {
         value = LONG_MIN;
         for(short iter = 0; iter < root->nchildren; iter++) {
             long heuristic;
             Key key = boardToKey(root->child[iter]->board);
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
-                heuristic = alphaBeta(root->child[iter], prune, depth - 1, side, FALSE);
+                heuristic = alphaBeta(root->child[iter], prune, nextStatus(status));
                 addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
             } else {
                 heuristic = entry->heuristic;
@@ -92,7 +103,7 @@ static long alphaBeta(Node *root, Prune prune, const short depth, const Side sid
             Key key = boardToKey(root->child[iter]->board);
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
-                heuristic = alphaBeta(root->child[iter], prune, depth - 1, side, TRUE);
+                heuristic = alphaBeta(root->child[iter], prune, nextStatus(status));
                 addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
             } else {
                 heuristic = entry->heuristic;
@@ -115,5 +126,14 @@ static long alphaBeta(Node *root, Prune prune, const short depth, const Side sid
     }
     free(root->child);
     return value;
+}
+
+static const MinimaxStatus nextStatus(const MinimaxStatus status) {
+    const MinimaxStatus next =  {
+        .depth = status.depth - 1,
+        .side = status.side,
+        .maximizing = NOT(status.maximizing),
+    };
+    return next;
 }
 

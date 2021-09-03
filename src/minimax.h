@@ -13,6 +13,12 @@ typedef struct {
     long beta;
 } Prune;
 
+typedef struct {
+    short depth;
+    const Side side;
+    Bool maximizing;
+} MinimaxStatus;
+
 void machineMove(Game *game);
 
 #endif // MINIMAX_GUARD
