@@ -7,7 +7,7 @@ DEPENDS	= $(wildcard $(SRCDIR)*.h)
 OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Werror -Ofast
+CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Ofast
 LFLAGS = `sdl2-config --cflags --libs`
 CDEBUGFLAGS = -D DEBUG -ggdb -g3 -O0
 CPROFILEFLAGS = -pg
