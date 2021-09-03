@@ -36,7 +36,6 @@ void printMasks();
 
 Bool matchMask(const Board *board, const SMask mask);
 unsigned matches(const Board *board, const unsigned length);
-unsigned wonBoard(const Board *board);
 
 Mask shift(const short row, const short col);
 
