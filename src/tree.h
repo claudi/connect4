@@ -3,8 +3,6 @@
 #include "defs.h"
 #include "board.h"
 #include "heuristic.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /*
  * Nodes called root or parent are assumed to

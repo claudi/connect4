@@ -1,5 +1,6 @@
 #ifndef DEFS_GUARD
 #define DEFS_GUARD
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h> // for uint64_t
 #include <limits.h> // for LONG_MIN and LONG_MAX
