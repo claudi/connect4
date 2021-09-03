@@ -8,6 +8,11 @@
 #include "tree.h"
 #include <time.h>
 
+typedef struct {
+    long alpha;
+    long beta;
+} Prune;
+
 void machineMove(Game *game);
 
 #endif // MINIMAX_GUARD

@@ -1,7 +1,7 @@
 #include "minimax.h"
 
 static unsigned exploredPositions;
-static long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing);
+static long alphaBeta(Node *root, Prune prune, const short depth, const Side side, const Bool maximizing);
 
 static int color(const Side side) {
     return (side == X) ? 1 : -1;
@@ -16,23 +16,21 @@ void machineMove(Game *game) {
     ASSERT(depth > 0);
     ASSERT(root->nchildren > 0);
 
-    resetTable(tables);
+    Prune start_prune = { LONG_MIN, LONG_MAX };
 
     for(short iter = 0; iter < depth - 1; iter++) {
-        alphaBeta(root, LONG_MIN, LONG_MAX, iter, side, FALSE);
+        alphaBeta(root, start_prune, iter, side, FALSE);
     }
 
     createChildren(root);
     Node *answer = (Node *) malloc(sizeof(Node));
 
     long value = LONG_MIN;
-    long alpha = LONG_MIN;
-    long beta = LONG_MAX;
 
     exploredPositions = 0;
     clock_t start = clock();
     for(short iter = 0; iter < root->nchildren; iter++) {
-        long heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+        long heuristic = alphaBeta(root->child[iter], start_prune, depth - 1, side, FALSE);
         if(heuristic > value) {
             value = heuristic;
             copyNode(answer, root->child[iter]);
@@ -51,7 +49,7 @@ void machineMove(Game *game) {
     free(answer);
 }
 
-static long alphaBeta(Node *root, long alpha, long beta, const short depth, const Side side, const Bool maximizing) {
+static long alphaBeta(Node *root, Prune prune, const short depth, const Side side, const Bool maximizing) {
     exploredPositions++;
 
     if(depth == 0 || root->nchildren == 0) {
@@ -68,7 +66,7 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
             Key key = boardToKey(root->child[iter]->board);
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
-                heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, FALSE);
+                heuristic = alphaBeta(root->child[iter], prune, depth - 1, side, FALSE);
                 addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
             } else {
                 heuristic = entry->heuristic;
@@ -77,10 +75,10 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
             if(heuristic > value) {
                 value = heuristic;
             }
-            if(value > alpha) {
-                alpha = value;
+            if(value > prune.alpha) {
+                prune.alpha = value;
             }
-            if(alpha >= beta) {
+            if(prune.alpha >= prune.beta) {
                 break;
             }
         }
@@ -91,7 +89,7 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
             Key key = boardToKey(root->child[iter]->board);
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
-                heuristic = alphaBeta(root->child[iter], alpha, beta, depth - 1, side, TRUE);
+                heuristic = alphaBeta(root->child[iter], prune, depth - 1, side, TRUE);
                 addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
             } else {
                 heuristic = entry->heuristic;
@@ -100,10 +98,10 @@ static long alphaBeta(Node *root, long alpha, long beta, const short depth, cons
             if(heuristic < value) {
                 value = heuristic;
             }
-            if(value < beta) {
-                beta = value;
+            if(value < prune.beta) {
+                prune.beta = value;
             }
-            if(beta <= alpha) {
+            if(prune.beta <= prune.alpha) {
                 break;
             }
         }
