@@ -10,9 +10,9 @@
 #define NEXT(turn) (((turn) == X) ? O : X)
 #define NOT(b) (((b) == TRUE) ? FALSE : TRUE)
 
-enum {TURN, BOTH, nboards};
-typedef enum {FALSE, TRUE} Bool;
-typedef enum {X, O, nsides} Side;
+enum { TURN, BOTH, nboards };
+typedef enum { FALSE, TRUE } Bool;
+typedef enum { X, O, nsides } Side;
 typedef uint64_t Board;
 typedef uint64_t Mask;
 
