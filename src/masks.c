@@ -1631,7 +1631,7 @@ const size_t nmasks[] = {
 };
 
 void printSMask(const SMask mask) {
-    printf("\t(SMask) { .main = (Mask) 0x%16.16zX, .anti = (Mask) 0x%16.16zX },\n", mask.main, mask.anti);
+    printf("\t{ .main = (Mask) 0x%16.16zX, .anti = (Mask) 0x%16.16zX },\n", mask.main, mask.anti);
 }
 
 void initMasks(void) {
