@@ -2,7 +2,7 @@
 
 static unsigned exploredPositions;
 static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status);
-static const MinimaxStatus nextStatus(const MinimaxStatus status);
+static MinimaxStatus nextStatus(const MinimaxStatus status);
 
 static int color(const Side side) {
     return (side == X) ? 1 : -1;
@@ -128,7 +128,7 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
     return value;
 }
 
-static const MinimaxStatus nextStatus(const MinimaxStatus status) {
+static MinimaxStatus nextStatus(const MinimaxStatus status) {
     const MinimaxStatus next =  {
         .depth = status.depth - 1,
         .side = status.side,
