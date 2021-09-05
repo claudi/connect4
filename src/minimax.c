@@ -81,7 +81,11 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
                 heuristic = alphaBeta(root->child[iter], prune, nextStatus(status));
-                addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
+                const Entry tmp = {
+                    .key = key,
+                    .heuristic = heuristic
+                };
+                addEntry(tables, tmp);
             } else {
                 heuristic = entry->heuristic;
             }
@@ -104,7 +108,11 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
             const Entry *entry = findEntry(tables, key);
             if(entry == NULL) {
                 heuristic = alphaBeta(root->child[iter], prune, nextStatus(status));
-                addEntry(tables, (Entry) { .key = key, .heuristic = heuristic });
+                const Entry tmp = {
+                    .key = key,
+                    .heuristic = heuristic
+                };
+                addEntry(tables, tmp);
             } else {
                 heuristic = entry->heuristic;
             }

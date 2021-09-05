@@ -62,11 +62,12 @@ static void printInterface(const Game *game) {
     char *exploredPositionsPrint = trimBigNumber(exploredPositions);
     char *posPerSecPrint = posPerSec(exploredPositions, elapsedTime);
     char *heuristicValue = trimBigNumber(game->stats.lastHeuristic);
+    char *difficultyPrint = difficulty(game->depth);
 
     char side[2][SIDE_H][SIDE_W];
     short pos = 0;
     snprintf(side[0][pos++], SIDE_W, "      Playing as %c      ", showTurn(game->playerSide));
-    snprintf(side[0][pos++], SIDE_W, "    Difficulty %s", difficulty(game->depth));
+    snprintf(side[0][pos++], SIDE_W, "    Difficulty %s", difficultyPrint);
     snprintf(side[0][pos++], SIDE_W, "                        ");
     snprintf(side[0][pos++], SIDE_W, " 1-8 Play on column     ");
     snprintf(side[0][pos++], SIDE_W, "   h Toggle help/stats  ");
@@ -77,7 +78,7 @@ static void printInterface(const Game *game) {
 
     pos = 0;
     snprintf(side[1][pos++], SIDE_W, "      Playing as %c      ", showTurn(game->playerSide));
-    snprintf(side[1][pos++], SIDE_W, "    Difficulty %s", difficulty(game->depth));
+    snprintf(side[1][pos++], SIDE_W, "    Difficulty %s", difficultyPrint);
     snprintf(side[1][pos++], SIDE_W, "                        ");
     snprintf(side[1][pos++], SIDE_W, " 1-8 Play on column     ");
     snprintf(side[1][pos++], SIDE_W, "   h Toggle help/stats  ");
@@ -111,6 +112,7 @@ static void printInterface(const Game *game) {
     free(posPerSecPrint);
     free(exploredPositionsPrint);
     free(heuristicValue);
+    free(difficultyPrint);
 }
 
 static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {

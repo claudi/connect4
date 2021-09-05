@@ -43,7 +43,7 @@ play.profile: $(SOURCES) $(DEPENDS)
 .PHONY: lint
 lint: lint.out
 lint.out: $(SOURCES) $(DEPENDS)
-	splint -booltype Bool -boolfalse FALSE -booltrue TRUE $^ > $@
+	splint -booltype Bool -boolfalse FALSE -booltrue TRUE -D__uint128_t=int -D__linux__ $^ > $@
 
 .PHONY: check
 check: check.out
