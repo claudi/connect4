@@ -16,5 +16,7 @@ typedef struct {
     Layer *layers;
 } Network;
 
+void testNetwork(void);
+
 #endif // NEURALNETWORK_GUARD
 
