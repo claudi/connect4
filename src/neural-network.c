@@ -106,16 +106,18 @@ void testNetwork(void) {
     size_t nlayers = 3;
     Num input[] = {1, 1, 1, 1, 1, 1, 1, 1};
 
-    Network network = initNetwork(nlayers, topology);
-    printNetwork(&network);
-    Num *result = evaluateNetwork(&network, input);
+    Network *network = NULL;
+    *network = initNetwork(nlayers, topology);
+
+    printNetwork(network);
+    Num *result = evaluateNetwork(network, input);
     printf("Input:\n\t");
-    for(size_t iter = 0; iter < network.ninputs; iter++) {
+    for(size_t iter = 0; iter < network->ninputs; iter++) {
         printf("%2d ", input[iter]);
     }
     printf("\n");
     printf("Result:\n\t");
-    for(size_t iter = 0; iter < network.layers[network.nlayers-1].ncells; iter++) {
+    for(size_t iter = 0; iter < network->layers[network->nlayers-1].ncells; iter++) {
         printf("%2d ", result[iter]);
     }
     printf("\n");
