@@ -3,7 +3,7 @@
 #include "defs.h"
 
 typedef int Num;
-typedef size_t *Topology;
+typedef size_t Topology[];
 
 typedef struct {
     size_t ncells;

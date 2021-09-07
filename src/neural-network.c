@@ -1,4 +1,5 @@
 #include "neural-network.h"
+#include <stdio.h>
 
 Network initNetwork(const size_t nlayers, const Topology topology) {
     ASSERT(nlayers > 0);
@@ -97,5 +98,25 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
     }
 
     return output;
+}
+
+void testNetwork(void) {
+    Topology topology = {8, 2, 4, 6};
+    size_t nlayers = 3;
+    Num input[] = {1, 1, 1, 1, 1, 1, 1, 1};
+
+    Network network = initNetwork(nlayers, topology);
+    printNetwork(&network);
+    Num *result = evaluateNetwork(&network, input);
+    printf("Input:\n\t");
+    for(size_t iter = 0; iter < network.ninputs; iter++) {
+        printf("%2d ", input[iter]);
+    }
+    printf("\n");
+    printf("Result:\n\t");
+    for(size_t iter = 0; iter < network.layers[network.nlayers-1].ncells; iter++) {
+        printf("%2d ", result[iter]);
+    }
+    printf("\n");
 }
 
