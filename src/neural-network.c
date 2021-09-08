@@ -60,6 +60,16 @@ void printNetwork(const Network *network) {
     }
 }
 
+Num prodesc(const Num *u, const Num *v, const size_t size) {
+    Num result = 0;
+
+    for(size_t iter = 0; iter < size; iter++) {
+        result += u[iter] * v[iter];
+    }
+
+    return result;
+}
+
 Num *evaluateNetwork(const Network *network, const Num *input) {
     ASSERT(network != NULL);
     ASSERT(input != NULL);
