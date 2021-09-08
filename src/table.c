@@ -10,13 +10,16 @@ static unsigned getIndex(const Table *table, const Key key) {
 }
 
 const Entry *findEntry(const Table *table, const Key key) {
+    Entry *result;
     unsigned index = getIndex(table, key);
 
     if(table->entry[index].key == key) {
-        return table->entry + index;
+        result = table->entry + index;
     } else {
-        return NULL;
+        result = NULL;
     }
+
+    return result;
 }
 
 static void printEntry(const Entry entry) {
