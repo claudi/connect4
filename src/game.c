@@ -6,6 +6,11 @@ static Game newGame(void);
 Game *initGame(void) {
     Game *game = (Game *) malloc(sizeof(Game));
     *game = newGame();
+
+    Topology topology = {3, 2, 4, 2};
+    size_t nlayers = 3;
+    network = (Network *) initNetwork(nlayers, topology);
+
     return game;
 }
 

@@ -16,7 +16,10 @@ typedef struct {
     Layer *layers;
 } Network;
 
-void testNetwork(void);
+Num *evaluateNetwork(const Network *network, const Num *input);
+Network *initNetwork(const size_t nlayers, const Topology topology);
+
+extern Network *network;
 
 #endif // NEURALNETWORK_GUARD
 
