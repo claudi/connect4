@@ -95,7 +95,7 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
         prev[cell] = output[cell];
     }
 
-    for(size_t iter = 1; iter < network->nlayers; iter++) {
+    for(size_t iter = 1; iter < network->nlayers-1; iter++) {
         for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
             output[cell] = 0;
             for(size_t weight = 0; weight < network->layers[iter-1].ncells; weight++) {
@@ -104,6 +104,15 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
         }
         for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
             prev[cell] = output[cell];
+        }
+    }
+
+
+    const size_t iter = network->nlayers-1;
+    for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
+        output[cell] = 0;
+        for(size_t weight = 0; weight < network->layers[iter-1].ncells; weight++) {
+            output[cell] += prev[weight] * network->layers[iter].weights[cell][weight];
         }
     }
 
