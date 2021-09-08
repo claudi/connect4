@@ -1,7 +1,7 @@
 #include "neural-network.h"
 #include <stdio.h>
 
-Network initNetwork(const size_t nlayers, const Topology topology) {
+Network *initNetwork(const size_t nlayers, const Topology topology) {
     ASSERT(nlayers > 0);
     ASSERT(topology != NULL);
 
@@ -23,11 +23,14 @@ Network initNetwork(const size_t nlayers, const Topology topology) {
         };
     }
 
-    return (Network) {
+    Network *network = (Network *) malloc(sizeof(Network));
+
+    *network = (Network) {
         .ninputs = topology[0],
         .nlayers = nlayers,
         .layers = layers,
     };
+    return network;
 }
 
 void printNetwork(const Network *network) {
@@ -106,10 +109,9 @@ void testNetwork(void) {
     size_t nlayers = 3;
     Num input[] = {1, 1, 1, 1, 1, 1, 1, 1};
 
-    Network *network = NULL;
-    *network = initNetwork(nlayers, topology);
-
+    Network *network = initNetwork(nlayers, topology);
     printNetwork(network);
+
     Num *result = evaluateNetwork(network, input);
     printf("Input:\n\t");
     for(size_t iter = 0; iter < network->ninputs; iter++) {
