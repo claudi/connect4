@@ -92,14 +92,9 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
     }
 
     Num *output = (Num *) malloc(maxWidth * sizeof(Num));
-    for(size_t iter = 0; iter < network->ninputs; iter++) {
-        output[iter] = 0;
-    }
 
     for(size_t cell = 0; cell < network->layers[0].ncells; cell++) {
-        for(size_t weight = 0; weight < network->ninputs; weight++) {
-            output[cell] += prev[weight] * network->layers[0].weights[cell][weight];
-        }
+        output[cell] = prodesc(prev, network->layers[0].weights[cell], network->ninputs);
     }
     for(size_t cell = 0; cell < network->layers[0].ncells; cell++) {
         prev[cell] = output[cell];
@@ -107,10 +102,7 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
 
     for(size_t iter = 1; iter < network->nlayers-1; iter++) {
         for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
-            output[cell] = 0;
-            for(size_t weight = 0; weight < network->layers[iter-1].ncells; weight++) {
-                output[cell] += prev[weight] * network->layers[iter].weights[cell][weight];
-            }
+            output[cell] = prodesc(prev, network->layers[iter].weights[cell], network->layers[iter-1].ncells);
         }
         for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
             prev[cell] = output[cell];
@@ -120,10 +112,7 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
 
     const size_t iter = network->nlayers-1;
     for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
-        output[cell] = 0;
-        for(size_t weight = 0; weight < network->layers[iter-1].ncells; weight++) {
-            output[cell] += prev[weight] * network->layers[iter].weights[cell][weight];
-        }
+        output[cell] = prodesc(prev, network->layers[iter].weights[cell], network->layers[iter-1].ncells);
     }
 
     return output;
