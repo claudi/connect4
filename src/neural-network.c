@@ -1,5 +1,6 @@
 #include "neural-network.h"
 
+Network *network;
 Network *initNetwork(const size_t nlayers, const Topology topology) {
     ASSERT(nlayers > 0);
     ASSERT(topology != NULL);
