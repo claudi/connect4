@@ -1,6 +1,7 @@
 SRCDIR = src/
 OBJDIR = obj/
 EXECUTS = play play.debug play.profile
+HELPERS = lint.out check.out
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
@@ -26,7 +27,7 @@ clean:
 	$(RM) $(OBJECTS) $(EXECUTS) release.tar.gz *.out
 
 .PHONY: all
-all: $(EXECUTS)
+all: $(EXECUTS) $(HELPERS)
 
 .PHONY: debug
 debug: play.debug
