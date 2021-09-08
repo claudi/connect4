@@ -1,6 +1,7 @@
 SRCDIR = src/
 OBJDIR = obj/
 EXECUTS = play play.debug play.profile
+HELPERS = lint.out check.out
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS	= $(wildcard $(SRCDIR)*.h)
@@ -18,15 +19,27 @@ play: $(OBJECTS)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-release.tar.gz: $(SOURCES) $(DEPENDS) Makefile
+.PHONY: release
+release: release.tar.gz
+
+release.tar.gz: $(SOURCES) $(DEPENDS) Makefile README.rst
 	tar -czvf $@ $^
 
 .PHONY: clean
 clean:
-	$(RM) $(OBJECTS) $(EXECUTS) release.tar.gz *.out
+	$(RM) $(OBJECTS)
+	$(RM) $(EXECUTS)
+	$(RM) $(HELPERS)
+	$(RM) release.tar.gz
+
+.PHONY: bin
+bin: $(EXECUTS)
+
+.PHONY: help
+help: $(HELPERS)
 
 .PHONY: all
-all: $(EXECUTS)
+all: bin help
 
 .PHONY: debug
 debug: play.debug
@@ -43,7 +56,7 @@ play.profile: $(SOURCES) $(DEPENDS)
 .PHONY: lint
 lint: lint.out
 lint.out: $(SOURCES) $(DEPENDS)
-	splint -booltype Bool -boolfalse FALSE -booltrue TRUE -D__uint128_t=int -D__linux__ $^ > $@
+	splint -booltype Bool -boolfalse FALSE -booltrue TRUE -D__uint128_t=int -D__linux__ $^ > $@ || true
 
 .PHONY: check
 check: check.out
