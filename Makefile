@@ -19,7 +19,10 @@ play: $(OBJECTS)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-release.tar.gz: $(SOURCES) $(DEPENDS) Makefile
+.PHONY: release
+release: release.tar.gz
+
+release.tar.gz: $(SOURCES) $(DEPENDS) Makefile README.rst
 	tar -czvf $@ $^
 
 .PHONY: clean
