@@ -32,8 +32,14 @@ clean:
 	$(RM) $(HELPERS)
 	$(RM) release.tar.gz
 
+.PHONY: bin
+bin: $(EXECUTS)
+
+.PHONY: help
+help: $(HELPERS)
+
 .PHONY: all
-all: $(EXECUTS) $(HELPERS)
+all: bin help
 
 .PHONY: debug
 debug: play.debug
