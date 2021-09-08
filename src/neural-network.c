@@ -91,6 +91,9 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
             output[cell] += prev[weight] * network->layers[0].weights[cell][weight];
         }
     }
+    for(size_t cell = 0; cell < network->layers[0].ncells; cell++) {
+        prev[cell] = output[cell];
+    }
 
     for(size_t iter = 1; iter < network->nlayers; iter++) {
         for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
@@ -99,15 +102,18 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
                 output[cell] += prev[weight] * network->layers[iter].weights[cell][weight];
             }
         }
+        for(size_t cell = 0; cell < network->layers[iter].ncells; cell++) {
+            prev[cell] = output[cell];
+        }
     }
 
     return output;
 }
 
 void testNetwork(void) {
-    Topology topology = {8, 2, 4, 6};
+    Topology topology = {3, 2, 4, 2};
     size_t nlayers = 3;
-    Num input[] = {1, 1, 1, 1, 1, 1, 1, 1};
+    Num input[] = {1, 1, 1};
 
     Network *network = initNetwork(nlayers, topology);
     printNetwork(network);
