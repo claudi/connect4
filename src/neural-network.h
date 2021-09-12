@@ -19,7 +19,7 @@ typedef struct {
 Num *evaluateNetwork(const Network *network, const Num *input);
 Network *initNetwork(const size_t nlayers, const Topology topology);
 
-extern Network *network;
+extern Network *networkHeuristic;
 
 #endif // NEURALNETWORK_GUARD
 
