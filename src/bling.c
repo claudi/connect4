@@ -26,11 +26,11 @@ static void printInterface(const Game *game) {
     char nextMove = showTurn(NEXT(game->node->turn));
     char emptySlot = '-';
     char slot;
-    for(short row = 0; row < N; row++) {
-        for(short col = 0; col < N; col++) {
-            if(game->node->board[TURN] & shift(N - row - 1, col)) {
+    for(short row = 0; row < BOARD_SIZE; row++) {
+        for(short col = 0; col < BOARD_SIZE; col++) {
+            if(game->node->board[TURN] & shift(BOARD_SIZE - row - 1, col)) {
                 slot = lastMove;
-            } else if(game->node->board[BOTH] & shift(N - row - 1, col)) {
+            } else if(game->node->board[BOTH] & shift(BOARD_SIZE - row - 1, col)) {
                 slot = nextMove;
             } else {
                 slot = emptySlot;
@@ -48,7 +48,7 @@ static void printInterface(const Game *game) {
     }
     // screen[GB_SCREEN_H-1][0] = '(';
     // screen[GB_SCREEN_H-1][GB_SCREEN_W-2] = ')';
-    for(short col = 0; col < N; col++) {
+    for(short col = 0; col < BOARD_SIZE; col++) {
         if(col == game->stats.lastMove) {
             screen[GB_SCREEN_H-1][2*col + 1] = '^';
         } else {
@@ -193,7 +193,7 @@ static void humanInput(Game *game) {
     char input = buff[0];
     if((input >= '0') && (input <= '9')) {
         short move = (short) atoi(buff);
-        if((move <= 0) || (move > N)) {
+        if((move <= 0) || (move > BOARD_SIZE)) {
             humanInput(game);
             // fprintf(stderr, "Invalid column\n");
         } else if(FULL_COLUMN(game->node->board, move-1)) {

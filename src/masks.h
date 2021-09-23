@@ -2,7 +2,7 @@
 #define MASKS_GUARD
 #include "defs.h"
 
-#define POS_TO_SHIFT(row, col) ((N * (row)) + (col))
+#define POS_TO_SHIFT(row, col) ((BOARD_SIZE * (row)) + (col))
 
 typedef struct {
     Mask main;

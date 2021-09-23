@@ -16,16 +16,16 @@ void copyBoard(Board *dest, const Board *orig) {
 }
 
 short makeMove(Node *node, const short col) {
-    ASSERT(col < N);
+    ASSERT(col < BOARD_SIZE);
     ASSERT(col >= 0);
     ASSERT(!FULL_COLUMN(node->board, col));
 
     short row = 0;
-    for(short iter = 0; iter < N; iter++) {
+    for(short iter = 0; iter < BOARD_SIZE; iter++) {
         row = row + ((node->board[BOTH] & shift(iter, col)) == shift(iter, col));
     }
 
-    ASSERT(row < N);
+    ASSERT(row < BOARD_SIZE);
 
     // Check for won board, and if so set nchildren to 0 and return 0
     node->board[TURN] ^= node->board[BOTH];
@@ -36,7 +36,7 @@ short makeMove(Node *node, const short col) {
 
     if(wonBoard(node->board)) {
         node->nchildren = 0;
-    } else if(row == N - 1) {
+    } else if(row == BOARD_SIZE - 1) {
         node->nchildren = node->nchildren - 1;
     }
 
@@ -56,8 +56,8 @@ static void printBoard(const Node *node) {
     char lastMove = showTurn(node->turn);
     char nextMove = showTurn(NEXT(node->turn));
     printf("\n");
-    for(row = N - 1; row >= 0; row--) {
-        for(col = 0; col < N; col++) {
+    for(row = BOARD_SIZE - 1; row >= 0; row--) {
+        for(col = 0; col < BOARD_SIZE; col++) {
             if(node->board[TURN] & shift(row, col)) {
                 printf(" %c", lastMove);
             } else if(node->board[BOTH] & shift(row, col)) {
@@ -68,7 +68,7 @@ static void printBoard(const Node *node) {
         }
         printf("\n");
     }
-    for(col = 0; col < N; col++) {
+    for(col = 0; col < BOARD_SIZE; col++) {
         printf(" %d", col);
     }
     printf("\n");

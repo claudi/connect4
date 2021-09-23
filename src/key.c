@@ -12,8 +12,8 @@ static Key keyShift(const short row, const short col) {
 }
 
 static void printKey(const Key key) {
-    for(short iter_i = (2*N - 1); iter_i >= 0; iter_i--) {
-        for(short iter_j = 0; iter_j < N; iter_j++) {
+    for(short iter_i = (2 * BOARD_SIZE - 1); iter_i >= 0; iter_i--) {
+        for(short iter_j = 0; iter_j < BOARD_SIZE; iter_j++) {
             printf("%c", (key & keyShift(iter_i, iter_j)) ? '1' : '0');
         }
         printf("\n");
@@ -22,7 +22,7 @@ static void printKey(const Key key) {
 }
 
 Key boardToKey(const Board *board) {
-    Key key = ((* ((Key *) &board[TURN])) << N*N) + ((Key) board[BOTH]);
+    Key key = ((* ((Key *) &board[TURN])) << BOARD_SIZE * BOARD_SIZE) + ((Key) board[BOTH]);
     Key mirrored = mirrorKey(key);
     if(mirrored > key) {
         key = mirrored;
@@ -32,21 +32,21 @@ Key boardToKey(const Board *board) {
 
 static Key mirrorKey(const Key key) {
     Key result = (Key) 0;
-    for(short iter = 0; iter < N; iter++) {
-        result |= (key & verticalKeys[iter]) << (N-1 - iter) >> iter;
+    for(short iter = 0; iter < BOARD_SIZE; iter++) {
+        result |= (key & verticalKeys[iter]) << (BOARD_SIZE - 1 - iter) >> iter;
     }
     return result;
 }
 
 static Key *verticalKeys;
 static void __attribute__((constructor)) initKeys(void) {
-    verticalKeys = (Key *) malloc(N * sizeof(Key));
+    verticalKeys = (Key *) malloc(BOARD_SIZE * sizeof(Key));
     verticalKeys[0] = (Key) 0;
-    for(short iter = 0; iter < 2*N; iter++) {
+    for(short iter = 0; iter < 2 * BOARD_SIZE; iter++) {
         verticalKeys[0] |= keyShift(iter, 0);
     }
 
-    for(short key = 1; key < N; key++) {
+    for(short key = 1; key < BOARD_SIZE; key++) {
         verticalKeys[key] = verticalKeys[0] << key;
     }
 }

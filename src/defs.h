@@ -6,7 +6,7 @@
 #include <limits.h> // for LONG_MIN and LONG_MAX
 #include <time.h>
 
-#define N 8
+#define BOARD_SIZE 8
 
 #define NEXT(turn) (((turn) == X_SIDE) ? O_SIDE : X_SIDE)
 #define NOT(b) (((b) == TRUE) ? FALSE : TRUE)

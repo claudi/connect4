@@ -1647,10 +1647,10 @@ static void initMasks(void) {
     SMask mask;
     size_t masksCount[NMATCHES];
     size_t Hcnt, Rcnt, Lcnt, Vcnt, combinations;
-    Hcnt = N*(N - 3);
-    Rcnt = (N - 3)*(N - 3);
-    Lcnt = (N - 3)*(N - 3);
-    Vcnt = (N - 3)*N;
+    Hcnt = BOARD_SIZE*(BOARD_SIZE - 3);
+    Rcnt = (BOARD_SIZE - 3)*(BOARD_SIZE - 3);
+    Lcnt = (BOARD_SIZE - 3)*(BOARD_SIZE - 3);
+    Vcnt = (BOARD_SIZE - 3)*BOARD_SIZE;
 
     printf("SMask *masks1 = {");
 
@@ -1658,8 +1658,8 @@ static void initMasks(void) {
     masksCount[MATCH1] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1000
     printf("\n\t// H1000\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,1) | shift(0,2) | shift(0,3);
@@ -1669,8 +1669,8 @@ static void initMasks(void) {
     }
     // H0100
     printf("\n\t// H0100\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,1);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(0,2) | shift(0,3);
@@ -1680,8 +1680,8 @@ static void initMasks(void) {
     }
     // H0010
     printf("\n\t// H0010\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(0,1) | shift(0,3);
@@ -1691,8 +1691,8 @@ static void initMasks(void) {
     }
     // H0001
     printf("\n\t// H0001\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(0,1) | shift(0,2);
@@ -1703,8 +1703,8 @@ static void initMasks(void) {
 
     // R1000
     printf("\n\t// R1000\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,1) | shift(2,2) | shift(3,3);
@@ -1714,8 +1714,8 @@ static void initMasks(void) {
     }
     // R0100
     printf("\n\t// R0100\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(1,1);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(2,2) | shift(3,3);
@@ -1725,8 +1725,8 @@ static void initMasks(void) {
     }
     // R0010
     printf("\n\t// R0010\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(2,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(1,1) | shift(3,3);
@@ -1736,8 +1736,8 @@ static void initMasks(void) {
     }
     // R0001
     printf("\n\t// R0001\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(1,1) | shift(2,2);
@@ -1748,8 +1748,8 @@ static void initMasks(void) {
 
     // L1000
     printf("\n\t// L1000\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,2) | shift(2,1) | shift(3,0);
@@ -1759,8 +1759,8 @@ static void initMasks(void) {
     }
     // L0100
     printf("\n\t// L0100\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(1,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,3) | shift(2,1) | shift(3,0);
@@ -1770,8 +1770,8 @@ static void initMasks(void) {
     }
     // L0010
     printf("\n\t// L0010\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(2,1);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,3) | shift(1,2) | shift(3,0);
@@ -1781,8 +1781,8 @@ static void initMasks(void) {
     }
     // L0001
     printf("\n\t// L0001\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,3) | shift(1,2) | shift(2,1);
@@ -1793,8 +1793,8 @@ static void initMasks(void) {
 
     // V1000
     printf("\n\t// V1000\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < N; col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < BOARD_SIZE; col++) {
             mask.main = shift(0,0);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,0) | shift(2,0) | shift(3,0);
@@ -1812,8 +1812,8 @@ static void initMasks(void) {
     masksCount[MATCH2] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1100
     printf("\n\t// H1100\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(0,1);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,2) | shift(0,3);
@@ -1823,8 +1823,8 @@ static void initMasks(void) {
     }
     // H1010
     printf("\n\t// H1010\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(0,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,1) | shift(0,3);
@@ -1834,8 +1834,8 @@ static void initMasks(void) {
     }
     // H0110
     printf("\n\t// H0110\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,1) | shift(0,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(0,3);
@@ -1845,8 +1845,8 @@ static void initMasks(void) {
     }
     // H1001
     printf("\n\t// H1001\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,1) | shift(0,2);
@@ -1856,8 +1856,8 @@ static void initMasks(void) {
     }
     // H0101
     printf("\n\t// H0101\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,1) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(0,2);
@@ -1867,8 +1867,8 @@ static void initMasks(void) {
     }
     // H0011
     printf("\n\t// H0011\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(0,1);
@@ -1879,8 +1879,8 @@ static void initMasks(void) {
 
     // R1100
     printf("\n\t// R1100\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(1,1);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(2,2) | shift(3,3);
@@ -1890,8 +1890,8 @@ static void initMasks(void) {
     }
     // R1010
     printf("\n\t// R1010\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(2,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,1) | shift(3,3);
@@ -1901,8 +1901,8 @@ static void initMasks(void) {
     }
     // R0110
     printf("\n\t// R0110\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(1,1) | shift(2,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(3,3);
@@ -1912,8 +1912,8 @@ static void initMasks(void) {
     }
     // R1001
     printf("\n\t// R1001\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,1) | shift(2,2);
@@ -1923,8 +1923,8 @@ static void initMasks(void) {
     }
     // R0101
     printf("\n\t// R0101\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(1,1) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(2,2);
@@ -1934,8 +1934,8 @@ static void initMasks(void) {
     }
     // R0011
     printf("\n\t// R0011\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(2,2) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0) | shift(1,1);
@@ -1946,8 +1946,8 @@ static void initMasks(void) {
 
     // L1100
     printf("\n\t// L1100\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0) | shift(2,1);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,2) | shift(0,3);
@@ -1957,8 +1957,8 @@ static void initMasks(void) {
     }
     // L1010
     printf("\n\t// L1010\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0) | shift(1,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(2,1) | shift(0,3);
@@ -1968,8 +1968,8 @@ static void initMasks(void) {
     }
     // L0110
     printf("\n\t// L0110\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(2,1) | shift(1,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(3,0) | shift(0,3);
@@ -1979,8 +1979,8 @@ static void initMasks(void) {
     }
     // L1001
     printf("\n\t// L1001\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(2,1) | shift(1,2);
@@ -1990,8 +1990,8 @@ static void initMasks(void) {
     }
     // L0101
     printf("\n\t// L0101\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(2,1) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(3,0) | shift(1,2);
@@ -2001,8 +2001,8 @@ static void initMasks(void) {
     }
     // L0011
     printf("\n\t// L0011\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(1,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(3,0) | shift(2,1);
@@ -2013,8 +2013,8 @@ static void initMasks(void) {
 
     // V1100
     printf("\n\t// V1100\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < N; col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < BOARD_SIZE; col++) {
             mask.main = shift(0,0) | shift(1,0);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(2,0) | shift(3,0);
@@ -2032,8 +2032,8 @@ static void initMasks(void) {
     masksCount[MATCH3] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1110
     printf("\n\t// H1110\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(0,1) | shift(0,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,3);
@@ -2043,8 +2043,8 @@ static void initMasks(void) {
     }
     // H1101
     printf("\n\t// H1101\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(0,1) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,2);
@@ -2054,8 +2054,8 @@ static void initMasks(void) {
     }
     // H1011
     printf("\n\t// H1011\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(0,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,1);
@@ -2065,8 +2065,8 @@ static void initMasks(void) {
     }
     // H0111
     printf("\n\t// H0111\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,1) | shift(0,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0);
@@ -2077,8 +2077,8 @@ static void initMasks(void) {
 
     // R1110
     printf("\n\t// R1110\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(1,1) | shift(2,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(3,3);
@@ -2088,8 +2088,8 @@ static void initMasks(void) {
     }
     // R1101
     printf("\n\t// R1101\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(1,1) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(2,2);
@@ -2099,8 +2099,8 @@ static void initMasks(void) {
     }
     // R1011
     printf("\n\t// R1011\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(2,2) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,1);
@@ -2110,8 +2110,8 @@ static void initMasks(void) {
     }
     // R0111
     printf("\n\t// R0111\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(1,1) | shift(2,2) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,0);
@@ -2122,8 +2122,8 @@ static void initMasks(void) {
 
     // L1110
     printf("\n\t// L1110\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0) | shift(2,1) | shift(1,2);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(0,3);
@@ -2133,8 +2133,8 @@ static void initMasks(void) {
     }
     // L1101
     printf("\n\t// L1101\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0) | shift(2,1) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(1,2);
@@ -2144,8 +2144,8 @@ static void initMasks(void) {
     }
     // L1011
     printf("\n\t// L1011\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0) | shift(1,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(2,1);
@@ -2155,8 +2155,8 @@ static void initMasks(void) {
     }
     // L0111
     printf("\n\t// L0111\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(2,1) | shift(1,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(3,0);
@@ -2167,8 +2167,8 @@ static void initMasks(void) {
 
     // V1110
     printf("\n\t// V1110\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < N; col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < BOARD_SIZE; col++) {
             mask.main = shift(0,0) | shift(1,0) | shift(2,0);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = shift(3,0);
@@ -2187,8 +2187,8 @@ static void initMasks(void) {
     masksCount[MATCH4] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1111
     printf("\n\t// H1111\n");
-    for(unsigned row = 0; row < N; row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < BOARD_SIZE; row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(0,1) | shift(0,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0x0000000000000000;
@@ -2198,8 +2198,8 @@ static void initMasks(void) {
 
     // R1111
     printf("\n\t// R1111\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(0,0) | shift(1,1) | shift(2,2) | shift(3,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0x0000000000000000;
@@ -2210,8 +2210,8 @@ static void initMasks(void) {
 
     // L1111
     printf("\n\t// L1111\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < (N - 3); col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < (BOARD_SIZE - 3); col++) {
             mask.main = shift(3,0) | shift(2,1) | shift(1,2) | shift(0,3);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0x0000000000000000;
@@ -2221,8 +2221,8 @@ static void initMasks(void) {
 
     // V1111
     printf("\n\t// V1111\n");
-    for(unsigned row = 0; row < (N - 3); row++) {
-        for(unsigned col = 0; col < N; col++) {
+    for(unsigned row = 0; row < (BOARD_SIZE - 3); row++) {
+        for(unsigned col = 0; col < BOARD_SIZE; col++) {
             mask.main = shift(0,0) | shift(1,0) | shift(2,0) | shift(3,0);
             mask.main <<= POS_TO_SHIFT(row, col);
             mask.anti = (Mask) 0x0000000000000000;
@@ -2248,8 +2248,8 @@ static void initMasks(void) {
 }
 
 static void printMask(const Mask mask) {
-    for(short iter_i = (N - 1); iter_i >= 0; iter_i--) {
-        for(short iter_j = 0; iter_j < N; iter_j++) {
+    for(short iter_i = (BOARD_SIZE - 1); iter_i >= 0; iter_i--) {
+        for(short iter_j = 0; iter_j < BOARD_SIZE; iter_j++) {
             printf("%c", (mask & shift(iter_i, iter_j)) ? '1' : '0');
         }
         printf("\n");
