@@ -5,10 +5,10 @@ static void orderChildren(Node *parent);
 
 Node *initNode(void) {
     Node *node = (Node *) malloc(sizeof(Node));
-    for(short iter = 0; iter < nboards; iter++) {
+    for(short iter = 0; iter < NBOARDS; iter++) {
         node->board[iter] = (Board) 0;
     }
-    node->turn = O;
+    node->turn = O_SIDE;
 
     node->nchildren = 8;
     node->child = NULL;

@@ -8,8 +8,8 @@
 #ifndef START_DEPTH
 #define START_DEPTH 4
 #endif // START_DEPTH
-#define START_PLAYER_SIDE X
-#define START_SIDE X
+#define START_PLAYER_SIDE X_SIDE
+#define START_SIDE X_SIDE
 #define START_HELP TRUE
 #define START_STATS emptyStats()
 

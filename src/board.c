@@ -10,7 +10,7 @@ void copyNode(Node *dest, const Node *orig) {
 }
 
 void copyBoard(Board *dest, const Board *orig) {
-    for(short iter = 0; iter < nboards; iter++) {
+    for(short iter = 0; iter < NBOARDS; iter++) {
         dest[iter] = orig[iter];
     }
 }
@@ -48,7 +48,7 @@ static unsigned wonBoard(const Board *board) {
 }
 
 char showTurn(const Side turn) {
-    return (turn == X) ? 'X' : 'O';
+    return (turn == X_SIDE) ? 'X' : 'O';
 }
 
 static void printBoard(const Node *node) {

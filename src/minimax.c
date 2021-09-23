@@ -5,7 +5,7 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status);
 static MinimaxStatus nextStatus(const MinimaxStatus status);
 
 static int color(const Side side) {
-    return (side == X) ? 1 : -1;
+    return (side == X_SIDE) ? 1 : -1;
 }
 
 void machineMove(Game *game) {

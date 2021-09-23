@@ -25,7 +25,7 @@ static long simpleHeuristic(Board __attribute__((unused)) *board, const Side __a
 }
 
 long getHeuristic(const Node *node, const Side side) {
-    Board board[nboards];
+    Board board[NBOARDS];
     copyBoard(board, node->board);
 
     if(node->turn == side) {
@@ -46,7 +46,7 @@ long getHeuristic(const Node *node, const Side side) {
 }
 
 long getOrderingHeuristic(const Node *node, const Side side) {
-    Board board[nboards];
+    Board board[NBOARDS];
     copyBoard(board, node->board);
 
     if(node->turn == side) {
