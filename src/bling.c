@@ -112,7 +112,6 @@ static void printInterface(const Game *game) {
     free(posPerSecPrint);
     free(exploredPositionsPrint);
     free(heuristicValue);
-    free(difficultyPrint);
 }
 
 static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
