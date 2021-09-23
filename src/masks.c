@@ -1,7 +1,7 @@
 #include "masks.h"
 
-static const SMask *masks[nmatches];
-static const size_t nmasks[nmatches];
+static const SMask *masks[NMATCHES];
+static const size_t nmasks[NMATCHES];
 
 static void initMasks(void);
 static void printMask(const Mask mask);
@@ -1645,7 +1645,7 @@ static void printSMask(const SMask mask) {
 
 static void initMasks(void) {
     SMask mask;
-    size_t masksCount[nmatches];
+    size_t masksCount[NMATCHES];
     size_t Hcnt, Rcnt, Lcnt, Vcnt, combinations;
     Hcnt = N*(N - 3);
     Rcnt = (N - 3)*(N - 3);
@@ -1654,8 +1654,8 @@ static void initMasks(void) {
 
     printf("SMask *masks1 = {");
 
-    combinations = (nmasks1 - 1)/3;
-    masksCount[match1] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+    combinations = (NMASKS1 - 1)/3;
+    masksCount[MATCH1] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1000
     printf("\n\t// H1000\n");
     for(unsigned row = 0; row < N; row++) {
@@ -1808,8 +1808,8 @@ static void initMasks(void) {
     printf("\n");
     printf("SMask *masks2 = {");
 
-    combinations = (nmasks2 - 1)/3;
-    masksCount[match2] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+    combinations = (NMASKS2 - 1)/3;
+    masksCount[MATCH2] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1100
     printf("\n\t// H1100\n");
     for(unsigned row = 0; row < N; row++) {
@@ -2028,8 +2028,8 @@ static void initMasks(void) {
     printf("\n");
     printf("SMask *masks3 = {");
 
-    combinations = (nmasks3 - 1)/3;
-    masksCount[match3] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+    combinations = (NMASKS3 - 1)/3;
+    masksCount[MATCH3] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1110
     printf("\n\t// H1110\n");
     for(unsigned row = 0; row < N; row++) {
@@ -2183,8 +2183,8 @@ static void initMasks(void) {
     printf("SMask *masks4 = {");
 
 
-    combinations = (nmasks4 - 1)/3;
-    masksCount[match4] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
+    combinations = (NMASKS4 - 1)/3;
+    masksCount[MATCH4] = combinations*Hcnt + combinations*Rcnt + combinations*Lcnt + Vcnt;
     // H1111
     printf("\n\t// H1111\n");
     for(unsigned row = 0; row < N; row++) {
@@ -2234,14 +2234,14 @@ static void initMasks(void) {
 
     printf("\n");
     printf("SMask *masks[] = {\n");
-    for(Matches match = 0; match < nmatches; match++) {
+    for(Matches match = 0; match < NMATCHES; match++) {
         printf("\tmasks%d,\n", match);
     }
     printf("};\n");
 
     printf("\n");
     printf("unsigned nmasks[] = {\n");
-    for(Matches match = 0; match < nmatches; match++) {
+    for(Matches match = 0; match < NMATCHES; match++) {
         printf("\t%zu,\n", masksCount[match]);
     }
     printf("};\n");
@@ -2258,7 +2258,7 @@ static void printMask(const Mask mask) {
 }
 
 static void printMasks() {
-    for(Matches iter = 0; iter < nmatches; iter++) {
+    for(Matches iter = 0; iter < NMATCHES; iter++) {
         for(unsigned length = 0; length < nmasks[iter]; length++) {
             printMask(masks[iter][length].main);
         }
@@ -2271,7 +2271,7 @@ static Bool matchMask(const Board *board, const SMask mask) {
 }
 
 unsigned matches(const Board *board, const unsigned length) {
-    ASSERT(length < nmatches);
+    ASSERT(length < NMATCHES);
 
     unsigned count = 0;
     for(unsigned mask = 0; mask < nmasks[length]; mask++) {

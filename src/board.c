@@ -44,7 +44,7 @@ short makeMove(Node *node, const short col) {
 }
 
 static unsigned wonBoard(const Board *board) {
-    return matches(board, match4);
+    return matches(board, MATCH4);
 }
 
 char showTurn(const Side turn) {
