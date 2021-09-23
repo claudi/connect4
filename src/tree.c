@@ -5,10 +5,10 @@ static void orderChildren(Node *parent);
 
 Node *initNode(void) {
     Node *node = (Node *) malloc(sizeof(Node));
-    for(short iter = 0; iter < nboards; iter++) {
+    for(short iter = 0; iter < NBOARDS; iter++) {
         node->board[iter] = (Board) 0;
     }
-    node->turn = O;
+    node->turn = O_SIDE;
 
     node->nchildren = 8;
     node->child = NULL;
@@ -17,7 +17,7 @@ Node *initNode(void) {
 }
 
 static Node *createChild(const Node *parent, const short col) {
-    ASSERT(col < N);
+    ASSERT(col < BOARD_SIZE);
     ASSERT(col >= 0);
 
     Node *child = (Node *) malloc(sizeof(Node));
@@ -34,9 +34,9 @@ void createChildren(Node *parent) {
     for(short iter = 0; iter < parent->nchildren; iter++) {
         while(FULL_COLUMN(parent->board, col)) {
             col++;
-            ASSERT(col < N);
+            ASSERT(col < BOARD_SIZE);
         }
-        ASSERT(col < N);
+        ASSERT(col < BOARD_SIZE);
         parent->child[iter] = createChild(parent, col);
         col++;
     }

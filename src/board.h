@@ -3,7 +3,7 @@
 #include "defs.h"
 #include "masks.h"
 
-#define FULL_COLUMN(b,c) ((b)[BOTH] & shift(N - 1, (c)))
+#define FULL_COLUMN(b,c) ((b)[BOTH] & shift(BOARD_SIZE - 1, (c)))
 
 void copyNode(Node *destination, const Node *origin);
 char showTurn(const Side side);

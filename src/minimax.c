@@ -5,7 +5,7 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status);
 static MinimaxStatus nextStatus(const MinimaxStatus status);
 
 static int color(const Side side) {
-    return (side == X) ? 1 : -1;
+    return (side == X_SIDE) ? 1 : -1;
 }
 
 void machineMove(Game *game) {
@@ -67,7 +67,7 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
     exploredPositions++;
 
     if(status.depth == 0 || root->nchildren == 0) {
-        long h = getHeuristic(root, status.side) - color(status.side) * color(root->turn) * ( N*N - status.depth );
+        long h = getHeuristic(root, status.side) - color(status.side) * color(root->turn) * ( (BOARD_SIZE * BOARD_SIZE) - status.depth );
         return h;
     }
 

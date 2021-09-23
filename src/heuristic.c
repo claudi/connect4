@@ -3,9 +3,9 @@
 static long myHeuristic(Board *board, const Side __attribute__((unused)) side) {
     long heuristic = 0;
 
-    heuristic += 2*(matches(board, match1) + 5*matches(board, match2) + 15*matches(board, match3));
+    heuristic += 2*(matches(board, MATCH1) + 5*matches(board, MATCH2) + 15*matches(board, MATCH3));
     board[TURN] ^= board[BOTH];
-    heuristic -= matches(board, match1) + 5*matches(board, match2) + 10*matches(board, match3);
+    heuristic -= matches(board, MATCH1) + 5*matches(board, MATCH2) + 10*matches(board, MATCH3);
 
     return heuristic;
 }
@@ -13,9 +13,9 @@ static long myHeuristic(Board *board, const Side __attribute__((unused)) side) {
 static long controlHeuristic(Board *board, const Side __attribute__((unused)) side) {
     long heuristic = 0;
 
-    heuristic += 2*(matches(board, match2) + 10*matches(board, match3));
+    heuristic += 2*(matches(board, MATCH2) + 10*matches(board, MATCH3));
     board[TURN] ^= board[BOTH];
-    heuristic -= matches(board, match2) + 10*matches(board, match3);
+    heuristic -= matches(board, MATCH2) + 10*matches(board, MATCH3);
 
     return heuristic;
 }
@@ -25,20 +25,20 @@ static long simpleHeuristic(Board __attribute__((unused)) *board, const Side __a
 }
 
 long getHeuristic(const Node *node, const Side side) {
-    Board board[nboards];
+    Board board[NBOARDS];
     copyBoard(board, node->board);
 
     if(node->turn == side) {
         board[TURN] ^= board[BOTH];
     }
 
-    if(matches(board, match4) > 0) {
+    if(matches(board, MATCH4) > 0) {
         return LONG_MIN;
     }
 
     board[TURN] ^= board[BOTH];
 
-    if(matches(board, match4) > 0) {
+    if(matches(board, MATCH4) > 0) {
         return LONG_MAX;
     }
 
@@ -46,20 +46,20 @@ long getHeuristic(const Node *node, const Side side) {
 }
 
 long getOrderingHeuristic(const Node *node, const Side side) {
-    Board board[nboards];
+    Board board[NBOARDS];
     copyBoard(board, node->board);
 
     if(node->turn == side) {
         board[TURN] ^= board[BOTH];
     }
 
-    if(matches(board, match4) > 0) {
+    if(matches(board, MATCH4) > 0) {
         return LONG_MIN;
     }
 
     board[TURN] ^= board[BOTH];
 
-    if(matches(board, match4) > 0) {
+    if(matches(board, MATCH4) > 0) {
         return LONG_MAX;
     }
 

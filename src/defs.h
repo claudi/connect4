@@ -6,20 +6,20 @@
 #include <limits.h> // for LONG_MIN and LONG_MAX
 #include <time.h>
 
-#define N 8
+#define BOARD_SIZE 8
 
-#define NEXT(turn) (((turn) == X) ? O : X)
+#define NEXT(turn) (((turn) == X_SIDE) ? O_SIDE : X_SIDE)
 #define NOT(b) (((b) == TRUE) ? FALSE : TRUE)
 
-enum { TURN, BOTH, nboards };
+enum { TURN, BOTH, NBOARDS };
 typedef enum { FALSE, TRUE } Bool;
-typedef enum { X, O, nsides } Side;
+typedef enum { X_SIDE, O_SIDE, NSIDES } Side;
 typedef uint64_t Board;
 typedef uint64_t Mask;
 
 typedef struct Node Node;
 struct Node {
-    Board board[nboards];
+    Board board[NBOARDS];
     Side turn;                  // Last move
     short nchildren;
     Node **child;
