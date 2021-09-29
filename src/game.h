@@ -2,6 +2,7 @@
 #define GAME_GUARD
 #include "defs.h"
 #include "tree.h"
+#include "neural-network.h"
 
 #define START_BOARD initNode()
 #define START_TURN 1
