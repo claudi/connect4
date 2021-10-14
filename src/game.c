@@ -9,7 +9,9 @@ Game *initGame(void) {
 
     Topology topology = {3, 2, 4, 2};
     size_t nlayers = 3;
-    networkHeuristic = (Network *) initNetwork(nlayers, topology);
+    if(initNetwork(nlayers, topology) == FALSE) {
+        fprintf(stderr, "Could not init network\n");
+    }
 
     return game;
 }
