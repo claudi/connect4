@@ -3,7 +3,6 @@
 #include "bling.h"
 #include "gui.h"
 #include "headless.h"
-#include "neural-network.h"
 
 #define ARRAY_SIZE(arr) (sizeof(arr)/sizeof(arr[0]))
 
