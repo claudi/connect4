@@ -23,13 +23,14 @@ Bool initNetwork(const size_t nlayers, const Topology topology) {
         };
     }
 
-    Network *networkHeuristic = (Network *) malloc(sizeof(Network));
+    networkHeuristic = (Network *) malloc(sizeof(Network));
 
     *networkHeuristic = (Network) {
         .ninputs = topology[0],
         .nlayers = nlayers,
         .layers = layers,
     };
+
     return networkHeuristic != NULL;
 }
 
