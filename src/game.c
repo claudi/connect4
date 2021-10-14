@@ -7,7 +7,7 @@ Game *initGame(void) {
     Game *game = (Game *) malloc(sizeof(Game));
     *game = newGame();
 
-    Topology topology = {3, 2, 4, 2};
+    Topology topology = {2, 2, 4, 1};
     size_t nlayers = 3;
     if(initNetwork(nlayers, topology) == FALSE) {
         fprintf(stderr, "Could not init network\n");

@@ -2,7 +2,7 @@
 #define NEURALNETWORK_GUARD
 #include "defs.h"
 
-typedef int Num;
+typedef int64_t Num;
 typedef size_t Topology[];
 
 typedef struct {
