@@ -17,6 +17,7 @@ typedef struct {
 } Network;
 
 Num *evaluateNetwork(const Network *network, const Num *input);
+Num evaluateNetworkOnBoard(const Board *board);
 Bool initNetwork(const size_t nlayers, const Topology topology);
 
 #endif // NEURALNETWORK_GUARD

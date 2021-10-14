@@ -119,6 +119,13 @@ Num *evaluateNetwork(const Network *network, const Num *input) {
     return output;
 }
 
+Num evaluateNetworkOnBoard(const Board *board) {
+    ASSERT(networkHeuristic != NULL);
+    ASSERT(board != NULL);
+
+    return *evaluateNetwork(networkHeuristic, (Num *) board);
+}
+
 void testNetwork(void) {
     Topology topology = {3, 2, 4, 2};
     size_t nlayers = 3;
