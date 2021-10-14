@@ -3,6 +3,7 @@
 #include "board.h"
 #include "defs.h"
 #include "masks.h"
+#include "neural-network.h"
 #include <stdlib.h>
 
 long getHeuristic(const Node *node, const Side side);

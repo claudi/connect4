@@ -1,5 +1,9 @@
 #include "heuristic.h"
 
+static long neuralNetworkHeuristic(Board *board, const Side __attribute((unused)) side) {
+    return evaluateNetworkOnBoard(board);
+}
+
 static long myHeuristic(Board *board, const Side __attribute((unused)) side) {
     long heuristic = 0;
 
