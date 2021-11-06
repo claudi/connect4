@@ -1,4 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "bling.h"
 #include "commands.h"
+#include "defs.h"
+#include "gui.h"
+#include "headless.h"
+
+#define ARRAY_SIZE(arr) (sizeof(arr)/sizeof(arr[0]))
+
+typedef struct {
+    char *name;
+    int (*function)(int argc, char **argv);
+} command;
 
 const command commands[] = {
     { "headless", headless_main },
