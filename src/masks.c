@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "masks.h"
 
+typedef struct {
+    Mask main;
+    Mask anti;
+} SMask;
+
 static const SMask *masks[NMATCHES];
 static const size_t nmasks[NMATCHES];
 
