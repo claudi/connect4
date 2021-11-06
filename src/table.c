@@ -1,4 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "table.h"
+
+#define TABLE_SIZE 10000000
 
 static void printEntry(const Entry entry);
 static void printTable(const Table *table);
@@ -26,7 +30,7 @@ static void printEntry(const Entry entry) {
     printf("%llx\t%ld\n", (unsigned long long) entry.key, entry.heuristic);
 }
 
-static void printTable(const Table *table) {
+static void __attribute__((unused)) printTable(const Table *table) {
     for(unsigned long iter = 0; iter < table->size; iter++) {
         printf("%lu\t", iter);
         printEntry(table->entry[iter]);

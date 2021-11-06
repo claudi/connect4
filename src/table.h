@@ -1,9 +1,6 @@
 #ifndef TABLE_GUARD
 #define TABLE_GUARD
-#include "defs.h"
 #include "key.h"
-
-#define TABLE_SIZE 10000000
 
 typedef struct {
     Key key;
