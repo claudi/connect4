@@ -1,4 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "bling.h"
+#include "board.h"
+#include "defs.h"
+#include "game.h"
+#include "masks.h"
+#include "minimax.h"
+
+#define GB_SCREEN_W 18
+#define GB_SCREEN_H 10
+#define SIDE_W 25
+#define SIDE_H 9
+#define CREDITS_W 28
+
+#ifdef __linux__
+#define COLOR_ON  "\033[0;7m" // inverted background
+#define COLOR_OFF "\033[0;0m" // default
+#endif // __linux__
 
 static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]);
 static char *difficulty(const short depth);
