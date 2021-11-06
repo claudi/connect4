@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "masks.h"
 
 static const SMask *masks[NMATCHES];
@@ -1643,7 +1645,7 @@ static void printSMask(const SMask mask) {
     printf("\t{ .main = (Mask) 0x%.16luX, .anti = (Mask) 0x%.16luX },\n", mask.main, mask.anti);
 }
 
-static void initMasks(void) {
+static void __attribute__((unused)) initMasks(void) {
     SMask mask;
     size_t masksCount[NMATCHES];
     size_t Hcnt, Rcnt, Lcnt, Vcnt, combinations;
@@ -2257,7 +2259,7 @@ static void printMask(const Mask mask) {
     printf("\n");
 }
 
-static void printMasks() {
+static void __attribute__((unused)) printMasks() {
     for(Matches iter = 0; iter < NMATCHES; iter++) {
         for(unsigned length = 0; length < nmasks[iter]; length++) {
             printMask(masks[iter][length].main);
