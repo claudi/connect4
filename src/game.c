@@ -1,4 +1,16 @@
+#include <stdlib.h>
 #include "game.h"
+#include "tree.h"
+
+#define START_BOARD initNode()
+#define START_TURN 1
+#ifndef START_DEPTH
+#define START_DEPTH 4
+#endif // START_DEPTH
+#define START_PLAYER_SIDE X_SIDE
+#define START_SIDE X_SIDE
+#define START_HELP TRUE
+#define START_STATS emptyStats()
 
 static Stats emptyStats(void);
 static Game newGame(void);
