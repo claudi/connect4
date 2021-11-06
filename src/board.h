@@ -1,7 +1,6 @@
 #ifndef BOARD_GUARD
 #define BOARD_GUARD
 #include "defs.h"
-#include "masks.h"
 
 #define FULL_COLUMN(b,c) ((b)[BOTH] & shift(BOARD_SIZE - 1, (c)))
 
