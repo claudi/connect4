@@ -1,7 +1,7 @@
 #ifndef TREE_GUARD
 #define TREE_GUARD
-#include "defs.h"
 #include "board.h"
+#include "defs.h"
 #include "heuristic.h"
 
 /*
