@@ -4,11 +4,6 @@
 
 #define POS_TO_SHIFT(row, col) ((BOARD_SIZE * (row)) + (col))
 
-typedef struct {
-    Mask main;
-    Mask anti;
-} SMask;
-
 typedef enum { MATCH1, MATCH2, MATCH3, MATCH4, NMATCHES } Matches;
 typedef enum { H1000, H0100, H0010, H0001,
                R1000, R0100, R0010, R0001,
