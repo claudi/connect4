@@ -4,8 +4,8 @@ EXECUTS = play play.debug play.profile
 HELPERS = lint.out check.out
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
-DEPENDS	= $(wildcard $(SRCDIR)*.h)
-OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o))
+DEPENDS = $(wildcard $(SRCDIR)*.h)
+OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o)) $(wildcard $(OBJDIR)*.o)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Ofast
@@ -61,5 +61,5 @@ lint.out: $(SOURCES) $(DEPENDS)
 .PHONY: check
 check: check.out
 check.out: $(SOURCES) $(DEPENDS)
-	cppcheck --std=c11 --enable=all --suppress=missingIncludeSystem $^ &> $@
+	cppcheck `sdl-config --cflags` --std=c11 --enable=all --suppress=missingIncludeSystem $^ &> $@
 

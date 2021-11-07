@@ -1,10 +1,7 @@
 #ifndef DEFS_GUARD
 #define DEFS_GUARD
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h> // for uint64_t
 #include <limits.h> // for LONG_MIN and LONG_MAX
-#include <time.h>
+#include <stdint.h> // for uint64_t
 
 #define BOARD_SIZE 8
 
@@ -28,6 +25,8 @@ struct Node {
 #ifndef DEBUG
     #define ASSERT(n) {}
 #else
+    #include <stdio.h>
+    #include <stdlib.h>
     #define ASSERT(n)                                   \
     if(!(n)) {                                          \
         fprintf(stderr, "\n\t  DEBUG INFO  \n");        \

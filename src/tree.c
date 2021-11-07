@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "tree.h"
 
 static Node *createChild(const Node *parent, const short child);
@@ -69,7 +70,7 @@ static void orderChildren(Node *parent) {
     free(values);
 }
 
-static void createTree(Node *root, const short depth) {
+static void __attribute__((unused)) createTree(Node *root, const short depth) {
     ASSERT(depth >= 0);
 
     if(depth == 0) {
@@ -83,7 +84,7 @@ static void createTree(Node *root, const short depth) {
     }
 }
 
-static void printTree(const Node *root) {
+static void __attribute__((unused)) printTree(const Node *root) {
     printNode(root);
     for(short iter = 0; iter < root->nchildren; iter++) {
         printTree(root->child[iter]);

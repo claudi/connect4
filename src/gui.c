@@ -1,4 +1,15 @@
+#include "defs.h"
+#include "game.h"
 #include "gui.h"
+#include "SDL2/SDL.h"
+
+#define SCREEN_WIDTH  1280
+#define SCREEN_HEIGHT 720
+
+typedef struct {
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+} App;
 
 static App *initSDL(void);
 static void freeSDL(App *app);

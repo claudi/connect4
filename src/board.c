@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include "board.h"
+#include "masks.h"
 
 static unsigned wonBoard(const Board *board);
 static void printBoard(const Node *node);

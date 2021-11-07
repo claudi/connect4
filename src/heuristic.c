@@ -1,3 +1,5 @@
+#include "board.h"
+#include "defs.h"
 #include "heuristic.h"
 
 static long myHeuristic(Board *board, const Side __attribute__((unused)) side) {
@@ -10,7 +12,7 @@ static long myHeuristic(Board *board, const Side __attribute__((unused)) side) {
     return heuristic;
 }
 
-static long controlHeuristic(Board *board, const Side __attribute__((unused)) side) {
+static long __attribute__((unused)) controlHeuristic(Board *board, const Side __attribute__((unused)) side) {
     long heuristic = 0;
 
     heuristic += 2*(matches(board, MATCH2) + 10*matches(board, MATCH3));
@@ -20,7 +22,7 @@ static long controlHeuristic(Board *board, const Side __attribute__((unused)) si
     return heuristic;
 }
 
-static long simpleHeuristic(Board __attribute__((unused)) *board, const Side __attribute__((unused)) side) {
+static long __attribute__((unused)) simpleHeuristic(Board __attribute__((unused)) *board, const Side __attribute__((unused)) side) {
     return 0;
 }
 

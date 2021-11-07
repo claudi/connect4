@@ -1,4 +1,21 @@
+#include <stdlib.h>
+#include <time.h>
+#include "defs.h"
+#include "heuristic.h"
 #include "minimax.h"
+#include "table.h"
+#include "tree.h"
+
+typedef struct {
+    long alpha;
+    long beta;
+} Prune;
+
+typedef struct {
+    short depth;
+    const Side side;
+    Bool maximizing;
+} MinimaxStatus;
 
 static unsigned exploredPositions;
 static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status);
