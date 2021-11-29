@@ -69,7 +69,7 @@ static void freeSDL(App *app) {
 	SDL_Quit();
 }
 
-static void render(App *app, Game __attribute__((unused)) *game) {
+static void render(App *app, __attribute__((unused)) Game *game) {
     SDL_SetRenderDrawColor(app->renderer, 0, 100, 100, 100);
     SDL_RenderClear(app->renderer);
 
@@ -94,7 +94,7 @@ static void update(App *app) {
     SDL_RenderPresent(app->renderer);
 }
 
-int gui_main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv) {
+int gui_main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
     App *app = initSDL();
     if(app == NULL) {
         return EXIT_FAILURE;

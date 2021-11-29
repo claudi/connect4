@@ -257,7 +257,7 @@ static void keepPlaying(Game *game) {
     free(buff);
 }
 
-int ascii_main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv) {
+int ascii_main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv) {
     Game *game = initGame();
     do {
         while(game->node->nchildren) {
