@@ -7,4 +7,3 @@
 int headless_main(int argc, char **argv);
 
 #endif // HEADLESS_GUARD
-

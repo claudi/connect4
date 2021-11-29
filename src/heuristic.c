@@ -65,4 +65,3 @@ long getOrderingHeuristic(const Node *node, const Side side) {
 
     return myHeuristic(board, side);
 }
-

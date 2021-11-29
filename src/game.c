@@ -37,4 +37,3 @@ static Game newGame(void) {
     };
     return game;
 }
-

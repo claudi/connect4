@@ -28,4 +28,3 @@ int handle_commands(int argc, char **argv) {
 
     return EXIT_SUCCESS;
 }
-

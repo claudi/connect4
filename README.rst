@@ -51,4 +51,3 @@ Quick start
 
 where :code:`<command>` can be any of :code:`ascii`, :code:`gui` and
 :code:`headless`
-

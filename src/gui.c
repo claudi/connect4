@@ -107,4 +107,3 @@ int gui_main(int __attribute__((unused)) argc, char __attribute__((unused)) **ar
     freeSDL(app);
     return EXIT_SUCCESS;
 }
-

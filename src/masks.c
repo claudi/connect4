@@ -2283,4 +2283,3 @@ unsigned matches(const Board *board, const unsigned length) {
 Mask shift(const short row, const short col) {
     return (((Mask) 1) << POS_TO_SHIFT(row, col));
 }
-

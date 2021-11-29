@@ -12,4 +12,3 @@ void copyBoard(Board *destination, const Board *origin);
 void printNode(const Node *node);
 
 #endif // BOARD_GUARD
-

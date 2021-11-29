@@ -144,4 +144,3 @@ static MinimaxStatus nextStatus(const MinimaxStatus status) {
     };
     return next;
 }
-

@@ -278,4 +278,3 @@ int ascii_main(int __attribute__((unused)) argc, char __attribute__((unused)) **
     free(game);
     return EXIT_SUCCESS;
 }
-

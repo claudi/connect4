@@ -42,4 +42,3 @@ struct Node {
 #endif // DEBUG
 
 #endif // DEFS_GUARD
-

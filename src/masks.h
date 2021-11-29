@@ -28,4 +28,3 @@ unsigned matches(const Board *board, const unsigned length);
 Mask shift(const short row, const short col);
 
 #endif // MASKS_GUARD
-

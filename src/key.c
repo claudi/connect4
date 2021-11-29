@@ -54,4 +54,3 @@ static void __attribute__((constructor)) initKeys(void) {
 static void __attribute__((destructor)) freeKeys(void) {
     free(verticalKeys);
 }
-

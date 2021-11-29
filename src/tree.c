@@ -89,4 +89,3 @@ static void printTree(const Node *root) {
         printTree(root->child[iter]);
     }
 }
-

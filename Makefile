@@ -62,4 +62,3 @@ lint.out: $(SOURCES) $(DEPENDS)
 check: check.out
 check.out: $(SOURCES) $(DEPENDS)
 	cppcheck --std=c11 --enable=all --suppress=missingIncludeSystem $^ &> $@
-

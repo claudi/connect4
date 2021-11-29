@@ -58,4 +58,3 @@ static void __attribute__((destructor)) freeTables(void) {
     free(tables->entry);
     free(tables);
 }
-

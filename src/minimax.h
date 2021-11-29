@@ -22,4 +22,3 @@ typedef struct {
 void machineMove(Game *game);
 
 #endif // MINIMAX_GUARD
-

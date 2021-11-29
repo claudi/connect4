@@ -12,4 +12,3 @@ Node *initNode(void);
 void createChildren(Node *parent);
 
 #endif // TREE_GUARD
-

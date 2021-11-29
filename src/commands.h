@@ -14,4 +14,3 @@ typedef struct {
 int handle_commands(int argc, char **argv);
 
 #endif // COMMAND_GUARD
-

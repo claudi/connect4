@@ -80,4 +80,3 @@ void printNode(const Node *node) {
     // printf("last move:\t%c\n", showTurn(node->turn));
     // printf("nchildren:\t%d\n", node->nchildren);
 }
-
