@@ -20,7 +20,8 @@ static long controlHeuristic(Board *board, __attribute__((unused)) const Side si
     return heuristic;
 }
 
-static long simpleHeuristic(__attribute__((unused)) Board *board, __attribute__((unused)) const Side side) {
+static long simpleHeuristic(__attribute__((unused)) Board *board,
+                            __attribute__((unused)) const Side side) {
     return 0;
 }
 

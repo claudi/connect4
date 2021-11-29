@@ -1,6 +1,8 @@
 #include "bling.h"
 
-static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]);
+static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W],
+                         char side[SIDE_H][SIDE_W],
+                         char credits[2][CREDITS_W]);
 static char *difficulty(const short depth);
 static char *trimBigNumber(const unsigned num);
 static char *posPerSec(unsigned positions, double time);
@@ -71,7 +73,8 @@ static void printInterface(const Game *game) {
     snprintf(side[0][pos++], SIDE_W, "                        ");
     snprintf(side[0][pos++], SIDE_W, " 1-8 Play on column     ");
     snprintf(side[0][pos++], SIDE_W, "   h Toggle help/stats  ");
-    snprintf(side[0][pos++], SIDE_W, "%4s Position%s explored", exploredPositionsPrint, exploredPositions == 1 ? "" : "s" );
+    snprintf(side[0][pos++], SIDE_W, "%4s Position%s explored", exploredPositionsPrint,
+             exploredPositions == 1 ? "" : "s");
     snprintf(side[0][pos++], SIDE_W, "%4s per second         ", posPerSecPrint);
     snprintf(side[0][pos++], SIDE_W, "%4.1lf seconds elapsed    ", secondsElapsed(elapsedTime));
     snprintf(side[0][pos++], SIDE_W, "%4s Position score", heuristicValue);
@@ -88,33 +91,34 @@ static void printInterface(const Game *game) {
     snprintf(side[1][pos++], SIDE_W, "   q Stop game          ");
 
     for(short height = 0; height < SIDE_H; height++) {
-        side[0][height][SIDE_W-1] = '\0';
-        side[1][height][SIDE_W-1] = '\0';
+        side[0][height][SIDE_W - 1] = '\0';
+        side[1][height][SIDE_W - 1] = '\0';
     }
 
-    char credits[2][CREDITS_W] = {" Artwork source:           ",
-                                  "www.oocities.org/soho/7373/"};
+    char credits[2][CREDITS_W] = {" Artwork source:           ", "www.oocities.org/soho/7373/"};
 
     printGameBoy(screen, side[game->help], credits);
 
     // printf("\n\n");
     // for(short height = 0; height < GB_SCREEN_H; height++) {
-        // printf("%s\n", screen[height]);
+    //     printf("%s\n", screen[height]);
     // }
     // printf("\n");
     // for(short height = 0; height < SIDE_H; height++) {
-        // printf("%s\n", side[0][height]);
+    //     printf("%s\n", side[0][height]);
     // }
     // printf("\n");
     // for(short height = 0; height < SIDE_H; height++) {
-        // printf("%s\n", side[1][height]);
+    //     printf("%s\n", side[1][height]);
     // }
     free(posPerSecPrint);
     free(exploredPositionsPrint);
     free(heuristicValue);
 }
 
-static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W], char side[SIDE_H][SIDE_W], char credits[2][CREDITS_W]) {
+static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W],
+                         char side[SIDE_H][SIDE_W],
+                         char credits[2][CREDITS_W]) {
     const char *padding = "     ";
     for(short iter = 0; iter < 80; iter++) {
         printf("\n");
