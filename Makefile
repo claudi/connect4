@@ -19,18 +19,11 @@ play: $(OBJECTS)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(DEPENDS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: release
-release: release.tar.gz
-
-release.tar.gz: $(SOURCES) $(DEPENDS) Makefile README.rst
-	tar -czvf $@ $^
-
 .PHONY: clean
 clean:
 	$(RM) $(OBJECTS)
 	$(RM) $(EXECUTS)
 	$(RM) $(HELPERS)
-	$(RM) release.tar.gz
 
 .PHONY: bin
 bin: $(EXECUTS)
