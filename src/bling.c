@@ -15,7 +15,7 @@ static void printInterface(const Game *game) {
 
     char screen[GB_SCREEN_H][GB_SCREEN_W];
     for(short height = 0; height < GB_SCREEN_H; height++) {
-        for(short width = 0; width < GB_SCREEN_W-1; width++) {
+        for(short width = 0; width < GB_SCREEN_W - 1; width++) {
             screen[height][width] = ' ';
         }
     }
@@ -37,28 +37,28 @@ static void printInterface(const Game *game) {
             } else {
                 slot = emptySlot;
             }
-            screen[row + 1][2*col + 1] = slot;
+            screen[row + 1][(2 * col) + 1] = slot;
         }
     }
 
-    // for(short width = 0; width < GB_SCREEN_W-1; width++) {
-        // screen[GB_SCREEN_H-2][width] = '_';
+    // for(short width = 0; width < GB_SCREEN_W - 1; width++) {
+    //     screen[GB_SCREEN_H - 2][width] = '_';
     // }
-    for(short width = 2; width < GB_SCREEN_W-2; width++) {
-        screen[GB_SCREEN_H-1][width] = ':';
+    for(short width = 2; width < GB_SCREEN_W - 2; width++) {
+        screen[GB_SCREEN_H - 1][width] = ':';
         width++;
     }
-    // screen[GB_SCREEN_H-1][0] = '(';
-    // screen[GB_SCREEN_H-1][GB_SCREEN_W-2] = ')';
+    // screen[GB_SCREEN_H - 1][0] = '(';
+    // screen[GB_SCREEN_H - 1][GB_SCREEN_W - 2] = ')';
     for(short col = 0; col < BOARD_SIZE; col++) {
         if(col == game->stats.lastMove) {
-            screen[GB_SCREEN_H-1][2*col + 1] = '^';
+            screen[GB_SCREEN_H - 1][(2 * col) + 1] = '^';
         } else {
-            screen[GB_SCREEN_H-1][2*col + 1] = '0' + (char) (col + 1);
+            screen[GB_SCREEN_H - 1][(2 * col) + 1] = '0' + (char) (col + 1);
         }
     }
     for(short height = 0; height < GB_SCREEN_H; height++) {
-        screen[height][GB_SCREEN_W-1] = '\0';
+        screen[height][GB_SCREEN_W - 1] = '\0';
     }
 
     char *exploredPositionsPrint = trimBigNumber(exploredPositions);
@@ -127,16 +127,16 @@ static void printGameBoy(char screen[GB_SCREEN_H][GB_SCREEN_W],
     printf("%s   |OFFo oON                   |\n", padding);
     printf("%s   | .-----------------------. |\t%s\n", padding, side[0]);
     printf("%s   | |  .-----------------.  | |\t%s\n", padding, side[1]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[0], side[2]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[1], side[3]);
-    printf("%s   | |))|"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[2], side[4]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[3], side[5]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[4], side[6]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[5], side[7]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[6], side[8]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\n", padding, screen[7]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[8], credits[0]);
-    printf("%s   | |  |"COLOR_ON"%s"COLOR_OFF"|  | |\t%s\n", padding, screen[9], credits[1]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[0], side[2]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[1], side[3]);
+    printf("%s   | |))|" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[2], side[4]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[3], side[5]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[4], side[6]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[5], side[7]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[6], side[8]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\n", padding, screen[7]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[8], credits[0]);
+    printf("%s   | |  |" COLOR_ON "%s" COLOR_OFF "|  | |\t%s\n", padding, screen[9], credits[1]);
     printf("%s   | |  '-----------------'  | |\n", padding);
     printf("%s   | |__GAME BOY_____________/ |\n", padding);
     printf("%s   |          ________         |\n", padding);
@@ -199,19 +199,19 @@ static void humanInput(Game *game) {
         if((move <= 0) || (move > BOARD_SIZE)) {
             humanInput(game);
             // fprintf(stderr, "Invalid column\n");
-        } else if(FULL_COLUMN(game->node->board, move-1)) {
+        } else if(FULL_COLUMN(game->node->board, move - 1)) {
             humanInput(game);
         } else {
-            makeMove(game->node, move-1);
+            makeMove(game->node, move - 1);
         }
     } else {
         short depth;
         switch(input) {
-            case 'h':   // Toggle help/stats
+            case 'h': // Toggle help/stats
                 game->help = NOT(game->help);
                 humanInput(game);
                 break;
-            case 'd':   // Change difficulty
+            case 'd': // Change difficulty
                 depth = (short) atoi(buff + 1);
                 if(depth <= 0) {
                     game->depth = 4;
@@ -220,19 +220,19 @@ static void humanInput(Game *game) {
                 }
                 humanInput(game);
                 break;
-            case 'q':   // Quit
+            case 'q': // Quit
                 game->node->nchildren = 0;
                 break;
-            case 's':   // Switch sides
+            case 's': // Switch sides
                 game->playerSide = NEXT(game->playerSide);
                 machineMove(game);
                 // humanInput(game);
                 break;
-            case 'n':   // New game
+            case 'n': // New game
                 resetGame(game);
                 game->side = NEXT(game->side);
                 break;
-            default:    // Other
+            default: // Other
                 // fprintf(stderr, "Invalid input\n");
                 humanInput(game);
                 break;
