@@ -5,7 +5,7 @@ HELPERS = lint.out check.out
 
 SOURCES = $(wildcard $(SRCDIR)*.c)
 DEPENDS = $(wildcard $(SRCDIR)*.h)
-OBJECTS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o)) $(wildcard $(OBJDIR)*.o)
+OBJECTS = $(sort $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SOURCES:.c=.o)) $(wildcard $(OBJDIR)*.o))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Wshadow -std=c11 -pedantic -Ofast
