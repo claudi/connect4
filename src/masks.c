@@ -14,7 +14,7 @@ static void initMasks(void);
 static void printMask(const Mask mask);
 static void printMasks();
 
-static Bool matchMask(const Board *board, const SMask mask);
+static Bool matchSMask(const Board *board, const SMask mask);
 
 static const SMask masks1[] = {
 	// H1000
@@ -2272,9 +2272,12 @@ static void __attribute__((unused)) printMasks() {
     }
 }
 
-static Bool matchMask(const Board *board, const SMask mask) {
-    return ((board[TURN] & mask.main) == (mask.main))
-        && ((board[BOTH] & mask.anti) == ((Mask) 0x0000000000000000));
+static Bool matchMask(const Board board, const Mask mask) {
+    return ((board & mask) == mask);
+}
+
+static Bool matchSMask(const Board *board, const SMask mask) {
+    return matchMask(board[TURN], mask.main) && matchMask(board[BOTH], mask.anti);
 }
 
 unsigned matches(const Board *board, const unsigned length) {
@@ -2282,7 +2285,7 @@ unsigned matches(const Board *board, const unsigned length) {
 
     unsigned count = 0;
     for(unsigned mask = 0; mask < nmasks[length]; mask++) {
-        count += matchMask(board, masks[length][mask]);
+        count += matchSMask(board, masks[length][mask]);
     }
     return count;
 }
