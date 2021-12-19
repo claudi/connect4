@@ -4,7 +4,7 @@
 #include "gui.h"
 #include "headless.h"
 
-#define ARRAY_SIZE(arr) (sizeof(arr)/sizeof(arr[0]))
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 
 typedef struct {
     char *name;

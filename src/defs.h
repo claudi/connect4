@@ -1,9 +1,9 @@
 #ifndef DEFS_GUARD
 #define DEFS_GUARD
+#include <limits.h> // for LONG_MIN and LONG_MAX
+#include <stdint.h> // for uint64_t
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h> // for uint64_t
-#include <limits.h> // for LONG_MIN and LONG_MAX
 #include <time.h>
 
 #define BOARD_SIZE 8
@@ -20,7 +20,7 @@ typedef uint64_t Mask;
 typedef struct Node Node;
 struct Node {
     Board board[NBOARDS];
-    Side turn;                  // Last move
+    Side turn; // Last move
     short nchildren;
     Node **child;
 };

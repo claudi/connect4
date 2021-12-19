@@ -137,7 +137,7 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
 }
 
 static MinimaxStatus nextStatus(const MinimaxStatus status) {
-    const MinimaxStatus next =  {
+    const MinimaxStatus next = {
         .depth = status.depth - 1,
         .side = status.side,
         .maximizing = NOT(status.maximizing),

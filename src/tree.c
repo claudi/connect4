@@ -58,13 +58,13 @@ static void orderChildren(Node *parent) {
 
         short j = iter - 1;
         while((j >= 0) && (values[j] < auxv)) {
-            parent->child[j+1] = parent->child[j];
-            values[j+1] = values[j];
+            parent->child[j + 1] = parent->child[j];
+            values[j + 1] = values[j];
 
             j = j - 1;
         }
-        parent->child[j+1] = auxn;
-        values[j+1] = auxv;
+        parent->child[j + 1] = auxn;
+        values[j + 1] = auxv;
     }
     free(values);
 }

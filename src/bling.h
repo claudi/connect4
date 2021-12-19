@@ -1,7 +1,7 @@
 #ifndef BLING_GUARD
 #define BLING_GUARD
-#include "defs.h"
 #include "board.h"
+#include "defs.h"
 #include "game.h"
 #include "minimax.h"
 
@@ -12,9 +12,9 @@
 #define CREDITS_W 28
 
 #ifdef __linux__
-#define COLOR_ON  "\033[0;7m" // inverted background
+#define COLOR_ON "\033[0;7m"  // inverted background
 #define COLOR_OFF "\033[0;0m" // default
-#endif // __linux__
+#endif
 
 int ascii_main(int argc, char **argv);
 
