@@ -19,14 +19,14 @@ void machineMove(Game *game) {
 
     const Prune start_prune = {
         .alpha = LONG_MIN,
-        .beta = LONG_MAX
+        .beta = LONG_MAX,
     };
 
     for(short iter = 0; iter < depth - 1; iter++) {
         const MinimaxStatus start_status = {
             .depth = iter,
             .side = side,
-            .maximizing = FALSE
+            .maximizing = FALSE,
         };
         alphaBeta(root, start_prune, start_status);
     }
@@ -67,7 +67,8 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
     exploredPositions++;
 
     if(status.depth == 0 || root->nchildren == 0) {
-        long h = getHeuristic(root, status.side) - color(status.side) * color(root->turn) * ( (BOARD_SIZE * BOARD_SIZE) - status.depth );
+        long h = getHeuristic(root, status.side);
+        h -= color(status.side) * color(root->turn) * ((BOARD_SIZE * BOARD_SIZE) - status.depth);
         return h;
     }
 
@@ -83,7 +84,7 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
                 heuristic = alphaBeta(root->child[iter], prune, nextStatus(status));
                 const Entry tmp = {
                     .key = key,
-                    .heuristic = heuristic
+                    .heuristic = heuristic,
                 };
                 addEntry(tables, tmp);
             } else {
@@ -110,7 +111,7 @@ static long alphaBeta(Node *root, Prune prune, const MinimaxStatus status) {
                 heuristic = alphaBeta(root->child[iter], prune, nextStatus(status));
                 const Entry tmp = {
                     .key = key,
-                    .heuristic = heuristic
+                    .heuristic = heuristic,
                 };
                 addEntry(tables, tmp);
             } else {

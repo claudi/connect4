@@ -1,23 +1,23 @@
 #include "heuristic.h"
 
 static long myHeuristic(Board *board, __attribute__((unused)) const Side side) {
-    long heuristic = 0;
+    long h = 0;
 
-    heuristic += 2*(matches(board, MATCH1) + 5*matches(board, MATCH2) + 15*matches(board, MATCH3));
+    h += 2 * (matches(board, MATCH1) + 5 * matches(board, MATCH2) + 15 * matches(board, MATCH3));
     board[TURN] ^= board[BOTH];
-    heuristic -= matches(board, MATCH1) + 5*matches(board, MATCH2) + 10*matches(board, MATCH3);
+    h -= matches(board, MATCH1) + 5 * matches(board, MATCH2) + 10 * matches(board, MATCH3);
 
-    return heuristic;
+    return h;
 }
 
 static long controlHeuristic(Board *board, __attribute__((unused)) const Side side) {
-    long heuristic = 0;
+    long h = 0;
 
-    heuristic += 2*(matches(board, MATCH2) + 10*matches(board, MATCH3));
+    h += 2 * (matches(board, MATCH2) + 10 * matches(board, MATCH3));
     board[TURN] ^= board[BOTH];
-    heuristic -= matches(board, MATCH2) + 10*matches(board, MATCH3);
+    h -= matches(board, MATCH2) + 10 * matches(board, MATCH3);
 
-    return heuristic;
+    return h;
 }
 
 static long simpleHeuristic(__attribute__((unused)) Board *board,

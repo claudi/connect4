@@ -73,7 +73,10 @@ static void printInterface(const Game *game) {
     snprintf(side[0][pos++], SIDE_W, "                        ");
     snprintf(side[0][pos++], SIDE_W, " 1-8 Play on column     ");
     snprintf(side[0][pos++], SIDE_W, "   h Toggle help/stats  ");
-    snprintf(side[0][pos++], SIDE_W, "%4s Position%s explored", exploredPositionsPrint,
+    snprintf(side[0][pos++],
+             SIDE_W,
+             "%4s Position%s explored",
+             exploredPositionsPrint,
              exploredPositions == 1 ? "" : "s");
     snprintf(side[0][pos++], SIDE_W, "%4s per second         ", posPerSecPrint);
     snprintf(side[0][pos++], SIDE_W, "%4.1lf seconds elapsed    ", secondsElapsed(elapsedTime));
@@ -95,7 +98,7 @@ static void printInterface(const Game *game) {
         side[1][height][SIDE_W - 1] = '\0';
     }
 
-    char credits[2][CREDITS_W] = {" Artwork source:           ", "www.oocities.org/soho/7373/"};
+    char credits[2][CREDITS_W] = { " Artwork source:           ", "www.oocities.org/soho/7373/" };
 
     printGameBoy(screen, side[game->help], credits);
 

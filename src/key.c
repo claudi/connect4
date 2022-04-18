@@ -22,7 +22,7 @@ static void printKey(const Key key) {
 }
 
 Key boardToKey(const Board *board) {
-    Key key = ((* ((Key *) &board[TURN])) << BOARD_SIZE * BOARD_SIZE) + ((Key) board[BOTH]);
+    Key key = ((*((Key *) &board[TURN])) << BOARD_SIZE * BOARD_SIZE) + ((Key) board[BOTH]);
     Key mirrored = mirrorKey(key);
     if(mirrored > key) {
         key = mirrored;
