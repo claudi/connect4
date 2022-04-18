@@ -1,6 +1,23 @@
 ---
 Language: Cpp
+
 IndentWidth: 4
 TabWidth: 4
-SpaceBeforeParens: Never
 ColumnLimit: 100
+
+AlignAfterOpenBracket: Align
+Cpp11BracedListStyle: false
+SpaceAfterCStyleCast: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeParens: Never
+
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine: Empty
+BinPackArguments: false
+BinPackParameters: false
+IndentCaseLabels: true
+
+AlignOperands: AlignAfterOperator
+BreakBeforeBinaryOperators: NonAssignment
