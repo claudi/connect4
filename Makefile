@@ -39,7 +39,11 @@ bin: $(EXECUTS)
 help: $(HELPERS)
 
 .PHONY: all
-all: bin help
+all: bin format help
+
+.PHONY: format
+format: $(SOURCES)
+	clang-format --dry-run $^
 
 .PHONY: debug
 debug: play.debug

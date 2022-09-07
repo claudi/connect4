@@ -16,3 +16,6 @@ doc/
 play.*
 *.o
 *.tar.gz
+
+.cache
+compile_commands.json
